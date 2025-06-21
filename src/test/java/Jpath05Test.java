@@ -14,8 +14,8 @@
  * Copyright (c) [2025-2099] Martin (goudingcheng@gmail.com)
  */
 
-import com.github.paohaijiao.model.JSONPathResult;
 import com.github.paohaijiao.executor.JSONPathExecutor;
+import com.github.paohaijiao.model.JSONPathResult;
 import com.paohaijiao.javelin.model.JSONObject;
 import org.junit.Test;
 
@@ -35,36 +35,37 @@ public class Jpath05Test {
 
     @Test
     public void test51() throws IOException {
-        JSONObject b=new JSONObject();
-        b.put("b","2");
-        JSONObject a=new JSONObject();
-        a.put("a",b);
-        a.put("b",3);
+        JSONObject b = new JSONObject();
+        b.put("b", "2");
+        JSONObject a = new JSONObject();
+        a.put("a", b);
+        a.put("b", 3);
         JSONPathExecutor executor = new JSONPathExecutor(a);
-        executor.addErrorListener(error -> {});
+        executor.addErrorListener(error -> {
+        });
         JSONPathResult jsonObject = executor.execute("$..b");
         System.out.println("结果: " + jsonObject.getRawData());
     }
+
     @Test
     public void test52() throws IOException {
-        JSONObject b1=new JSONObject();
-        b1.put("b","2");
+        JSONObject b1 = new JSONObject();
+        b1.put("b", "2");
 
-        JSONObject b2=new JSONObject();
-        b2.put("b","3");
-        JSONObject a=new JSONObject();
-        a.put("a", Arrays.asList(b1,b2));
-        JSONObject d=new JSONObject();
-        d.put("d","3");
+        JSONObject b2 = new JSONObject();
+        b2.put("b", "3");
+        JSONObject a = new JSONObject();
+        a.put("a", Arrays.asList(b1, b2));
+        JSONObject d = new JSONObject();
+        d.put("d", "3");
         a.put("c", Arrays.asList(d));
 
         JSONPathExecutor executor = new JSONPathExecutor(a);
-        executor.addErrorListener(error -> {});
+        executor.addErrorListener(error -> {
+        });
         JSONPathResult jsonObject = executor.execute("$..[0]");
         System.out.println("结果: " + jsonObject.getRawData());
     }
-
-
 
 
 }

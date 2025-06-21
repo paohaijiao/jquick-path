@@ -17,8 +17,9 @@ public class JSONPathResult {
             this.isList = false;
         }
     }
+
     public List<Object> getAsList() {
-        return isList ? (List<Object>)data : Collections.singletonList(data);
+        return isList ? (List<Object>) data : Collections.singletonList(data);
     }
 
     public Object getRawData() {

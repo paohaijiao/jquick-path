@@ -15,10 +15,10 @@
  */
 
 import com.github.paohaijiao.model.JTypeModel;
-import com.paohaijiao.javelin.model.JSONObject;
 import com.github.paohaijiao.parser.JQuickJSONPathLexer;
 import com.github.paohaijiao.parser.JQuickJSONPathParser;
 import com.github.paohaijiao.visitor.JSONPathCommonVisitor;
+import com.paohaijiao.javelin.model.JSONObject;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.junit.Test;
@@ -46,9 +46,10 @@ public class JDotExprTest {
         obj.put("value", "1");
         obj.put("type", "string");
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void testValue02() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("value"));
@@ -59,9 +60,10 @@ public class JDotExprTest {
         obj.put("value", "1");
         obj.put("type", "string");
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void testValue03() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("value"));
@@ -72,9 +74,10 @@ public class JDotExprTest {
         obj.setValue("1");
         obj.setType("string");
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void testValue04() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("@"));
@@ -85,9 +88,10 @@ public class JDotExprTest {
         obj.setValue("1");
         obj.setType("string");
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void testValue05() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("1"));
@@ -95,9 +99,10 @@ public class JDotExprTest {
         JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
         JQuickJSONPathParser.LeftDotExprContext tree = parser.leftDotExpr();
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void testValue06() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("\"dssdas\""));
@@ -105,9 +110,10 @@ public class JDotExprTest {
         JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
         JQuickJSONPathParser.LeftDotExprContext tree = parser.leftDotExpr();
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void directDotExpression() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.type"));
@@ -118,9 +124,10 @@ public class JDotExprTest {
         obj.setValue("1");
         obj.setType("string");
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void directDotExpression1() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.*"));
@@ -131,9 +138,10 @@ public class JDotExprTest {
         obj.setValue("1");
         obj.setType("string");
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void directDotExpression2() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.value.type"));
@@ -143,15 +151,12 @@ public class JDotExprTest {
         JSONObject a = new JSONObject();
         a.put("type", "string");
         JSONObject obj = new JSONObject();
-        obj.put("key","1");
-        obj.put("value",a);
+        obj.put("key", "1");
+        obj.put("value", a);
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
-
-
-
 
 
 }

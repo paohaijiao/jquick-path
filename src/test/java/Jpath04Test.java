@@ -14,8 +14,8 @@
  * Copyright (c) [2025-2099] Martin (goudingcheng@gmail.com)
  */
 
-import com.github.paohaijiao.model.JSONPathResult;
 import com.github.paohaijiao.executor.JSONPathExecutor;
+import com.github.paohaijiao.model.JSONPathResult;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -35,54 +35,59 @@ public class Jpath04Test {
 
     @Test
     public void test41() throws IOException {
-        List<String> list=new ArrayList<>();
+        List<String> list = new ArrayList<>();
         list.add("a");
         list.add("b");
         list.add("c");
         list.add("d");
         JSONPathExecutor executor = new JSONPathExecutor(list);
-        executor.addErrorListener(error -> {});
+        executor.addErrorListener(error -> {
+        });
         JSONPathResult jsonObject = executor.execute("$[1:3]");
         System.out.println("结果: " + jsonObject.getRawData());
     }
 
     @Test
     public void test42() throws IOException {
-        List<String> list=new ArrayList<>();
+        List<String> list = new ArrayList<>();
         list.add("a");
         list.add("b");
         list.add("c");
         list.add("d");
         JSONPathExecutor executor = new JSONPathExecutor(list);
-        executor.addErrorListener(error -> {});
+        executor.addErrorListener(error -> {
+        });
         JSONPathResult jsonObject = executor.execute("$[:2]");
         System.out.println("结果: " + jsonObject.getRawData());
     }
+
     @Test
     public void test43() throws IOException {
-        List<String> list=new ArrayList<>();
+        List<String> list = new ArrayList<>();
         list.add("a");
         list.add("b");
         list.add("c");
         list.add("d");
         JSONPathExecutor executor = new JSONPathExecutor(list);
-        executor.addErrorListener(error -> {});
+        executor.addErrorListener(error -> {
+        });
         JSONPathResult jsonObject = executor.execute("$[1:]");
         System.out.println("结果: " + jsonObject.getRawData());
     }
+
     @Test
     public void test44() throws IOException {
-        List<String> list=new ArrayList<>();
+        List<String> list = new ArrayList<>();
         list.add("a");
         list.add("b");
         list.add("c");
         list.add("d");
         JSONPathExecutor executor = new JSONPathExecutor(list);
-        executor.addErrorListener(error -> {});
+        executor.addErrorListener(error -> {
+        });
         JSONPathResult jsonObject = executor.execute("$[::2]");
         System.out.println("结果: " + jsonObject.getRawData());
     }
-
 
 
 }

@@ -14,8 +14,8 @@
  * Copyright (c) [2025-2099] Martin (goudingcheng@gmail.com)
  */
 
-import com.github.paohaijiao.model.JSONPathResult;
 import com.github.paohaijiao.executor.JSONPathExecutor;
+import com.github.paohaijiao.model.JSONPathResult;
 import com.paohaijiao.javelin.model.JSONObject;
 import org.junit.Test;
 
@@ -35,30 +35,31 @@ public class Jpath06Test {
 
     @Test
     public void test61() throws IOException {
-        JSONObject b=new JSONObject();
-        b.put("price",5);
-        JSONObject a=new JSONObject();
-        a.put("price",15);
-        JSONPathExecutor executor = new JSONPathExecutor(Arrays.asList(a,b));
-        executor.addErrorListener(error -> {});
+        JSONObject b = new JSONObject();
+        b.put("price", 5);
+        JSONObject a = new JSONObject();
+        a.put("price", 15);
+        JSONPathExecutor executor = new JSONPathExecutor(Arrays.asList(a, b));
+        executor.addErrorListener(error -> {
+        });
         JSONPathResult jsonObject = executor.execute("$[?(@.price > 10)]");
         System.out.println("结果: " + jsonObject.getRawData());
     }
+
     @Test
     public void test62() throws IOException {
-        JSONObject b=new JSONObject();
-        b.put("price",5);
-        b.put("inStock",true);
-        JSONObject a=new JSONObject();
-        a.put("price",8);
-        a.put("inStock",true);
-        JSONPathExecutor executor = new JSONPathExecutor(Arrays.asList(a,b));
-        executor.addErrorListener(error -> {});
+        JSONObject b = new JSONObject();
+        b.put("price", 5);
+        b.put("inStock", true);
+        JSONObject a = new JSONObject();
+        a.put("price", 8);
+        a.put("inStock", true);
+        JSONPathExecutor executor = new JSONPathExecutor(Arrays.asList(a, b));
+        executor.addErrorListener(error -> {
+        });
         JSONPathResult jsonObject = executor.execute("$[?(@.price < 10 && @.inStock)]");
         System.out.println("结果: " + jsonObject.getRawData());
     }
-
-
 
 
 }

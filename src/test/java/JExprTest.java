@@ -14,10 +14,10 @@
  * Copyright (c) [2025-2099] Martin (goudingcheng@gmail.com)
  */
 
-import com.paohaijiao.javelin.model.JSONObject;
 import com.github.paohaijiao.parser.JQuickJSONPathLexer;
 import com.github.paohaijiao.parser.JQuickJSONPathParser;
 import com.github.paohaijiao.visitor.JSONPathCommonVisitor;
+import com.paohaijiao.javelin.model.JSONObject;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.junit.Test;
@@ -46,12 +46,13 @@ public class JExprTest {
         JSONObject a = new JSONObject();
         a.put("type", "string");
         JSONObject obj = new JSONObject();
-        obj.put("key","1");
-        obj.put("value",a);
+        obj.put("key", "1");
+        obj.put("value", a);
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void bracketExpression() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.value.list[3]"));
@@ -60,14 +61,15 @@ public class JExprTest {
         JQuickJSONPathParser.ExprContext tree = parser.expr();
         JSONObject a = new JSONObject();
         a.put("type", "string");
-        a.put("list", Arrays.asList(1,"2",3,4,5,6,7));
+        a.put("list", Arrays.asList(1, "2", 3, 4, 5, 6, 7));
         JSONObject obj = new JSONObject();
-        obj.put("key","1");
-        obj.put("value",a);
+        obj.put("key", "1");
+        obj.put("value", a);
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void functionCallExpression() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("contains(@.name, 'Book')"));
@@ -77,9 +79,10 @@ public class JExprTest {
         JSONObject a = new JSONObject();
         a.put("name", "Book");
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(a);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void notExpression() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("!true"));
@@ -89,9 +92,10 @@ public class JExprTest {
         JSONObject a = new JSONObject();
         a.put("name", "Book");
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(a);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void multiplicativeExpression() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("19%7"));
@@ -101,9 +105,10 @@ public class JExprTest {
         JSONObject a = new JSONObject();
         a.put("name", "Book");
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(a);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void additiveExpression() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("1-2"));
@@ -113,9 +118,10 @@ public class JExprTest {
         JSONObject a = new JSONObject();
         a.put("name", "Book");
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(a);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void comparisonExpression() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("55<=4"));
@@ -125,9 +131,10 @@ public class JExprTest {
         JSONObject a = new JSONObject();
         a.put("name", "Book");
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(a);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void equalityExpression() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("55!=55"));
@@ -137,9 +144,10 @@ public class JExprTest {
         JSONObject a = new JSONObject();
         a.put("name", "Book");
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(a);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void inExpression() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.list in ('cherry','banana')"));
@@ -150,9 +158,10 @@ public class JExprTest {
         a.put("name", "Book");
         a.put("list", Arrays.asList("apple", "banana", "cherry"));
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(a);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void logicalAndExpression() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("true && false"));
@@ -163,9 +172,10 @@ public class JExprTest {
         a.put("name", "Book");
         a.put("list", Arrays.asList("apple", "banana", "cherry"));
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(a);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
+
     @Test
     public void logicalOrExpression() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("false || false"));
@@ -176,19 +186,9 @@ public class JExprTest {
         a.put("name", "Book");
         a.put("list", Arrays.asList("apple", "banana", "cherry"));
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(a);
-        Object object= tv.visit(tree);
+        Object object = tv.visit(tree);
         System.out.println(object);
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }

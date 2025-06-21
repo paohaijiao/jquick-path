@@ -6,16 +6,15 @@ import com.github.paohaijiao.parser.JQuickJSONPathParser;
 public class JRootAndPathVisitor extends JSegmentVisitor {
 
 
-
     @Override
     public JSONPathResult visitPath(JQuickJSONPathParser.PathContext ctx) {
-        Object obj=null;
+        Object obj = null;
         if (null != ctx.root()) {
             obj = visitRoot(ctx.root());
         }
-       
+
         for (JQuickJSONPathParser.SegmentContext segment : ctx.segment()) {
-            obj=visit(segment);
+            obj = visit(segment);
         }
         JSONPathResult jsonPathResult = new JSONPathResult(obj);
         return jsonPathResult;

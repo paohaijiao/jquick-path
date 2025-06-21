@@ -1,12 +1,14 @@
 package com.github.paohaijiao.visitor;
 
 import com.github.paohaijiao.model.JSlice;
-import com.paohaijiao.javelin.exception.JAssert;
 import com.github.paohaijiao.parser.JQuickJSONPathParser;
+import com.paohaijiao.javelin.exception.JAssert;
 import com.paohaijiao.javelin.util.JObjectConverter;
 import com.paohaijiao.javelin.util.JStringUtils;
+
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JSubscriptVisitor extends JExprVisitor {
 
@@ -48,23 +50,22 @@ public class JSubscriptVisitor extends JExprVisitor {
     }
 
 
-
     @Override
     public List<?> visitFilterExpression(JQuickJSONPathParser.FilterExpressionContext ctx) {
-        List<Object> list=new ArrayList<>();
-        List<?> data=this.getList(this.currentJsonObject);
-        for(Object o:data){
-            this.currentJsonObject=o;
-            if(ctx.expr()!=null){
-              Object obj=  visit((ctx.expr()));
-              if(obj instanceof Boolean){
-                  Boolean bool=  JObjectConverter.assign(obj,Boolean.class);
-                  if(bool){
-                      list.add(o);
-                  }
-              }else {
-                  JAssert.throwNewException("FilterExpression only accept boolean express");
-              }
+        List<Object> list = new ArrayList<>();
+        List<?> data = this.getList(this.currentJsonObject);
+        for (Object o : data) {
+            this.currentJsonObject = o;
+            if (ctx.expr() != null) {
+                Object obj = visit((ctx.expr()));
+                if (obj instanceof Boolean) {
+                    Boolean bool = JObjectConverter.assign(obj, Boolean.class);
+                    if (bool) {
+                        list.add(o);
+                    }
+                } else {
+                    JAssert.throwNewException("FilterExpression only accept boolean express");
+                }
             }
         }
         return list;
@@ -74,8 +75,6 @@ public class JSubscriptVisitor extends JExprVisitor {
     public Object visitScriptExpression(JQuickJSONPathParser.ScriptExpressionContext ctx) {
         return visit(ctx.expr());
     }
-
-
 
 
 }

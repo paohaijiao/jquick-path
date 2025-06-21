@@ -1,8 +1,8 @@
 package com.github.paohaijiao.visitor;
 
+import com.github.paohaijiao.parser.JQuickJSONPathBaseVisitor;
 import com.paohaijiao.javelin.model.JSONObject;
 import com.paohaijiao.javelin.param.JContext;
-import com.github.paohaijiao.parser.JQuickJSONPathBaseVisitor;
 import com.paohaijiao.javelin.util.JReflectionUtils;
 
 import java.lang.reflect.Field;
@@ -10,32 +10,38 @@ import java.util.*;
 
 public class JSONPathCoreVisitor extends JQuickJSONPathBaseVisitor<Object> {
 
-    protected  Object rootJsonObject;
+    protected Object rootJsonObject;
     protected Object currentJsonObject;
     protected JContext context;
 
     private Deque<Map<String, Object>> variableStack = new ArrayDeque<>();
-    protected void setRoot(Object object){
+
+    protected void setRoot(Object object) {
         this.rootJsonObject = object;
     }
-    protected void setCurrent(Object object){
+
+    protected void setCurrent(Object object) {
         this.currentJsonObject = object;
     }
-    protected Object getCurrent(){
+
+    protected Object getCurrent() {
         return this.currentJsonObject;
     }
-    protected Object getRoot(){
+
+    protected Object getRoot() {
         return this.rootJsonObject;
     }
-    protected   List<?> getList(Object current){
+
+    protected List<?> getList(Object current) {
         List<?> list = (List<?>) current;
         return list;
     }
+
     protected static <T> List<T> slice(List<T> list, Integer start, Integer end, Integer step) {
         if (list == null) return Collections.emptyList();
         int size = list.size();
         int actualStart = start != null ? (start >= 0 ? start : size + start) : 0;
-        int actualEnd = end != null ? (end >= 0 ? end : size + end) : size-1;
+        int actualEnd = end != null ? (end >= 0 ? end : size + end) : size - 1;
         int actualStep = step != null ? step : 1;
         if (actualStep == 0) throw new IllegalArgumentException("Step cannot be zero");
         if (actualStart < 0) actualStart = 0;
@@ -52,21 +58,23 @@ public class JSONPathCoreVisitor extends JQuickJSONPathBaseVisitor<Object> {
         }
         return result;
     }
-    public Object getValue(Object target, Object obj){
-        if(target == null){
+
+    public Object getValue(Object target, Object obj) {
+        if (target == null) {
             return null;
         }
-        if(obj instanceof String){
-            Object value= getValueByKey(target, (String)obj);
+        if (obj instanceof String) {
+            Object value = getValueByKey(target, (String) obj);
             return value;
-        }else if(obj instanceof Integer){
-            Object value= getValueByIndex(target, (Integer)obj);
+        } else if (obj instanceof Integer) {
+            Object value = getValueByIndex(target, (Integer) obj);
             return value;
         }
         return null;
 
     }
-    public Object getValueByKey(Object obj, String fieldName){
+
+    public Object getValueByKey(Object obj, String fieldName) {
         if (obj instanceof JSONObject) {
             JSONObject jsonObj = (JSONObject) obj;
             return jsonObj.has(fieldName) ? jsonObj.get(fieldName) : null;
@@ -81,18 +89,19 @@ public class JSONPathCoreVisitor extends JQuickJSONPathBaseVisitor<Object> {
                 }
             }
             return results.isEmpty() ? null : results;
-        }else if(obj instanceof Map){
+        } else if (obj instanceof Map) {
             return ((Map<?, ?>) obj).get(fieldName);
-        }else if (obj instanceof Object) {
-            Object target= JReflectionUtils.getFieldValue(obj,fieldName);
+        } else if (obj instanceof Object) {
+            Object target = JReflectionUtils.getFieldValue(obj, fieldName);
             return target;
         }
         return null;
     }
-    public Object getValueByIndex(Object obj, Integer index){
+
+    public Object getValueByIndex(Object obj, Integer index) {
         if (obj instanceof JSONObject) {
-          //  JSONObject jsonObj = (JSONObject) obj;
-           // return jsonObj.has(fieldName) ? jsonObj.get(fieldName) : null;
+            //  JSONObject jsonObj = (JSONObject) obj;
+            // return jsonObj.has(fieldName) ? jsonObj.get(fieldName) : null;
         } else if (obj instanceof List) {
             List<?> list = (List<?>) obj;
             return list.get(index);
@@ -121,6 +130,7 @@ public class JSONPathCoreVisitor extends JQuickJSONPathBaseVisitor<Object> {
         }
         return true;
     }
+
     protected Object evaluateBinaryOperation(Object left, Object right, String operator) {
         if (left == null || right == null) {
             return handleNullComparison(left, right, operator);
@@ -129,23 +139,35 @@ public class JSONPathCoreVisitor extends JQuickJSONPathBaseVisitor<Object> {
             double leftNum = ((Number) left).doubleValue();
             double rightNum = ((Number) right).doubleValue();
             switch (operator) {
-                case "<": return leftNum < rightNum;
-                case ">": return leftNum > rightNum;
-                case "<=": return leftNum <= rightNum;
-                case ">=": return leftNum >= rightNum;
-                case "==": return leftNum == rightNum;
-                case "!=": return leftNum != rightNum;
+                case "<":
+                    return leftNum < rightNum;
+                case ">":
+                    return leftNum > rightNum;
+                case "<=":
+                    return leftNum <= rightNum;
+                case ">=":
+                    return leftNum >= rightNum;
+                case "==":
+                    return leftNum == rightNum;
+                case "!=":
+                    return leftNum != rightNum;
             }
         }
         if (left instanceof String && right instanceof String) {
             int comparison = ((String) left).compareTo((String) right);
             switch (operator) {
-                case "<": return comparison < 0;
-                case ">": return comparison > 0;
-                case "<=": return comparison <= 0;
-                case ">=": return comparison >= 0;
-                case "==": return comparison == 0;
-                case "!=": return comparison != 0;
+                case "<":
+                    return comparison < 0;
+                case ">":
+                    return comparison > 0;
+                case "<=":
+                    return comparison <= 0;
+                case ">=":
+                    return comparison >= 0;
+                case "==":
+                    return comparison == 0;
+                case "!=":
+                    return comparison != 0;
             }
         }
         if (operator.equals("&&")) {
@@ -166,15 +188,21 @@ public class JSONPathCoreVisitor extends JQuickJSONPathBaseVisitor<Object> {
             double leftNum = ((Number) left).doubleValue();
             double rightNum = ((Number) right).doubleValue();
             switch (operator) {
-                case "+": return leftNum + rightNum;
-                case "-": return leftNum - rightNum;
-                case "*": return leftNum * rightNum;
-                case "/": return leftNum / rightNum;
-                case "%": return leftNum % rightNum;
+                case "+":
+                    return leftNum + rightNum;
+                case "-":
+                    return leftNum - rightNum;
+                case "*":
+                    return leftNum * rightNum;
+                case "/":
+                    return leftNum / rightNum;
+                case "%":
+                    return leftNum % rightNum;
             }
         }
         return false;
     }
+
     private Object handleNullComparison(Object left, Object right, String operator) {
         if (operator.equals("==")) {
             return left == null && right == null;
@@ -184,6 +212,7 @@ public class JSONPathCoreVisitor extends JQuickJSONPathBaseVisitor<Object> {
         }
         return false;
     }
+
     protected Object evaluateUnaryOperation(Object operand, String operator) {
         if (operand == null) {
             return false;
@@ -200,8 +229,6 @@ public class JSONPathCoreVisitor extends JQuickJSONPathBaseVisitor<Object> {
     }
 
 
-
-
     protected Object visitWildcard(Object current) {
         if (current == null) {
             return null;
@@ -209,17 +236,16 @@ public class JSONPathCoreVisitor extends JQuickJSONPathBaseVisitor<Object> {
         if (current instanceof JSONObject) {
             JSONObject jsonObj = (JSONObject) current;
             return new ArrayList<>(jsonObj.toMap().values());
-        }
-        else if (current instanceof List) {
+        } else if (current instanceof List) {
             return current;
-        }
-        else if (current instanceof Map) {
+        } else if (current instanceof Map) {
             return new ArrayList<>(((Map<?, ?>) current).values());
-        }else if( current instanceof Object) {
+        } else if (current instanceof Object) {
             return current;
         }
         return Collections.emptyList();
     }
+
     protected Object getProperty(Object obj, String property) {
         if (obj == null) {
             return null;

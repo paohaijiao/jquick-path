@@ -14,8 +14,8 @@
  * Copyright (c) [2025-2099] Martin (goudingcheng@gmail.com)
  */
 
-import com.github.paohaijiao.model.JSONPathResult;
 import com.github.paohaijiao.executor.JSONPathExecutor;
+import com.github.paohaijiao.model.JSONPathResult;
 import com.paohaijiao.javelin.model.JSONObject;
 import org.junit.Test;
 
@@ -36,10 +36,12 @@ public class Jpath01Test {
         JSONObject obj = new JSONObject();
         obj.put("a", "1");
         JSONPathExecutor executor = new JSONPathExecutor(obj);
-        executor.addErrorListener(error -> {});
+        executor.addErrorListener(error -> {
+        });
         JSONPathResult jsonObject = executor.execute("$");
         System.out.println("结果: " + jsonObject.getRawData());
     }
+
     @Test
     public void test12() throws IOException {
         JSONObject b = new JSONObject();
@@ -47,16 +49,19 @@ public class Jpath01Test {
         JSONObject a = new JSONObject();
         a.put("a", b);
         JSONPathExecutor executor = new JSONPathExecutor(a);
-        executor.addErrorListener(error -> {});
+        executor.addErrorListener(error -> {
+        });
         JSONPathResult jsonObject = executor.execute("$.a.b");
         System.out.println("结果: " + jsonObject.getRawData());
     }
+
     @Test
     public void test13() throws IOException {
         JSONObject a = new JSONObject();
         a.put("my-property", 3);
         JSONPathExecutor executor = new JSONPathExecutor(a);
-        executor.addErrorListener(error -> {});
+        executor.addErrorListener(error -> {
+        });
         JSONPathResult jsonObject = executor.execute("$['my-property']");
         System.out.println("结果: " + jsonObject.getRawData());
     }

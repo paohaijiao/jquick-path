@@ -1,7 +1,8 @@
 package com.github.paohaijiao.visitor;
 
-import com.paohaijiao.javelin.param.JContext;
 import com.github.paohaijiao.parser.JQuickJSONPathParser;
+import com.paohaijiao.javelin.param.JContext;
+
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -12,11 +13,13 @@ public class JSONPathCommonVisitor extends JRootAndPathVisitor {
         this.currentJsonObject = rootJsonObject;
         this.context = context;
     }
+
     public JSONPathCommonVisitor(Object root) {
         this.rootJsonObject = root;
         this.currentJsonObject = rootJsonObject;
         this.context = new JContext();
     }
+
     /**
      * ()
      *
@@ -28,9 +31,6 @@ public class JSONPathCommonVisitor extends JRootAndPathVisitor {
         JQuickJSONPathParser.ExprContext exprCtx = ctx.expr();
         return visit(exprCtx);
     }
-
-
-
 
 
     @Override
@@ -62,9 +62,6 @@ public class JSONPathCommonVisitor extends JRootAndPathVisitor {
             throw new RuntimeException("Invalid regular expression: " + pattern, e);
         }
     }
-
-
-
 
 
 //    @Override

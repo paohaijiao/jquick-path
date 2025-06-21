@@ -1,9 +1,9 @@
 package com.github.paohaijiao.visitor;
 
 import com.github.paohaijiao.model.JSlice;
+import com.github.paohaijiao.parser.JQuickJSONPathParser;
 import com.paohaijiao.javelin.exception.JAssert;
 import com.paohaijiao.javelin.model.JSONObject;
-import com.github.paohaijiao.parser.JQuickJSONPathParser;
 
 import java.util.ArrayList;
 import java.util.Collections;

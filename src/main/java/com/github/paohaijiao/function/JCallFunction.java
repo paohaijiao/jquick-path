@@ -45,6 +45,7 @@ public class JCallFunction {
         JAssert.throwNewException("Unknown function: " + functionName);
         return null;
     }
+
     private Object handleLengthFunction(Object[] args) {
         if (args.length != 1) {
             JAssert.throwNewException("length() expects exactly 1 argument");
@@ -65,6 +66,7 @@ public class JCallFunction {
         JAssert.throwNewException("length() cannot be applied to " + arg.getClass());
         return null;
     }
+
     private Object handleSumFunction(Object[] args) {
         if (args.length == 0) {
             JAssert.throwNewException("sum() requires at least 1 argument");
@@ -83,6 +85,7 @@ public class JCallFunction {
         }
         return sum;
     }
+
     private Object handleMatchesFunction(Object[] args) {
         if (args.length != 2) {
             JAssert.throwNewException("matches() requires exactly 2 arguments");
@@ -97,7 +100,8 @@ public class JCallFunction {
         }
         return null;
     }
-//    private Object callFunction(String functionName, Object[] args) {
+
+    //    private Object callFunction(String functionName, Object[] args) {
 //        if (args.length > 0 && args[0] != null) {
 //            try {// try with java invoke
 //                Class<?> clazz = args[0].getClass();
