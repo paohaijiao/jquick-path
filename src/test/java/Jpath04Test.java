@@ -14,8 +14,8 @@
  * Copyright (c) [2025-2099] Martin (goudingcheng@gmail.com)
  */
 
-import com.paohaijiao.javelin.model.JSONPathResult;
-import com.paohaijiao.javelin.executor.JSONPathExecutor;
+import com.github.paohaijiao.model.JSONPathResult;
+import com.github.paohaijiao.executor.JSONPathExecutor;
 import org.junit.Test;
 
 import java.io.IOException;

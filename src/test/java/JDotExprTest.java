@@ -14,11 +14,11 @@
  * Copyright (c) [2025-2099] Martin (goudingcheng@gmail.com)
  */
 
-import com.paohaijiao.javelin.model.JTypeModel;
+import com.github.paohaijiao.model.JTypeModel;
 import com.paohaijiao.javelin.model.JSONObject;
-import com.paohaijiao.javelin.parser.JQuickJSONPathLexer;
-import com.paohaijiao.javelin.parser.JQuickJSONPathParser;
-import com.paohaijiao.javelin.visitor.JSONPathCommonVisitor;
+import com.github.paohaijiao.parser.JQuickJSONPathLexer;
+import com.github.paohaijiao.parser.JQuickJSONPathParser;
+import com.github.paohaijiao.visitor.JSONPathCommonVisitor;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.junit.Test;

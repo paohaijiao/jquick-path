@@ -1,4 +1,4 @@
-package com.paohaijiao.javelin.model;
+package com.github.paohaijiao.model;
 
 import lombok.Data;
 

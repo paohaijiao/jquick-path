@@ -1,7 +1,7 @@
-package com.paohaijiao.javelin.visitor;
+package com.github.paohaijiao.visitor;
 
 import com.paohaijiao.javelin.param.JContext;
-import com.paohaijiao.javelin.parser.JQuickJSONPathParser;
+import com.github.paohaijiao.parser.JQuickJSONPathParser;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 

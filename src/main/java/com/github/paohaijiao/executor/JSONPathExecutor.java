@@ -1,11 +1,11 @@
-package com.paohaijiao.javelin.executor;
+package com.github.paohaijiao.executor;
 
 import com.paohaijiao.javelin.antlr.impl.JAbstractAntlrExecutor;
-import com.paohaijiao.javelin.model.JSONPathResult;
+import com.github.paohaijiao.model.JSONPathResult;
 import com.paohaijiao.javelin.exception.JAntlrExecutionException;
-import com.paohaijiao.javelin.parser.JQuickJSONPathLexer;
-import com.paohaijiao.javelin.parser.JQuickJSONPathParser;
-import com.paohaijiao.javelin.visitor.JSONPathCommonVisitor;
+import com.github.paohaijiao.parser.JQuickJSONPathLexer;
+import com.github.paohaijiao.parser.JQuickJSONPathParser;
+import com.github.paohaijiao.visitor.JSONPathCommonVisitor;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.Parser;

@@ -1,4 +1,4 @@
-package com.paohaijiao.javelin.function;
+package com.github.paohaijiao.function;
 
 import com.paohaijiao.javelin.exception.JAssert;
 

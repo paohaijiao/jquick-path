@@ -1,7 +1,7 @@
-package com.paohaijiao.javelin.visitor;
+package com.github.paohaijiao.visitor;
 
-import com.paohaijiao.javelin.model.JSONPathResult;
-import com.paohaijiao.javelin.parser.JQuickJSONPathParser;
+import com.github.paohaijiao.model.JSONPathResult;
+import com.github.paohaijiao.parser.JQuickJSONPathParser;
 
 public class JRootAndPathVisitor extends JSegmentVisitor {
 
