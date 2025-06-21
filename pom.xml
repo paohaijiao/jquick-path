@@ -32,14 +32,8 @@
             <artifactId>javelin-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.paohaijiao.javelin</groupId>
-            <artifactId>jquick-base</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.paohaijiao.javelin</groupId>
+            <groupId>com.github.paohaijiao</groupId>
             <artifactId>jquick-json</artifactId>
-            <version>1.0.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
