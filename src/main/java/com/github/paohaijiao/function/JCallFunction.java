@@ -1,6 +1,6 @@
 package com.github.paohaijiao.function;
 
-import com.paohaijiao.javelin.exception.JAssert;
+import com.github.paohaijiao.exception.JAssert;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;

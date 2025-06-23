@@ -2,8 +2,8 @@ package com.github.paohaijiao.visitor;
 
 import com.github.paohaijiao.parser.JQuickJSONPathBaseVisitor;
 import com.paohaijiao.javelin.model.JSONObject;
-import com.paohaijiao.javelin.param.JContext;
-import com.paohaijiao.javelin.util.JReflectionUtils;
+import com.github.paohaijiao.param.JContext;
+import com.github.paohaijiao.util.JReflectionUtils;
 
 import java.lang.reflect.Field;
 import java.util.*;

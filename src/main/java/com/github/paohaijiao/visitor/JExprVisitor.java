@@ -1,9 +1,9 @@
 package com.github.paohaijiao.visitor;
 
 import com.github.paohaijiao.parser.JQuickJSONPathParser;
-import com.paohaijiao.javelin.evalue.JEvaluator;
-import com.paohaijiao.javelin.exception.JAssert;
-import com.paohaijiao.javelin.util.JObjectConverter;
+import com.github.paohaijiao.evalue.JEvaluator;
+import com.github.paohaijiao.exception.JAssert;
+import com.github.paohaijiao.util.JObjectConverter;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;

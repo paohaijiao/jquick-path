@@ -2,8 +2,8 @@ package com.github.paohaijiao.visitor;
 
 import com.github.paohaijiao.model.JSlice;
 import com.github.paohaijiao.parser.JQuickJSONPathParser;
-import com.paohaijiao.javelin.exception.JAssert;
-import com.paohaijiao.javelin.util.JStringUtils;
+import com.github.paohaijiao.exception.JAssert;
+import com.github.paohaijiao.util.JStringUtils;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
