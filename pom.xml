@@ -28,13 +28,12 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.paohaijiao.javelin</groupId>
+            <groupId>com.github.paohaijiao</groupId>
             <artifactId>javelin-core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.github.paohaijiao</groupId>
             <artifactId>jquick-json</artifactId>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
