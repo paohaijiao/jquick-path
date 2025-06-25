@@ -86,12 +86,6 @@ public interface JQuickJSONPathVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStep(JQuickJSONPathParser.StepContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JQuickJSONPathParser#scriptExpression}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitScriptExpression(JQuickJSONPathParser.ScriptExpressionContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code negationExpression}
 	 * labeled alternative in {@link JQuickJSONPathParser#expr}.
 	 * @param ctx the parse tree

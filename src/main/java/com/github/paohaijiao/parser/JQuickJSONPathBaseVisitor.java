@@ -101,13 +101,6 @@ public class JQuickJSONPathBaseVisitor<T> extends AbstractParseTreeVisitor<T> im
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitScriptExpression(JQuickJSONPathParser.ScriptExpressionContext ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitNegationExpression(JQuickJSONPathParser.NegationExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

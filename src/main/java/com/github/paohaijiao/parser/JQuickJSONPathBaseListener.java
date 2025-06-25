@@ -160,18 +160,6 @@ public class JQuickJSONPathBaseListener implements JQuickJSONPathListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterScriptExpression(JQuickJSONPathParser.ScriptExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitScriptExpression(JQuickJSONPathParser.ScriptExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterNegationExpression(JQuickJSONPathParser.NegationExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}

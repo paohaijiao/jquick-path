@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-public class JSegmentVisitor extends JSubscriptVisitor {
+public class JSegmentVisitor extends JExprVisitor {
 
     @Override
     public Object visitIdentifierSegment(JQuickJSONPathParser.IdentifierSegmentContext ctx) {

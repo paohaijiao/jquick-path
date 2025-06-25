@@ -3,6 +3,8 @@ package com.github.paohaijiao.visitor;
 import com.github.paohaijiao.model.JSONPathResult;
 import com.github.paohaijiao.parser.JQuickJSONPathParser;
 
+import java.util.List;
+
 public class JRootAndPathVisitor extends JSegmentVisitor {
 
 
@@ -11,15 +13,14 @@ public class JRootAndPathVisitor extends JSegmentVisitor {
         Object obj = null;
         if (null != ctx.root()) {
             obj = visitRoot(ctx.root());
+            this.currentJsonObject=obj;
         }
-
         for (JQuickJSONPathParser.SegmentContext segment : ctx.segment()) {
             obj = visit(segment);
         }
         JSONPathResult jsonPathResult = new JSONPathResult(obj);
         return jsonPathResult;
     }
-
     @Override
     public Object visitRoot(JQuickJSONPathParser.RootContext ctx) {
         if (ctx.getText().equals("$")) {

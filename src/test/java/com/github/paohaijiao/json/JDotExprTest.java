@@ -24,6 +24,7 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * packageName PACKAGE_NAME
@@ -237,6 +238,101 @@ public class JDotExprTest {
         JTypeModel obj = new JTypeModel();
         obj.setValue("1");
         obj.setType("string");
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void netestDotExpr() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.value.type"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        JQuickJSONPathParser.ExprContext tree = parser.expr();
+        JSONObject a = new JSONObject();
+        a.put("type", "string");
+        JSONObject obj = new JSONObject();
+        obj.put("key", "1");
+        obj.put("value", a);
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void bracketExpression() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.value.list[4]"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        JQuickJSONPathParser.ExprContext tree = parser.expr();
+        JSONObject a = new JSONObject();
+        a.put("type", "string");
+        a.put("list", Arrays.asList(1, "2", 3, 4, 5, 6, 7));
+        JSONObject obj = new JSONObject();
+        obj.put("key", "1");
+        obj.put("value", a);
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void bracketExpression1() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.value.list[*]"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        JQuickJSONPathParser.PathContext tree = parser.path();
+        JSONObject a = new JSONObject();
+        a.put("type", "string");
+        a.put("list", Arrays.asList(1, "2", 3, 4, 5, 6, 7));
+        JSONObject obj = new JSONObject();
+        obj.put("key", "1");
+        obj.put("value", a);
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void bracketExpression2() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.value[\"type\"]"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        JQuickJSONPathParser.PathContext tree = parser.path();
+        JSONObject a = new JSONObject();
+        a.put("type", "string");
+        a.put("list", Arrays.asList(1, "2", 3, 4, 5, 6, 7));
+        JSONObject obj = new JSONObject();
+        obj.put("key", "1");
+        obj.put("value", a);
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void bracketExpression3() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.value.list[1:2:4]"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        JQuickJSONPathParser.PathContext tree = parser.path();
+        JSONObject a = new JSONObject();
+        a.put("type", "string");
+        a.put("list", Arrays.asList(1, "2", 3, 4, 5, 6, 7));
+        JSONObject obj = new JSONObject();
+        obj.put("key", "1");
+        obj.put("value", a);
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void bracketExpression4() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.value.list[1:2:4]"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        JQuickJSONPathParser.PathContext tree = parser.path();
+        JSONObject a = new JSONObject();
+        a.put("type", "string");
+        a.put("list", Arrays.asList(1, "2", 3, 4, 5, 6, 7));
+        JSONObject obj = new JSONObject();
+        obj.put("key", "1");
+        obj.put("value", a);
         JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
         Object object = tv.visit(tree);
         System.out.println(object);

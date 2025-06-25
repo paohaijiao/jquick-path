@@ -37,54 +37,10 @@ import java.util.Arrays;
 public class JExprTest {
 
 
-    @Test
-    public void netestDotExpr() throws IOException {
-        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.value.type"));
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
-        JQuickJSONPathParser.ExprContext tree = parser.expr();
-        JSONObject a = new JSONObject();
-        a.put("type", "string");
-        JSONObject obj = new JSONObject();
-        obj.put("key", "1");
-        obj.put("value", a);
-        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
-        Object object = tv.visit(tree);
-        System.out.println(object);
-    }
 
-    @Test
-    public void bracketExpression() throws IOException {
-        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.value.list[4]"));
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
-        JQuickJSONPathParser.ExprContext tree = parser.expr();
-        JSONObject a = new JSONObject();
-        a.put("type", "string");
-        a.put("list", Arrays.asList(1, "2", 3, 4, 5, 6, 7));
-        JSONObject obj = new JSONObject();
-        obj.put("key", "1");
-        obj.put("value", a);
-        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
-        Object object = tv.visit(tree);
-        System.out.println(object);
-    }
-    @Test
-    public void bracketExpression1() throws IOException {
-        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.value.list[*]"));
-        CommonTokenStream tokens = new CommonTokenStream(lexer);
-        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
-        JQuickJSONPathParser.ExprContext tree = parser.expr();
-        JSONObject a = new JSONObject();
-        a.put("type", "string");
-        a.put("list", Arrays.asList(1, "2", 3, 4, 5, 6, 7));
-        JSONObject obj = new JSONObject();
-        obj.put("key", "1");
-        obj.put("value", a);
-        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
-        Object object = tv.visit(tree);
-        System.out.println(object);
-    }
+
+
+
 
     @Test
     public void functionCallExpression() throws IOException {

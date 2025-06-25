@@ -27,24 +27,8 @@ public class JSubscriptVisitor extends JValueVisitor {
             return slice;
         } else if (ctx.filterExpression() != null) {//pass
             return visitFilterExpression(ctx.filterExpression());
-        } else if (ctx.scriptExpression() != null) {
-            return visitScriptExpression(ctx.scriptExpression());
         } else if (ctx.getText().equals("*")) {//pass
             return visitWildcard(this.currentJsonObject);
-        } else if (ctx.subscript() != null && ctx.getChild(0).getText().equals(",")) {
-            // mutiple subscript（ like [1,2,3]）
-            List<Object> results = new ArrayList<>();
-            for (JQuickJSONPathParser.SubscriptContext subCtx : ctx.subscript()) {
-                Object result = visitSubscript(subCtx);
-                if (result != null) {
-                    if (result instanceof List) {
-                        results.addAll((List<?>) result);
-                    } else {
-                        results.add(result);
-                    }
-                }
-            }
-            return results;
         }
         return null;
     }
@@ -71,10 +55,7 @@ public class JSubscriptVisitor extends JValueVisitor {
         return list;
     }
 
-    @Override
-    public Object visitScriptExpression(JQuickJSONPathParser.ScriptExpressionContext ctx) {
-        return visit(ctx.expr());
-    }
+
 
 
 }

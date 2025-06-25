@@ -135,16 +135,6 @@ public interface JQuickJSONPathListener extends ParseTreeListener {
 	 */
 	void exitStep(JQuickJSONPathParser.StepContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JQuickJSONPathParser#scriptExpression}.
-	 * @param ctx the parse tree
-	 */
-	void enterScriptExpression(JQuickJSONPathParser.ScriptExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JQuickJSONPathParser#scriptExpression}.
-	 * @param ctx the parse tree
-	 */
-	void exitScriptExpression(JQuickJSONPathParser.ScriptExpressionContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code negationExpression}
 	 * labeled alternative in {@link JQuickJSONPathParser#expr}.
 	 * @param ctx the parse tree

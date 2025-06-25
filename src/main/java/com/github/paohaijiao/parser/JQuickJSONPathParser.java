@@ -28,25 +28,25 @@ public class JQuickJSONPathParser extends Parser {
 		REGEX_FLAGS=39;
 	public static final int
 		RULE_path = 0, RULE_root = 1, RULE_segment = 2, RULE_subscript = 3, RULE_filterExpression = 4, 
-		RULE_slice = 5, RULE_start = 6, RULE_end = 7, RULE_step = 8, RULE_scriptExpression = 9, 
-		RULE_expr = 10, RULE_exprList = 11, RULE_dotExpr = 12, RULE_leftDotExpr = 13, 
-		RULE_rightDotExpr = 14, RULE_valueList = 15, RULE_regexLiteral = 16, RULE_identifier = 17, 
-		RULE_literal = 18, RULE_stringLiteral = 19, RULE_number = 20, RULE_variable = 21;
+		RULE_slice = 5, RULE_start = 6, RULE_end = 7, RULE_step = 8, RULE_expr = 9, 
+		RULE_exprList = 10, RULE_dotExpr = 11, RULE_leftDotExpr = 12, RULE_rightDotExpr = 13, 
+		RULE_valueList = 14, RULE_regexLiteral = 15, RULE_identifier = 16, RULE_literal = 17, 
+		RULE_stringLiteral = 18, RULE_number = 19, RULE_variable = 20;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"path", "root", "segment", "subscript", "filterExpression", "slice", 
-			"start", "end", "step", "scriptExpression", "expr", "exprList", "dotExpr", 
-			"leftDotExpr", "rightDotExpr", "valueList", "regexLiteral", "identifier", 
-			"literal", "stringLiteral", "number", "variable"
+			"start", "end", "step", "expr", "exprList", "dotExpr", "leftDotExpr", 
+			"rightDotExpr", "valueList", "regexLiteral", "identifier", "literal", 
+			"stringLiteral", "number", "variable"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
 
 	private static String[] makeLiteralNames() {
 		return new String[] {
-			null, "'$'", "'@'", "'.'", "'*'", "'['", "']'", "'..'", "','", "'?'", 
-			"'('", "')'", "':'", "'-'", "'!'", "'/'", "'%'", "'+'", "'<'", "'>'", 
-			"'<='", "'>='", "'=='", "'!='", "'=~'", "'in'", "'&&'", "'||'", "'true'", 
+			null, "'$'", "'@'", "'.'", "'*'", "'['", "']'", "'..'", "'?'", "'('", 
+			"')'", "':'", "'-'", "'!'", "'/'", "'%'", "'+'", "'<'", "'>'", "'<='", 
+			"'>='", "'=='", "'!='", "'=~'", "'in'", "'&&'", "'||'", "','", "'true'", 
 			"'false'", "'null'", "'${'", "'}'"
 		};
 	}
@@ -128,15 +128,15 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_path; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterPath(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterPath(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitPath(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitPath(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitPath(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitPath(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -148,23 +148,23 @@ public class JQuickJSONPathParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(44);
+			setState(42);
 			root();
-			setState(48);
+			setState(46);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & 168L) != 0)) {
 				{
 				{
-				setState(45);
+				setState(43);
 				segment();
 				}
 				}
-				setState(50);
+				setState(48);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(51);
+			setState(49);
 			match(EOF);
 			}
 		}
@@ -187,15 +187,15 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_root; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterRoot(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterRoot(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitRoot(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitRoot(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitRoot(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitRoot(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -207,7 +207,7 @@ public class JQuickJSONPathParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(53);
+			setState(51);
 			_la = _input.LA(1);
 			if ( !(_la==T__0 || _la==T__1) ) {
 			_errHandler.recoverInline(this);
@@ -250,15 +250,15 @@ public class JQuickJSONPathParser extends Parser {
 		public ChildIdentifierSegmentContext(SegmentContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterChildIdentifierSegment(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterChildIdentifierSegment(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitChildIdentifierSegment(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitChildIdentifierSegment(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitChildIdentifierSegment(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitChildIdentifierSegment(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -270,15 +270,15 @@ public class JQuickJSONPathParser extends Parser {
 		public ChildSubscriptSegmentContext(SegmentContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterChildSubscriptSegment(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterChildSubscriptSegment(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitChildSubscriptSegment(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitChildSubscriptSegment(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitChildSubscriptSegment(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitChildSubscriptSegment(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -290,15 +290,15 @@ public class JQuickJSONPathParser extends Parser {
 		public SubscriptSegmentContext(SegmentContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterSubscriptSegment(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterSubscriptSegment(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitSubscriptSegment(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitSubscriptSegment(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitSubscriptSegment(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitSubscriptSegment(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -310,15 +310,15 @@ public class JQuickJSONPathParser extends Parser {
 		public IdentifierSegmentContext(SegmentContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterIdentifierSegment(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterIdentifierSegment(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitIdentifierSegment(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitIdentifierSegment(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitIdentifierSegment(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitIdentifierSegment(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -327,27 +327,27 @@ public class JQuickJSONPathParser extends Parser {
 		SegmentContext _localctx = new SegmentContext(_ctx, getState());
 		enterRule(_localctx, 4, RULE_segment);
 		try {
-			setState(74);
+			setState(72);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,3,_ctx) ) {
 			case 1:
 				_localctx = new IdentifierSegmentContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(55);
+				setState(53);
 				match(T__2);
-				setState(58);
+				setState(56);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case IDENTIFIER:
 					{
-					setState(56);
+					setState(54);
 					identifier();
 					}
 					break;
 				case T__3:
 					{
-					setState(57);
+					setState(55);
 					match(T__3);
 					}
 					break;
@@ -360,11 +360,11 @@ public class JQuickJSONPathParser extends Parser {
 				_localctx = new SubscriptSegmentContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(60);
+				setState(58);
 				match(T__4);
-				setState(61);
-				subscript(0);
-				setState(62);
+				setState(59);
+				subscript();
+				setState(60);
 				match(T__5);
 				}
 				break;
@@ -372,20 +372,20 @@ public class JQuickJSONPathParser extends Parser {
 				_localctx = new ChildIdentifierSegmentContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(64);
+				setState(62);
 				match(T__6);
-				setState(67);
+				setState(65);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case IDENTIFIER:
 					{
-					setState(65);
+					setState(63);
 					identifier();
 					}
 					break;
 				case T__3:
 					{
-					setState(66);
+					setState(64);
 					match(T__3);
 					}
 					break;
@@ -398,13 +398,13 @@ public class JQuickJSONPathParser extends Parser {
 				_localctx = new ChildSubscriptSegmentContext(_localctx);
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(69);
+				setState(67);
 				match(T__6);
-				setState(70);
+				setState(68);
 				match(T__4);
-				setState(71);
-				subscript(0);
-				setState(72);
+				setState(69);
+				subscript();
+				setState(70);
 				match(T__5);
 				}
 				break;
@@ -432,17 +432,8 @@ public class JQuickJSONPathParser extends Parser {
 		public SliceContext slice() {
 			return getRuleContext(SliceContext.class,0);
 		}
-		public ScriptExpressionContext scriptExpression() {
-			return getRuleContext(ScriptExpressionContext.class,0);
-		}
 		public FilterExpressionContext filterExpression() {
 			return getRuleContext(FilterExpressionContext.class,0);
-		}
-		public List<SubscriptContext> subscript() {
-			return getRuleContexts(SubscriptContext.class);
-		}
-		public SubscriptContext subscript(int i) {
-			return getRuleContext(SubscriptContext.class,i);
 		}
 		public SubscriptContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -450,99 +441,61 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_subscript; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterSubscript(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterSubscript(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitSubscript(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitSubscript(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitSubscript(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitSubscript(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final SubscriptContext subscript() throws RecognitionException {
-		return subscript(0);
-	}
-
-	private SubscriptContext subscript(int _p) throws RecognitionException {
-		ParserRuleContext _parentctx = _ctx;
-		int _parentState = getState();
-		SubscriptContext _localctx = new SubscriptContext(_ctx, _parentState);
-		SubscriptContext _prevctx = _localctx;
-		int _startState = 6;
-		enterRecursionRule(_localctx, 6, RULE_subscript, _p);
+		SubscriptContext _localctx = new SubscriptContext(_ctx, getState());
+		enterRule(_localctx, 6, RULE_subscript);
 		try {
-			int _alt;
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(83);
+			setState(79);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,4,_ctx) ) {
 			case 1:
+				enterOuterAlt(_localctx, 1);
 				{
-				setState(77);
+				setState(74);
 				number();
 				}
 				break;
 			case 2:
+				enterOuterAlt(_localctx, 2);
 				{
-				setState(78);
+				setState(75);
 				match(T__3);
 				}
 				break;
 			case 3:
+				enterOuterAlt(_localctx, 3);
 				{
-				setState(79);
+				setState(76);
 				stringLiteral();
 				}
 				break;
 			case 4:
+				enterOuterAlt(_localctx, 4);
 				{
-				setState(80);
+				setState(77);
 				slice();
 				}
 				break;
 			case 5:
+				enterOuterAlt(_localctx, 5);
 				{
-				setState(81);
-				scriptExpression();
-				}
-				break;
-			case 6:
-				{
-				setState(82);
+				setState(78);
 				filterExpression();
 				}
 				break;
-			}
-			_ctx.stop = _input.LT(-1);
-			setState(90);
-			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
-			while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER ) {
-				if ( _alt==1 ) {
-					if ( _parseListeners!=null ) triggerExitRuleEvent();
-					_prevctx = _localctx;
-					{
-					{
-					_localctx = new SubscriptContext(_parentctx, _parentState);
-					pushNewRecursionContext(_localctx, _startState, RULE_subscript);
-					setState(85);
-					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-					setState(86);
-					match(T__7);
-					setState(87);
-					subscript(2);
-					}
-					} 
-				}
-				setState(92);
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,5,_ctx);
-			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -551,7 +504,7 @@ public class JQuickJSONPathParser extends Parser {
 			_errHandler.recover(this, re);
 		}
 		finally {
-			unrollRecursionContexts(_parentctx);
+			exitRule();
 		}
 		return _localctx;
 	}
@@ -567,15 +520,15 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_filterExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterFilterExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterFilterExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitFilterExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitFilterExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitFilterExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitFilterExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -586,14 +539,14 @@ public class JQuickJSONPathParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(93);
+			setState(81);
+			match(T__7);
+			setState(82);
 			match(T__8);
-			setState(94);
-			match(T__9);
-			setState(95);
+			setState(83);
 			expr(0);
-			setState(96);
-			match(T__10);
+			setState(84);
+			match(T__9);
 			}
 		}
 		catch (RecognitionException re) {
@@ -624,15 +577,15 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_slice; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterSlice(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterSlice(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitSlice(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitSlice(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitSlice(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitSlice(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -640,27 +593,28 @@ public class JQuickJSONPathParser extends Parser {
 	public final SliceContext slice() throws RecognitionException {
 		SliceContext _localctx = new SliceContext(_ctx, getState());
 		enterRule(_localctx, 10, RULE_slice);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(98);
+			setState(86);
 			start();
-			setState(99);
-			match(T__11);
-			setState(100);
+			setState(87);
+			match(T__10);
+			setState(88);
 			end();
-			setState(103);
+			setState(91);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,6,_ctx) ) {
-			case 1:
+			_la = _input.LA(1);
+			if (_la==T__10) {
 				{
-				setState(101);
-				match(T__11);
-				setState(102);
+				setState(89);
+				match(T__10);
+				setState(90);
 				step();
 				}
-				break;
 			}
+
 			}
 		}
 		catch (RecognitionException re) {
@@ -685,15 +639,15 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_start; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterStart(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterStart(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitStart(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitStart(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitStart(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitStart(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -705,12 +659,12 @@ public class JQuickJSONPathParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(106);
+			setState(94);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==NUMBER) {
 				{
-				setState(105);
+				setState(93);
 				number();
 				}
 			}
@@ -739,15 +693,15 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_end; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterEnd(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterEnd(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitEnd(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitEnd(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitEnd(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitEnd(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -755,19 +709,20 @@ public class JQuickJSONPathParser extends Parser {
 	public final EndContext end() throws RecognitionException {
 		EndContext _localctx = new EndContext(_ctx, getState());
 		enterRule(_localctx, 14, RULE_end);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(109);
+			setState(97);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
-			case 1:
+			_la = _input.LA(1);
+			if (_la==NUMBER) {
 				{
-				setState(108);
+				setState(96);
 				number();
 				}
-				break;
 			}
+
 			}
 		}
 		catch (RecognitionException re) {
@@ -792,15 +747,15 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_step; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterStep(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterStep(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitStep(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitStep(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitStep(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitStep(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -808,68 +763,20 @@ public class JQuickJSONPathParser extends Parser {
 	public final StepContext step() throws RecognitionException {
 		StepContext _localctx = new StepContext(_ctx, getState());
 		enterRule(_localctx, 16, RULE_step);
+		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(112);
+			setState(100);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
-			case 1:
+			_la = _input.LA(1);
+			if (_la==NUMBER) {
 				{
-				setState(111);
+				setState(99);
 				number();
 				}
-				break;
 			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
 
-	@SuppressWarnings("CheckReturnValue")
-	public static class ScriptExpressionContext extends ParserRuleContext {
-		public ExprContext expr() {
-			return getRuleContext(ExprContext.class,0);
-		}
-		public ScriptExpressionContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_scriptExpression; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterScriptExpression(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitScriptExpression(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitScriptExpression(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final ScriptExpressionContext scriptExpression() throws RecognitionException {
-		ScriptExpressionContext _localctx = new ScriptExpressionContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_scriptExpression);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(114);
-			match(T__9);
-			setState(115);
-			expr(0);
-			setState(116);
-			match(T__10);
 			}
 		}
 		catch (RecognitionException re) {
@@ -903,15 +810,15 @@ public class JQuickJSONPathParser extends Parser {
 		public NegationExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterNegationExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterNegationExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitNegationExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitNegationExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitNegationExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitNegationExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -926,15 +833,15 @@ public class JQuickJSONPathParser extends Parser {
 		public AdditiveExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterAdditiveExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterAdditiveExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitAdditiveExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitAdditiveExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitAdditiveExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitAdditiveExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -946,15 +853,15 @@ public class JQuickJSONPathParser extends Parser {
 		public IdentifierExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterIdentifierExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterIdentifierExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitIdentifierExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitIdentifierExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitIdentifierExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitIdentifierExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -966,15 +873,15 @@ public class JQuickJSONPathParser extends Parser {
 		public NotExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterNotExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterNotExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitNotExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitNotExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitNotExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitNotExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -989,15 +896,15 @@ public class JQuickJSONPathParser extends Parser {
 		public ComparisonExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterComparisonExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterComparisonExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitComparisonExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitComparisonExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitComparisonExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitComparisonExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1012,15 +919,15 @@ public class JQuickJSONPathParser extends Parser {
 		public MultiplicativeExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterMultiplicativeExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterMultiplicativeExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitMultiplicativeExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitMultiplicativeExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitMultiplicativeExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitMultiplicativeExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1035,15 +942,15 @@ public class JQuickJSONPathParser extends Parser {
 		public LogicalOrExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterLogicalOrExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterLogicalOrExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitLogicalOrExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitLogicalOrExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitLogicalOrExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitLogicalOrExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1055,15 +962,15 @@ public class JQuickJSONPathParser extends Parser {
 		public NetestDotExprContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterNetestDotExpr(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterNetestDotExpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitNetestDotExpr(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitNetestDotExpr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitNetestDotExpr(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitNetestDotExpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1078,15 +985,15 @@ public class JQuickJSONPathParser extends Parser {
 		public BracketExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterBracketExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterBracketExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitBracketExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitBracketExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitBracketExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitBracketExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1095,15 +1002,15 @@ public class JQuickJSONPathParser extends Parser {
 		public RootExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterRootExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterRootExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitRootExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitRootExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitRootExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitRootExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1118,15 +1025,15 @@ public class JQuickJSONPathParser extends Parser {
 		public InExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterInExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterInExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitInExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitInExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitInExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitInExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1138,15 +1045,15 @@ public class JQuickJSONPathParser extends Parser {
 		public ParenthesizedExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterParenthesizedExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterParenthesizedExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitParenthesizedExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitParenthesizedExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitParenthesizedExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitParenthesizedExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1155,15 +1062,15 @@ public class JQuickJSONPathParser extends Parser {
 		public CurrentExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterCurrentExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterCurrentExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitCurrentExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitCurrentExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitCurrentExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitCurrentExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1178,15 +1085,15 @@ public class JQuickJSONPathParser extends Parser {
 		public EqualityExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterEqualityExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterEqualityExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitEqualityExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitEqualityExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitEqualityExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitEqualityExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1201,15 +1108,15 @@ public class JQuickJSONPathParser extends Parser {
 		public LogicalAndExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterLogicalAndExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterLogicalAndExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitLogicalAndExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitLogicalAndExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitLogicalAndExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitLogicalAndExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1224,15 +1131,15 @@ public class JQuickJSONPathParser extends Parser {
 		public FunctionCallExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterFunctionCallExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterFunctionCallExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitFunctionCallExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitFunctionCallExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitFunctionCallExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitFunctionCallExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1247,15 +1154,15 @@ public class JQuickJSONPathParser extends Parser {
 		public RegexExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterRegexExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterRegexExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitRegexExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitRegexExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitRegexExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitRegexExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1267,15 +1174,15 @@ public class JQuickJSONPathParser extends Parser {
 		public LiteralExpressionContext(ExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterLiteralExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterLiteralExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitLiteralExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitLiteralExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitLiteralExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitLiteralExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1289,23 +1196,23 @@ public class JQuickJSONPathParser extends Parser {
 		int _parentState = getState();
 		ExprContext _localctx = new ExprContext(_ctx, _parentState);
 		ExprContext _prevctx = _localctx;
-		int _startState = 20;
-		enterRecursionRule(_localctx, 20, RULE_expr, _p);
+		int _startState = 18;
+		enterRecursionRule(_localctx, 18, RULE_expr, _p);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(132);
+			setState(116);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
 			case 1:
 				{
 				_localctx = new NetestDotExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
-				setState(119);
+				setState(103);
 				dotExpr(0);
 				}
 				break;
@@ -1314,9 +1221,9 @@ public class JQuickJSONPathParser extends Parser {
 				_localctx = new NegationExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(120);
-				match(T__12);
-				setState(121);
+				setState(104);
+				match(T__11);
+				setState(105);
 				expr(15);
 				}
 				break;
@@ -1325,9 +1232,9 @@ public class JQuickJSONPathParser extends Parser {
 				_localctx = new NotExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(122);
-				match(T__13);
-				setState(123);
+				setState(106);
+				match(T__12);
+				setState(107);
 				expr(14);
 				}
 				break;
@@ -1336,7 +1243,7 @@ public class JQuickJSONPathParser extends Parser {
 				_localctx = new LiteralExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(124);
+				setState(108);
 				literal();
 				}
 				break;
@@ -1345,7 +1252,7 @@ public class JQuickJSONPathParser extends Parser {
 				_localctx = new IdentifierExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(125);
+				setState(109);
 				identifier();
 				}
 				break;
@@ -1354,7 +1261,7 @@ public class JQuickJSONPathParser extends Parser {
 				_localctx = new RootExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(126);
+				setState(110);
 				match(T__0);
 				}
 				break;
@@ -1363,7 +1270,7 @@ public class JQuickJSONPathParser extends Parser {
 				_localctx = new CurrentExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(127);
+				setState(111);
 				match(T__1);
 				}
 				break;
@@ -1372,36 +1279,36 @@ public class JQuickJSONPathParser extends Parser {
 				_localctx = new ParenthesizedExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(128);
-				match(T__9);
-				setState(129);
+				setState(112);
+				match(T__8);
+				setState(113);
 				expr(0);
-				setState(130);
-				match(T__10);
+				setState(114);
+				match(T__9);
 				}
 				break;
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(171);
+			setState(155);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,12,_ctx);
 			while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
 					_prevctx = _localctx;
 					{
-					setState(169);
+					setState(153);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,12,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
 					case 1:
 						{
 						_localctx = new MultiplicativeExpressionContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(134);
+						setState(118);
 						if (!(precpred(_ctx, 13))) throw new FailedPredicateException(this, "precpred(_ctx, 13)");
-						setState(135);
+						setState(119);
 						_la = _input.LA(1);
-						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 98320L) != 0)) ) {
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 49168L) != 0)) ) {
 						_errHandler.recoverInline(this);
 						}
 						else {
@@ -1409,7 +1316,7 @@ public class JQuickJSONPathParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(136);
+						setState(120);
 						expr(14);
 						}
 						break;
@@ -1417,11 +1324,11 @@ public class JQuickJSONPathParser extends Parser {
 						{
 						_localctx = new AdditiveExpressionContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(137);
+						setState(121);
 						if (!(precpred(_ctx, 12))) throw new FailedPredicateException(this, "precpred(_ctx, 12)");
-						setState(138);
+						setState(122);
 						_la = _input.LA(1);
-						if ( !(_la==T__12 || _la==T__16) ) {
+						if ( !(_la==T__11 || _la==T__15) ) {
 						_errHandler.recoverInline(this);
 						}
 						else {
@@ -1429,7 +1336,7 @@ public class JQuickJSONPathParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(139);
+						setState(123);
 						expr(13);
 						}
 						break;
@@ -1437,11 +1344,11 @@ public class JQuickJSONPathParser extends Parser {
 						{
 						_localctx = new ComparisonExpressionContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(140);
+						setState(124);
 						if (!(precpred(_ctx, 11))) throw new FailedPredicateException(this, "precpred(_ctx, 11)");
-						setState(141);
+						setState(125);
 						_la = _input.LA(1);
-						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 3932160L) != 0)) ) {
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 1966080L) != 0)) ) {
 						_errHandler.recoverInline(this);
 						}
 						else {
@@ -1449,7 +1356,7 @@ public class JQuickJSONPathParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(142);
+						setState(126);
 						expr(12);
 						}
 						break;
@@ -1457,11 +1364,11 @@ public class JQuickJSONPathParser extends Parser {
 						{
 						_localctx = new EqualityExpressionContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(143);
+						setState(127);
 						if (!(precpred(_ctx, 10))) throw new FailedPredicateException(this, "precpred(_ctx, 10)");
-						setState(144);
+						setState(128);
 						_la = _input.LA(1);
-						if ( !(_la==T__21 || _la==T__22) ) {
+						if ( !(_la==T__20 || _la==T__21) ) {
 						_errHandler.recoverInline(this);
 						}
 						else {
@@ -1469,7 +1376,7 @@ public class JQuickJSONPathParser extends Parser {
 							_errHandler.reportMatch(this);
 							consume();
 						}
-						setState(145);
+						setState(129);
 						expr(11);
 						}
 						break;
@@ -1477,11 +1384,11 @@ public class JQuickJSONPathParser extends Parser {
 						{
 						_localctx = new LogicalAndExpressionContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(146);
+						setState(130);
 						if (!(precpred(_ctx, 7))) throw new FailedPredicateException(this, "precpred(_ctx, 7)");
-						setState(147);
-						match(T__25);
-						setState(148);
+						setState(131);
+						match(T__24);
+						setState(132);
 						expr(8);
 						}
 						break;
@@ -1489,11 +1396,11 @@ public class JQuickJSONPathParser extends Parser {
 						{
 						_localctx = new LogicalOrExpressionContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(149);
+						setState(133);
 						if (!(precpred(_ctx, 6))) throw new FailedPredicateException(this, "precpred(_ctx, 6)");
-						setState(150);
-						match(T__26);
-						setState(151);
+						setState(134);
+						match(T__25);
+						setState(135);
 						expr(7);
 						}
 						break;
@@ -1501,13 +1408,13 @@ public class JQuickJSONPathParser extends Parser {
 						{
 						_localctx = new BracketExpressionContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(152);
+						setState(136);
 						if (!(precpred(_ctx, 17))) throw new FailedPredicateException(this, "precpred(_ctx, 17)");
-						setState(153);
+						setState(137);
 						match(T__4);
-						setState(154);
-						subscript(0);
-						setState(155);
+						setState(138);
+						subscript();
+						setState(139);
 						match(T__5);
 						}
 						break;
@@ -1515,33 +1422,33 @@ public class JQuickJSONPathParser extends Parser {
 						{
 						_localctx = new FunctionCallExpressionContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(157);
+						setState(141);
 						if (!(precpred(_ctx, 16))) throw new FailedPredicateException(this, "precpred(_ctx, 16)");
-						setState(158);
-						match(T__9);
-						setState(160);
+						setState(142);
+						match(T__8);
+						setState(144);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
-						if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 62008615942L) != 0)) {
+						if ((((_la) & ~0x3f) == 0 && ((1L << _la) & 62008603142L) != 0)) {
 							{
-							setState(159);
+							setState(143);
 							exprList();
 							}
 						}
 
-						setState(162);
-						match(T__10);
+						setState(146);
+						match(T__9);
 						}
 						break;
 					case 9:
 						{
 						_localctx = new RegexExpressionContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(163);
+						setState(147);
 						if (!(precpred(_ctx, 9))) throw new FailedPredicateException(this, "precpred(_ctx, 9)");
-						setState(164);
-						match(T__23);
-						setState(165);
+						setState(148);
+						match(T__22);
+						setState(149);
 						regexLiteral();
 						}
 						break;
@@ -1549,20 +1456,20 @@ public class JQuickJSONPathParser extends Parser {
 						{
 						_localctx = new InExpressionContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
-						setState(166);
+						setState(150);
 						if (!(precpred(_ctx, 8))) throw new FailedPredicateException(this, "precpred(_ctx, 8)");
-						setState(167);
-						match(T__24);
-						setState(168);
+						setState(151);
+						match(T__23);
+						setState(152);
 						valueList();
 						}
 						break;
 					}
 					} 
 				}
-				setState(173);
+				setState(157);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,13,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,12,_ctx);
 			}
 			}
 		}
@@ -1591,41 +1498,41 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_exprList; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterExprList(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterExprList(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitExprList(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitExprList(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitExprList(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitExprList(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final ExprListContext exprList() throws RecognitionException {
 		ExprListContext _localctx = new ExprListContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_exprList);
+		enterRule(_localctx, 20, RULE_exprList);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(174);
+			setState(158);
 			expr(0);
-			setState(179);
+			setState(163);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__7) {
+			while (_la==T__26) {
 				{
 				{
-				setState(175);
-				match(T__7);
-				setState(176);
+				setState(159);
+				match(T__26);
+				setState(160);
 				expr(0);
 				}
 				}
-				setState(181);
+				setState(165);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -1665,15 +1572,15 @@ public class JQuickJSONPathParser extends Parser {
 		public ChainedDotExpressionContext(DotExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterChainedDotExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterChainedDotExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitChainedDotExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitChainedDotExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitChainedDotExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitChainedDotExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1688,15 +1595,15 @@ public class JQuickJSONPathParser extends Parser {
 		public DirectDotExpressionContext(DotExprContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterDirectDotExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterDirectDotExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitDirectDotExpression(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitDirectDotExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitDirectDotExpression(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitDirectDotExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1710,8 +1617,8 @@ public class JQuickJSONPathParser extends Parser {
 		int _parentState = getState();
 		DotExprContext _localctx = new DotExprContext(_ctx, _parentState);
 		DotExprContext _prevctx = _localctx;
-		int _startState = 24;
-		enterRecursionRule(_localctx, 24, RULE_dotExpr, _p);
+		int _startState = 22;
+		enterRecursionRule(_localctx, 22, RULE_dotExpr, _p);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
@@ -1721,17 +1628,17 @@ public class JQuickJSONPathParser extends Parser {
 			_ctx = _localctx;
 			_prevctx = _localctx;
 
-			setState(183);
+			setState(167);
 			leftDotExpr();
-			setState(184);
+			setState(168);
 			match(T__2);
-			setState(185);
+			setState(169);
 			rightDotExpr();
 			}
 			_ctx.stop = _input.LT(-1);
-			setState(192);
+			setState(176);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,14,_ctx);
 			while ( _alt!=2 && _alt!= ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					if ( _parseListeners!=null ) triggerExitRuleEvent();
@@ -1740,18 +1647,18 @@ public class JQuickJSONPathParser extends Parser {
 					{
 					_localctx = new ChainedDotExpressionContext(new DotExprContext(_parentctx, _parentState));
 					pushNewRecursionContext(_localctx, _startState, RULE_dotExpr);
-					setState(187);
+					setState(171);
 					if (!(precpred(_ctx, 1))) throw new FailedPredicateException(this, "precpred(_ctx, 1)");
-					setState(188);
+					setState(172);
 					match(T__2);
-					setState(189);
+					setState(173);
 					rightDotExpr();
 					}
 					} 
 				}
-				setState(194);
+				setState(178);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,15,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,14,_ctx);
 			}
 			}
 		}
@@ -1783,44 +1690,44 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_leftDotExpr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterLeftDotExpr(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterLeftDotExpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitLeftDotExpr(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitLeftDotExpr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitLeftDotExpr(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitLeftDotExpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final LeftDotExprContext leftDotExpr() throws RecognitionException {
 		LeftDotExprContext _localctx = new LeftDotExprContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_leftDotExpr);
+		enterRule(_localctx, 24, RULE_leftDotExpr);
 		try {
-			setState(203);
+			setState(187);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(195);
+				setState(179);
 				identifier();
 				}
 				break;
 			case T__0:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(196);
+				setState(180);
 				match(T__0);
 				}
 				break;
 			case T__1:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(197);
+				setState(181);
 				match(T__1);
 				}
 				break;
@@ -1831,19 +1738,19 @@ public class JQuickJSONPathParser extends Parser {
 			case NUMBER:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(198);
+				setState(182);
 				literal();
 				}
 				break;
-			case T__9:
+			case T__8:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(199);
-				match(T__9);
-				setState(200);
+				setState(183);
+				match(T__8);
+				setState(184);
 				expr(0);
-				setState(201);
-				match(T__10);
+				setState(185);
+				match(T__9);
 				}
 				break;
 			default:
@@ -1872,37 +1779,37 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_rightDotExpr; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterRightDotExpr(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterRightDotExpr(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitRightDotExpr(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitRightDotExpr(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitRightDotExpr(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitRightDotExpr(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final RightDotExprContext rightDotExpr() throws RecognitionException {
 		RightDotExprContext _localctx = new RightDotExprContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_rightDotExpr);
+		enterRule(_localctx, 26, RULE_rightDotExpr);
 		try {
-			setState(207);
+			setState(191);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(205);
+				setState(189);
 				identifier();
 				}
 				break;
 			case T__3:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(206);
+				setState(190);
 				match(T__3);
 				}
 				break;
@@ -1935,48 +1842,48 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_valueList; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterValueList(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterValueList(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitValueList(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitValueList(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitValueList(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitValueList(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final ValueListContext valueList() throws RecognitionException {
 		ValueListContext _localctx = new ValueListContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_valueList);
+		enterRule(_localctx, 28, RULE_valueList);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(209);
-			match(T__9);
-			setState(210);
+			setState(193);
+			match(T__8);
+			setState(194);
 			literal();
-			setState(215);
+			setState(199);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==T__7) {
+			while (_la==T__26) {
 				{
 				{
-				setState(211);
-				match(T__7);
-				setState(212);
+				setState(195);
+				match(T__26);
+				setState(196);
 				literal();
 				}
 				}
-				setState(217);
+				setState(201);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(218);
-			match(T__10);
+			setState(202);
+			match(T__9);
 			}
 		}
 		catch (RecognitionException re) {
@@ -2007,35 +1914,35 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_regexLiteral; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterRegexLiteral(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterRegexLiteral(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitRegexLiteral(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitRegexLiteral(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitRegexLiteral(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitRegexLiteral(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final RegexLiteralContext regexLiteral() throws RecognitionException {
 		RegexLiteralContext _localctx = new RegexLiteralContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_regexLiteral);
+		enterRule(_localctx, 30, RULE_regexLiteral);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(220);
-			match(T__14);
-			setState(224);
+			setState(204);
+			match(T__13);
+			setState(208);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==REGEX_CHAR || _la==ESCAPE_SEQ) {
 				{
 				{
-				setState(221);
+				setState(205);
 				_la = _input.LA(1);
 				if ( !(_la==REGEX_CHAR || _la==ESCAPE_SEQ) ) {
 				_errHandler.recoverInline(this);
@@ -2047,18 +1954,18 @@ public class JQuickJSONPathParser extends Parser {
 				}
 				}
 				}
-				setState(226);
+				setState(210);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(227);
-			match(T__14);
-			setState(229);
+			setState(211);
+			match(T__13);
+			setState(213);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,20,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,19,_ctx) ) {
 			case 1:
 				{
-				setState(228);
+				setState(212);
 				match(REGEX_FLAGS);
 				}
 				break;
@@ -2085,26 +1992,26 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_identifier; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterIdentifier(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterIdentifier(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitIdentifier(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitIdentifier(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitIdentifier(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitIdentifier(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final IdentifierContext identifier() throws RecognitionException {
 		IdentifierContext _localctx = new IdentifierContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_identifier);
+		enterRule(_localctx, 32, RULE_identifier);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(231);
+			setState(215);
 			match(IDENTIFIER);
 			}
 		}
@@ -2133,58 +2040,58 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_literal; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterLiteral(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterLiteral(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitLiteral(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitLiteral(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitLiteral(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitLiteral(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final LiteralContext literal() throws RecognitionException {
 		LiteralContext _localctx = new LiteralContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_literal);
+		enterRule(_localctx, 34, RULE_literal);
 		try {
-			setState(238);
+			setState(222);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case STRING:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(233);
+				setState(217);
 				stringLiteral();
 				}
 				break;
 			case NUMBER:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(234);
+				setState(218);
 				number();
 				}
 				break;
 			case T__27:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(235);
+				setState(219);
 				match(T__27);
 				}
 				break;
 			case T__28:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(236);
+				setState(220);
 				match(T__28);
 				}
 				break;
 			case T__29:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(237);
+				setState(221);
 				match(T__29);
 				}
 				break;
@@ -2212,26 +2119,26 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_stringLiteral; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterStringLiteral(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterStringLiteral(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitStringLiteral(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitStringLiteral(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitStringLiteral(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitStringLiteral(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final StringLiteralContext stringLiteral() throws RecognitionException {
 		StringLiteralContext _localctx = new StringLiteralContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_stringLiteral);
+		enterRule(_localctx, 36, RULE_stringLiteral);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(240);
+			setState(224);
 			match(STRING);
 			}
 		}
@@ -2255,26 +2162,26 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_number; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterNumber(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterNumber(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitNumber(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitNumber(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitNumber(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitNumber(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final NumberContext number() throws RecognitionException {
 		NumberContext _localctx = new NumberContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_number);
+		enterRule(_localctx, 38, RULE_number);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(242);
+			setState(226);
 			match(NUMBER);
 			}
 		}
@@ -2298,30 +2205,30 @@ public class JQuickJSONPathParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_variable; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).enterVariable(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).enterVariable(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof JQuickJSONPathListener) ((JQuickJSONPathListener)listener).exitVariable(this);
+			if ( listener instanceof JQuickJSONPathListener ) ((JQuickJSONPathListener)listener).exitVariable(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof JQuickJSONPathVisitor) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitVariable(this);
+			if ( visitor instanceof JQuickJSONPathVisitor ) return ((JQuickJSONPathVisitor<? extends T>)visitor).visitVariable(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
 	public final VariableContext variable() throws RecognitionException {
 		VariableContext _localctx = new VariableContext(_ctx, getState());
-		enterRule(_localctx, 42, RULE_variable);
+		enterRule(_localctx, 40, RULE_variable);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(244);
+			setState(228);
 			match(T__30);
-			setState(245);
+			setState(229);
 			match(IDENTIFIER);
-			setState(246);
+			setState(230);
 			match(T__31);
 			}
 		}
@@ -2338,216 +2245,195 @@ public class JQuickJSONPathParser extends Parser {
 
 	public boolean sempred(RuleContext _localctx, int ruleIndex, int predIndex) {
 		switch (ruleIndex) {
-		case 3:
-			return subscript_sempred((SubscriptContext)_localctx, predIndex);
-		case 10:
+		case 9:
 			return expr_sempred((ExprContext)_localctx, predIndex);
-		case 12:
+		case 11:
 			return dotExpr_sempred((DotExprContext)_localctx, predIndex);
-		}
-		return true;
-	}
-	private boolean subscript_sempred(SubscriptContext _localctx, int predIndex) {
-		switch (predIndex) {
-		case 0:
-			return precpred(_ctx, 1);
 		}
 		return true;
 	}
 	private boolean expr_sempred(ExprContext _localctx, int predIndex) {
 		switch (predIndex) {
-		case 1:
+		case 0:
 			return precpred(_ctx, 13);
-		case 2:
+		case 1:
 			return precpred(_ctx, 12);
-		case 3:
+		case 2:
 			return precpred(_ctx, 11);
-		case 4:
+		case 3:
 			return precpred(_ctx, 10);
-		case 5:
+		case 4:
 			return precpred(_ctx, 7);
-		case 6:
+		case 5:
 			return precpred(_ctx, 6);
-		case 7:
+		case 6:
 			return precpred(_ctx, 17);
-		case 8:
+		case 7:
 			return precpred(_ctx, 16);
-		case 9:
+		case 8:
 			return precpred(_ctx, 9);
-		case 10:
+		case 9:
 			return precpred(_ctx, 8);
 		}
 		return true;
 	}
 	private boolean dotExpr_sempred(DotExprContext _localctx, int predIndex) {
 		switch (predIndex) {
-		case 11:
+		case 10:
 			return precpred(_ctx, 1);
 		}
 		return true;
 	}
 
 	public static final String _serializedATN =
-		"\u0004\u0001\'\u00f9\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
+		"\u0004\u0001\'\u00e9\u0002\u0000\u0007\u0000\u0002\u0001\u0007\u0001\u0002"+
 		"\u0002\u0007\u0002\u0002\u0003\u0007\u0003\u0002\u0004\u0007\u0004\u0002"+
 		"\u0005\u0007\u0005\u0002\u0006\u0007\u0006\u0002\u0007\u0007\u0007\u0002"+
 		"\b\u0007\b\u0002\t\u0007\t\u0002\n\u0007\n\u0002\u000b\u0007\u000b\u0002"+
 		"\f\u0007\f\u0002\r\u0007\r\u0002\u000e\u0007\u000e\u0002\u000f\u0007\u000f"+
 		"\u0002\u0010\u0007\u0010\u0002\u0011\u0007\u0011\u0002\u0012\u0007\u0012"+
-		"\u0002\u0013\u0007\u0013\u0002\u0014\u0007\u0014\u0002\u0015\u0007\u0015"+
-		"\u0001\u0000\u0001\u0000\u0005\u0000/\b\u0000\n\u0000\f\u00002\t\u0000"+
-		"\u0001\u0000\u0001\u0000\u0001\u0001\u0001\u0001\u0001\u0002\u0001\u0002"+
-		"\u0001\u0002\u0003\u0002;\b\u0002\u0001\u0002\u0001\u0002\u0001\u0002"+
-		"\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u0002D\b\u0002"+
-		"\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u0002"+
-		"K\b\u0002\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003"+
-		"\u0001\u0003\u0001\u0003\u0003\u0003T\b\u0003\u0001\u0003\u0001\u0003"+
-		"\u0001\u0003\u0005\u0003Y\b\u0003\n\u0003\f\u0003\\\t\u0003\u0001\u0004"+
-		"\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0005\u0001\u0005"+
-		"\u0001\u0005\u0001\u0005\u0001\u0005\u0003\u0005h\b\u0005\u0001\u0006"+
-		"\u0003\u0006k\b\u0006\u0001\u0007\u0003\u0007n\b\u0007\u0001\b\u0003\b"+
-		"q\b\b\u0001\t\u0001\t\u0001\t\u0001\t\u0001\n\u0001\n\u0001\n\u0001\n"+
-		"\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001"+
-		"\n\u0001\n\u0003\n\u0085\b\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001"+
-		"\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001"+
-		"\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001"+
-		"\n\u0001\n\u0001\n\u0003\n\u00a1\b\n\u0001\n\u0001\n\u0001\n\u0001\n\u0001"+
-		"\n\u0001\n\u0001\n\u0005\n\u00aa\b\n\n\n\f\n\u00ad\t\n\u0001\u000b\u0001"+
-		"\u000b\u0001\u000b\u0005\u000b\u00b2\b\u000b\n\u000b\f\u000b\u00b5\t\u000b"+
-		"\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0005"+
-		"\f\u00bf\b\f\n\f\f\f\u00c2\t\f\u0001\r\u0001\r\u0001\r\u0001\r\u0001\r"+
-		"\u0001\r\u0001\r\u0001\r\u0003\r\u00cc\b\r\u0001\u000e\u0001\u000e\u0003"+
-		"\u000e\u00d0\b\u000e\u0001\u000f\u0001\u000f\u0001\u000f\u0001\u000f\u0005"+
-		"\u000f\u00d6\b\u000f\n\u000f\f\u000f\u00d9\t\u000f\u0001\u000f\u0001\u000f"+
-		"\u0001\u0010\u0001\u0010\u0005\u0010\u00df\b\u0010\n\u0010\f\u0010\u00e2"+
-		"\t\u0010\u0001\u0010\u0001\u0010\u0003\u0010\u00e6\b\u0010\u0001\u0011"+
-		"\u0001\u0011\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012\u0001\u0012"+
-		"\u0003\u0012\u00ef\b\u0012\u0001\u0013\u0001\u0013\u0001\u0014\u0001\u0014"+
-		"\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015\u0001\u0015\u0000\u0003"+
-		"\u0006\u0014\u0018\u0016\u0000\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012"+
-		"\u0014\u0016\u0018\u001a\u001c\u001e \"$&(*\u0000\u0006\u0001\u0000\u0001"+
-		"\u0002\u0002\u0000\u0004\u0004\u000f\u0010\u0002\u0000\r\r\u0011\u0011"+
-		"\u0001\u0000\u0012\u0015\u0001\u0000\u0016\u0017\u0001\u0000%&\u0112\u0000"+
-		",\u0001\u0000\u0000\u0000\u00025\u0001\u0000\u0000\u0000\u0004J\u0001"+
-		"\u0000\u0000\u0000\u0006S\u0001\u0000\u0000\u0000\b]\u0001\u0000\u0000"+
-		"\u0000\nb\u0001\u0000\u0000\u0000\fj\u0001\u0000\u0000\u0000\u000em\u0001"+
-		"\u0000\u0000\u0000\u0010p\u0001\u0000\u0000\u0000\u0012r\u0001\u0000\u0000"+
-		"\u0000\u0014\u0084\u0001\u0000\u0000\u0000\u0016\u00ae\u0001\u0000\u0000"+
-		"\u0000\u0018\u00b6\u0001\u0000\u0000\u0000\u001a\u00cb\u0001\u0000\u0000"+
-		"\u0000\u001c\u00cf\u0001\u0000\u0000\u0000\u001e\u00d1\u0001\u0000\u0000"+
-		"\u0000 \u00dc\u0001\u0000\u0000\u0000\"\u00e7\u0001\u0000\u0000\u0000"+
-		"$\u00ee\u0001\u0000\u0000\u0000&\u00f0\u0001\u0000\u0000\u0000(\u00f2"+
-		"\u0001\u0000\u0000\u0000*\u00f4\u0001\u0000\u0000\u0000,0\u0003\u0002"+
-		"\u0001\u0000-/\u0003\u0004\u0002\u0000.-\u0001\u0000\u0000\u0000/2\u0001"+
-		"\u0000\u0000\u00000.\u0001\u0000\u0000\u000001\u0001\u0000\u0000\u0000"+
-		"13\u0001\u0000\u0000\u000020\u0001\u0000\u0000\u000034\u0005\u0000\u0000"+
-		"\u00014\u0001\u0001\u0000\u0000\u000056\u0007\u0000\u0000\u00006\u0003"+
-		"\u0001\u0000\u0000\u00007:\u0005\u0003\u0000\u00008;\u0003\"\u0011\u0000"+
-		"9;\u0005\u0004\u0000\u0000:8\u0001\u0000\u0000\u0000:9\u0001\u0000\u0000"+
-		"\u0000;K\u0001\u0000\u0000\u0000<=\u0005\u0005\u0000\u0000=>\u0003\u0006"+
-		"\u0003\u0000>?\u0005\u0006\u0000\u0000?K\u0001\u0000\u0000\u0000@C\u0005"+
-		"\u0007\u0000\u0000AD\u0003\"\u0011\u0000BD\u0005\u0004\u0000\u0000CA\u0001"+
-		"\u0000\u0000\u0000CB\u0001\u0000\u0000\u0000DK\u0001\u0000\u0000\u0000"+
-		"EF\u0005\u0007\u0000\u0000FG\u0005\u0005\u0000\u0000GH\u0003\u0006\u0003"+
-		"\u0000HI\u0005\u0006\u0000\u0000IK\u0001\u0000\u0000\u0000J7\u0001\u0000"+
-		"\u0000\u0000J<\u0001\u0000\u0000\u0000J@\u0001\u0000\u0000\u0000JE\u0001"+
-		"\u0000\u0000\u0000K\u0005\u0001\u0000\u0000\u0000LM\u0006\u0003\uffff"+
-		"\uffff\u0000MT\u0003(\u0014\u0000NT\u0005\u0004\u0000\u0000OT\u0003&\u0013"+
-		"\u0000PT\u0003\n\u0005\u0000QT\u0003\u0012\t\u0000RT\u0003\b\u0004\u0000"+
-		"SL\u0001\u0000\u0000\u0000SN\u0001\u0000\u0000\u0000SO\u0001\u0000\u0000"+
-		"\u0000SP\u0001\u0000\u0000\u0000SQ\u0001\u0000\u0000\u0000SR\u0001\u0000"+
-		"\u0000\u0000TZ\u0001\u0000\u0000\u0000UV\n\u0001\u0000\u0000VW\u0005\b"+
-		"\u0000\u0000WY\u0003\u0006\u0003\u0002XU\u0001\u0000\u0000\u0000Y\\\u0001"+
-		"\u0000\u0000\u0000ZX\u0001\u0000\u0000\u0000Z[\u0001\u0000\u0000\u0000"+
-		"[\u0007\u0001\u0000\u0000\u0000\\Z\u0001\u0000\u0000\u0000]^\u0005\t\u0000"+
-		"\u0000^_\u0005\n\u0000\u0000_`\u0003\u0014\n\u0000`a\u0005\u000b\u0000"+
-		"\u0000a\t\u0001\u0000\u0000\u0000bc\u0003\f\u0006\u0000cd\u0005\f\u0000"+
-		"\u0000dg\u0003\u000e\u0007\u0000ef\u0005\f\u0000\u0000fh\u0003\u0010\b"+
-		"\u0000ge\u0001\u0000\u0000\u0000gh\u0001\u0000\u0000\u0000h\u000b\u0001"+
-		"\u0000\u0000\u0000ik\u0003(\u0014\u0000ji\u0001\u0000\u0000\u0000jk\u0001"+
-		"\u0000\u0000\u0000k\r\u0001\u0000\u0000\u0000ln\u0003(\u0014\u0000ml\u0001"+
-		"\u0000\u0000\u0000mn\u0001\u0000\u0000\u0000n\u000f\u0001\u0000\u0000"+
-		"\u0000oq\u0003(\u0014\u0000po\u0001\u0000\u0000\u0000pq\u0001\u0000\u0000"+
-		"\u0000q\u0011\u0001\u0000\u0000\u0000rs\u0005\n\u0000\u0000st\u0003\u0014"+
-		"\n\u0000tu\u0005\u000b\u0000\u0000u\u0013\u0001\u0000\u0000\u0000vw\u0006"+
-		"\n\uffff\uffff\u0000w\u0085\u0003\u0018\f\u0000xy\u0005\r\u0000\u0000"+
-		"y\u0085\u0003\u0014\n\u000fz{\u0005\u000e\u0000\u0000{\u0085\u0003\u0014"+
-		"\n\u000e|\u0085\u0003$\u0012\u0000}\u0085\u0003\"\u0011\u0000~\u0085\u0005"+
-		"\u0001\u0000\u0000\u007f\u0085\u0005\u0002\u0000\u0000\u0080\u0081\u0005"+
-		"\n\u0000\u0000\u0081\u0082\u0003\u0014\n\u0000\u0082\u0083\u0005\u000b"+
-		"\u0000\u0000\u0083\u0085\u0001\u0000\u0000\u0000\u0084v\u0001\u0000\u0000"+
-		"\u0000\u0084x\u0001\u0000\u0000\u0000\u0084z\u0001\u0000\u0000\u0000\u0084"+
-		"|\u0001\u0000\u0000\u0000\u0084}\u0001\u0000\u0000\u0000\u0084~\u0001"+
-		"\u0000\u0000\u0000\u0084\u007f\u0001\u0000\u0000\u0000\u0084\u0080\u0001"+
-		"\u0000\u0000\u0000\u0085\u00ab\u0001\u0000\u0000\u0000\u0086\u0087\n\r"+
-		"\u0000\u0000\u0087\u0088\u0007\u0001\u0000\u0000\u0088\u00aa\u0003\u0014"+
-		"\n\u000e\u0089\u008a\n\f\u0000\u0000\u008a\u008b\u0007\u0002\u0000\u0000"+
-		"\u008b\u00aa\u0003\u0014\n\r\u008c\u008d\n\u000b\u0000\u0000\u008d\u008e"+
-		"\u0007\u0003\u0000\u0000\u008e\u00aa\u0003\u0014\n\f\u008f\u0090\n\n\u0000"+
-		"\u0000\u0090\u0091\u0007\u0004\u0000\u0000\u0091\u00aa\u0003\u0014\n\u000b"+
-		"\u0092\u0093\n\u0007\u0000\u0000\u0093\u0094\u0005\u001a\u0000\u0000\u0094"+
-		"\u00aa\u0003\u0014\n\b\u0095\u0096\n\u0006\u0000\u0000\u0096\u0097\u0005"+
-		"\u001b\u0000\u0000\u0097\u00aa\u0003\u0014\n\u0007\u0098\u0099\n\u0011"+
-		"\u0000\u0000\u0099\u009a\u0005\u0005\u0000\u0000\u009a\u009b\u0003\u0006"+
-		"\u0003\u0000\u009b\u009c\u0005\u0006\u0000\u0000\u009c\u00aa\u0001\u0000"+
-		"\u0000\u0000\u009d\u009e\n\u0010\u0000\u0000\u009e\u00a0\u0005\n\u0000"+
-		"\u0000\u009f\u00a1\u0003\u0016\u000b\u0000\u00a0\u009f\u0001\u0000\u0000"+
-		"\u0000\u00a0\u00a1\u0001\u0000\u0000\u0000\u00a1\u00a2\u0001\u0000\u0000"+
-		"\u0000\u00a2\u00aa\u0005\u000b\u0000\u0000\u00a3\u00a4\n\t\u0000\u0000"+
-		"\u00a4\u00a5\u0005\u0018\u0000\u0000\u00a5\u00aa\u0003 \u0010\u0000\u00a6"+
-		"\u00a7\n\b\u0000\u0000\u00a7\u00a8\u0005\u0019\u0000\u0000\u00a8\u00aa"+
-		"\u0003\u001e\u000f\u0000\u00a9\u0086\u0001\u0000\u0000\u0000\u00a9\u0089"+
-		"\u0001\u0000\u0000\u0000\u00a9\u008c\u0001\u0000\u0000\u0000\u00a9\u008f"+
-		"\u0001\u0000\u0000\u0000\u00a9\u0092\u0001\u0000\u0000\u0000\u00a9\u0095"+
-		"\u0001\u0000\u0000\u0000\u00a9\u0098\u0001\u0000\u0000\u0000\u00a9\u009d"+
-		"\u0001\u0000\u0000\u0000\u00a9\u00a3\u0001\u0000\u0000\u0000\u00a9\u00a6"+
-		"\u0001\u0000\u0000\u0000\u00aa\u00ad\u0001\u0000\u0000\u0000\u00ab\u00a9"+
-		"\u0001\u0000\u0000\u0000\u00ab\u00ac\u0001\u0000\u0000\u0000\u00ac\u0015"+
-		"\u0001\u0000\u0000\u0000\u00ad\u00ab\u0001\u0000\u0000\u0000\u00ae\u00b3"+
-		"\u0003\u0014\n\u0000\u00af\u00b0\u0005\b\u0000\u0000\u00b0\u00b2\u0003"+
-		"\u0014\n\u0000\u00b1\u00af\u0001\u0000\u0000\u0000\u00b2\u00b5\u0001\u0000"+
-		"\u0000\u0000\u00b3\u00b1\u0001\u0000\u0000\u0000\u00b3\u00b4\u0001\u0000"+
-		"\u0000\u0000\u00b4\u0017\u0001\u0000\u0000\u0000\u00b5\u00b3\u0001\u0000"+
-		"\u0000\u0000\u00b6\u00b7\u0006\f\uffff\uffff\u0000\u00b7\u00b8\u0003\u001a"+
-		"\r\u0000\u00b8\u00b9\u0005\u0003\u0000\u0000\u00b9\u00ba\u0003\u001c\u000e"+
-		"\u0000\u00ba\u00c0\u0001\u0000\u0000\u0000\u00bb\u00bc\n\u0001\u0000\u0000"+
-		"\u00bc\u00bd\u0005\u0003\u0000\u0000\u00bd\u00bf\u0003\u001c\u000e\u0000"+
-		"\u00be\u00bb\u0001\u0000\u0000\u0000\u00bf\u00c2\u0001\u0000\u0000\u0000"+
-		"\u00c0\u00be\u0001\u0000\u0000\u0000\u00c0\u00c1\u0001\u0000\u0000\u0000"+
-		"\u00c1\u0019\u0001\u0000\u0000\u0000\u00c2\u00c0\u0001\u0000\u0000\u0000"+
-		"\u00c3\u00cc\u0003\"\u0011\u0000\u00c4\u00cc\u0005\u0001\u0000\u0000\u00c5"+
-		"\u00cc\u0005\u0002\u0000\u0000\u00c6\u00cc\u0003$\u0012\u0000\u00c7\u00c8"+
-		"\u0005\n\u0000\u0000\u00c8\u00c9\u0003\u0014\n\u0000\u00c9\u00ca\u0005"+
-		"\u000b\u0000\u0000\u00ca\u00cc\u0001\u0000\u0000\u0000\u00cb\u00c3\u0001"+
-		"\u0000\u0000\u0000\u00cb\u00c4\u0001\u0000\u0000\u0000\u00cb\u00c5\u0001"+
-		"\u0000\u0000\u0000\u00cb\u00c6\u0001\u0000\u0000\u0000\u00cb\u00c7\u0001"+
-		"\u0000\u0000\u0000\u00cc\u001b\u0001\u0000\u0000\u0000\u00cd\u00d0\u0003"+
-		"\"\u0011\u0000\u00ce\u00d0\u0005\u0004\u0000\u0000\u00cf\u00cd\u0001\u0000"+
-		"\u0000\u0000\u00cf\u00ce\u0001\u0000\u0000\u0000\u00d0\u001d\u0001\u0000"+
-		"\u0000\u0000\u00d1\u00d2\u0005\n\u0000\u0000\u00d2\u00d7\u0003$\u0012"+
-		"\u0000\u00d3\u00d4\u0005\b\u0000\u0000\u00d4\u00d6\u0003$\u0012\u0000"+
-		"\u00d5\u00d3\u0001\u0000\u0000\u0000\u00d6\u00d9\u0001\u0000\u0000\u0000"+
-		"\u00d7\u00d5\u0001\u0000\u0000\u0000\u00d7\u00d8\u0001\u0000\u0000\u0000"+
-		"\u00d8\u00da\u0001\u0000\u0000\u0000\u00d9\u00d7\u0001\u0000\u0000\u0000"+
-		"\u00da\u00db\u0005\u000b\u0000\u0000\u00db\u001f\u0001\u0000\u0000\u0000"+
-		"\u00dc\u00e0\u0005\u000f\u0000\u0000\u00dd\u00df\u0007\u0005\u0000\u0000"+
-		"\u00de\u00dd\u0001\u0000\u0000\u0000\u00df\u00e2\u0001\u0000\u0000\u0000"+
-		"\u00e0\u00de\u0001\u0000\u0000\u0000\u00e0\u00e1\u0001\u0000\u0000\u0000"+
-		"\u00e1\u00e3\u0001\u0000\u0000\u0000\u00e2\u00e0\u0001\u0000\u0000\u0000"+
-		"\u00e3\u00e5\u0005\u000f\u0000\u0000\u00e4\u00e6\u0005\'\u0000\u0000\u00e5"+
-		"\u00e4\u0001\u0000\u0000\u0000\u00e5\u00e6\u0001\u0000\u0000\u0000\u00e6"+
-		"!\u0001\u0000\u0000\u0000\u00e7\u00e8\u0005!\u0000\u0000\u00e8#\u0001"+
-		"\u0000\u0000\u0000\u00e9\u00ef\u0003&\u0013\u0000\u00ea\u00ef\u0003(\u0014"+
-		"\u0000\u00eb\u00ef\u0005\u001c\u0000\u0000\u00ec\u00ef\u0005\u001d\u0000"+
-		"\u0000\u00ed\u00ef\u0005\u001e\u0000\u0000\u00ee\u00e9\u0001\u0000\u0000"+
-		"\u0000\u00ee\u00ea\u0001\u0000\u0000\u0000\u00ee\u00eb\u0001\u0000\u0000"+
-		"\u0000\u00ee\u00ec\u0001\u0000\u0000\u0000\u00ee\u00ed\u0001\u0000\u0000"+
-		"\u0000\u00ef%\u0001\u0000\u0000\u0000\u00f0\u00f1\u0005\"\u0000\u0000"+
-		"\u00f1\'\u0001\u0000\u0000\u0000\u00f2\u00f3\u0005#\u0000\u0000\u00f3"+
-		")\u0001\u0000\u0000\u0000\u00f4\u00f5\u0005\u001f\u0000\u0000\u00f5\u00f6"+
-		"\u0005!\u0000\u0000\u00f6\u00f7\u0005 \u0000\u0000\u00f7+\u0001\u0000"+
-		"\u0000\u0000\u00160:CJSZgjmp\u0084\u00a0\u00a9\u00ab\u00b3\u00c0\u00cb"+
-		"\u00cf\u00d7\u00e0\u00e5\u00ee";
+		"\u0002\u0013\u0007\u0013\u0002\u0014\u0007\u0014\u0001\u0000\u0001\u0000"+
+		"\u0005\u0000-\b\u0000\n\u0000\f\u00000\t\u0000\u0001\u0000\u0001\u0000"+
+		"\u0001\u0001\u0001\u0001\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u0002"+
+		"9\b\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002\u0001\u0002"+
+		"\u0001\u0002\u0001\u0002\u0003\u0002B\b\u0002\u0001\u0002\u0001\u0002"+
+		"\u0001\u0002\u0001\u0002\u0001\u0002\u0003\u0002I\b\u0002\u0001\u0003"+
+		"\u0001\u0003\u0001\u0003\u0001\u0003\u0001\u0003\u0003\u0003P\b\u0003"+
+		"\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0004\u0001\u0005"+
+		"\u0001\u0005\u0001\u0005\u0001\u0005\u0001\u0005\u0003\u0005\\\b\u0005"+
+		"\u0001\u0006\u0003\u0006_\b\u0006\u0001\u0007\u0003\u0007b\b\u0007\u0001"+
+		"\b\u0003\be\b\b\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001"+
+		"\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0003\tu\b"+
+		"\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001"+
+		"\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001"+
+		"\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0003"+
+		"\t\u0091\b\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0001\t\u0005"+
+		"\t\u009a\b\t\n\t\f\t\u009d\t\t\u0001\n\u0001\n\u0001\n\u0005\n\u00a2\b"+
+		"\n\n\n\f\n\u00a5\t\n\u0001\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0001"+
+		"\u000b\u0001\u000b\u0001\u000b\u0001\u000b\u0005\u000b\u00af\b\u000b\n"+
+		"\u000b\f\u000b\u00b2\t\u000b\u0001\f\u0001\f\u0001\f\u0001\f\u0001\f\u0001"+
+		"\f\u0001\f\u0001\f\u0003\f\u00bc\b\f\u0001\r\u0001\r\u0003\r\u00c0\b\r"+
+		"\u0001\u000e\u0001\u000e\u0001\u000e\u0001\u000e\u0005\u000e\u00c6\b\u000e"+
+		"\n\u000e\f\u000e\u00c9\t\u000e\u0001\u000e\u0001\u000e\u0001\u000f\u0001"+
+		"\u000f\u0005\u000f\u00cf\b\u000f\n\u000f\f\u000f\u00d2\t\u000f\u0001\u000f"+
+		"\u0001\u000f\u0003\u000f\u00d6\b\u000f\u0001\u0010\u0001\u0010\u0001\u0011"+
+		"\u0001\u0011\u0001\u0011\u0001\u0011\u0001\u0011\u0003\u0011\u00df\b\u0011"+
+		"\u0001\u0012\u0001\u0012\u0001\u0013\u0001\u0013\u0001\u0014\u0001\u0014"+
+		"\u0001\u0014\u0001\u0014\u0001\u0014\u0000\u0002\u0012\u0016\u0015\u0000"+
+		"\u0002\u0004\u0006\b\n\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c"+
+		"\u001e \"$&(\u0000\u0006\u0001\u0000\u0001\u0002\u0002\u0000\u0004\u0004"+
+		"\u000e\u000f\u0002\u0000\f\f\u0010\u0010\u0001\u0000\u0011\u0014\u0001"+
+		"\u0000\u0015\u0016\u0001\u0000%&\u0101\u0000*\u0001\u0000\u0000\u0000"+
+		"\u00023\u0001\u0000\u0000\u0000\u0004H\u0001\u0000\u0000\u0000\u0006O"+
+		"\u0001\u0000\u0000\u0000\bQ\u0001\u0000\u0000\u0000\nV\u0001\u0000\u0000"+
+		"\u0000\f^\u0001\u0000\u0000\u0000\u000ea\u0001\u0000\u0000\u0000\u0010"+
+		"d\u0001\u0000\u0000\u0000\u0012t\u0001\u0000\u0000\u0000\u0014\u009e\u0001"+
+		"\u0000\u0000\u0000\u0016\u00a6\u0001\u0000\u0000\u0000\u0018\u00bb\u0001"+
+		"\u0000\u0000\u0000\u001a\u00bf\u0001\u0000\u0000\u0000\u001c\u00c1\u0001"+
+		"\u0000\u0000\u0000\u001e\u00cc\u0001\u0000\u0000\u0000 \u00d7\u0001\u0000"+
+		"\u0000\u0000\"\u00de\u0001\u0000\u0000\u0000$\u00e0\u0001\u0000\u0000"+
+		"\u0000&\u00e2\u0001\u0000\u0000\u0000(\u00e4\u0001\u0000\u0000\u0000*"+
+		".\u0003\u0002\u0001\u0000+-\u0003\u0004\u0002\u0000,+\u0001\u0000\u0000"+
+		"\u0000-0\u0001\u0000\u0000\u0000.,\u0001\u0000\u0000\u0000./\u0001\u0000"+
+		"\u0000\u0000/1\u0001\u0000\u0000\u00000.\u0001\u0000\u0000\u000012\u0005"+
+		"\u0000\u0000\u00012\u0001\u0001\u0000\u0000\u000034\u0007\u0000\u0000"+
+		"\u00004\u0003\u0001\u0000\u0000\u000058\u0005\u0003\u0000\u000069\u0003"+
+		" \u0010\u000079\u0005\u0004\u0000\u000086\u0001\u0000\u0000\u000087\u0001"+
+		"\u0000\u0000\u00009I\u0001\u0000\u0000\u0000:;\u0005\u0005\u0000\u0000"+
+		";<\u0003\u0006\u0003\u0000<=\u0005\u0006\u0000\u0000=I\u0001\u0000\u0000"+
+		"\u0000>A\u0005\u0007\u0000\u0000?B\u0003 \u0010\u0000@B\u0005\u0004\u0000"+
+		"\u0000A?\u0001\u0000\u0000\u0000A@\u0001\u0000\u0000\u0000BI\u0001\u0000"+
+		"\u0000\u0000CD\u0005\u0007\u0000\u0000DE\u0005\u0005\u0000\u0000EF\u0003"+
+		"\u0006\u0003\u0000FG\u0005\u0006\u0000\u0000GI\u0001\u0000\u0000\u0000"+
+		"H5\u0001\u0000\u0000\u0000H:\u0001\u0000\u0000\u0000H>\u0001\u0000\u0000"+
+		"\u0000HC\u0001\u0000\u0000\u0000I\u0005\u0001\u0000\u0000\u0000JP\u0003"+
+		"&\u0013\u0000KP\u0005\u0004\u0000\u0000LP\u0003$\u0012\u0000MP\u0003\n"+
+		"\u0005\u0000NP\u0003\b\u0004\u0000OJ\u0001\u0000\u0000\u0000OK\u0001\u0000"+
+		"\u0000\u0000OL\u0001\u0000\u0000\u0000OM\u0001\u0000\u0000\u0000ON\u0001"+
+		"\u0000\u0000\u0000P\u0007\u0001\u0000\u0000\u0000QR\u0005\b\u0000\u0000"+
+		"RS\u0005\t\u0000\u0000ST\u0003\u0012\t\u0000TU\u0005\n\u0000\u0000U\t"+
+		"\u0001\u0000\u0000\u0000VW\u0003\f\u0006\u0000WX\u0005\u000b\u0000\u0000"+
+		"X[\u0003\u000e\u0007\u0000YZ\u0005\u000b\u0000\u0000Z\\\u0003\u0010\b"+
+		"\u0000[Y\u0001\u0000\u0000\u0000[\\\u0001\u0000\u0000\u0000\\\u000b\u0001"+
+		"\u0000\u0000\u0000]_\u0003&\u0013\u0000^]\u0001\u0000\u0000\u0000^_\u0001"+
+		"\u0000\u0000\u0000_\r\u0001\u0000\u0000\u0000`b\u0003&\u0013\u0000a`\u0001"+
+		"\u0000\u0000\u0000ab\u0001\u0000\u0000\u0000b\u000f\u0001\u0000\u0000"+
+		"\u0000ce\u0003&\u0013\u0000dc\u0001\u0000\u0000\u0000de\u0001\u0000\u0000"+
+		"\u0000e\u0011\u0001\u0000\u0000\u0000fg\u0006\t\uffff\uffff\u0000gu\u0003"+
+		"\u0016\u000b\u0000hi\u0005\f\u0000\u0000iu\u0003\u0012\t\u000fjk\u0005"+
+		"\r\u0000\u0000ku\u0003\u0012\t\u000elu\u0003\"\u0011\u0000mu\u0003 \u0010"+
+		"\u0000nu\u0005\u0001\u0000\u0000ou\u0005\u0002\u0000\u0000pq\u0005\t\u0000"+
+		"\u0000qr\u0003\u0012\t\u0000rs\u0005\n\u0000\u0000su\u0001\u0000\u0000"+
+		"\u0000tf\u0001\u0000\u0000\u0000th\u0001\u0000\u0000\u0000tj\u0001\u0000"+
+		"\u0000\u0000tl\u0001\u0000\u0000\u0000tm\u0001\u0000\u0000\u0000tn\u0001"+
+		"\u0000\u0000\u0000to\u0001\u0000\u0000\u0000tp\u0001\u0000\u0000\u0000"+
+		"u\u009b\u0001\u0000\u0000\u0000vw\n\r\u0000\u0000wx\u0007\u0001\u0000"+
+		"\u0000x\u009a\u0003\u0012\t\u000eyz\n\f\u0000\u0000z{\u0007\u0002\u0000"+
+		"\u0000{\u009a\u0003\u0012\t\r|}\n\u000b\u0000\u0000}~\u0007\u0003\u0000"+
+		"\u0000~\u009a\u0003\u0012\t\f\u007f\u0080\n\n\u0000\u0000\u0080\u0081"+
+		"\u0007\u0004\u0000\u0000\u0081\u009a\u0003\u0012\t\u000b\u0082\u0083\n"+
+		"\u0007\u0000\u0000\u0083\u0084\u0005\u0019\u0000\u0000\u0084\u009a\u0003"+
+		"\u0012\t\b\u0085\u0086\n\u0006\u0000\u0000\u0086\u0087\u0005\u001a\u0000"+
+		"\u0000\u0087\u009a\u0003\u0012\t\u0007\u0088\u0089\n\u0011\u0000\u0000"+
+		"\u0089\u008a\u0005\u0005\u0000\u0000\u008a\u008b\u0003\u0006\u0003\u0000"+
+		"\u008b\u008c\u0005\u0006\u0000\u0000\u008c\u009a\u0001\u0000\u0000\u0000"+
+		"\u008d\u008e\n\u0010\u0000\u0000\u008e\u0090\u0005\t\u0000\u0000\u008f"+
+		"\u0091\u0003\u0014\n\u0000\u0090\u008f\u0001\u0000\u0000\u0000\u0090\u0091"+
+		"\u0001\u0000\u0000\u0000\u0091\u0092\u0001\u0000\u0000\u0000\u0092\u009a"+
+		"\u0005\n\u0000\u0000\u0093\u0094\n\t\u0000\u0000\u0094\u0095\u0005\u0017"+
+		"\u0000\u0000\u0095\u009a\u0003\u001e\u000f\u0000\u0096\u0097\n\b\u0000"+
+		"\u0000\u0097\u0098\u0005\u0018\u0000\u0000\u0098\u009a\u0003\u001c\u000e"+
+		"\u0000\u0099v\u0001\u0000\u0000\u0000\u0099y\u0001\u0000\u0000\u0000\u0099"+
+		"|\u0001\u0000\u0000\u0000\u0099\u007f\u0001\u0000\u0000\u0000\u0099\u0082"+
+		"\u0001\u0000\u0000\u0000\u0099\u0085\u0001\u0000\u0000\u0000\u0099\u0088"+
+		"\u0001\u0000\u0000\u0000\u0099\u008d\u0001\u0000\u0000\u0000\u0099\u0093"+
+		"\u0001\u0000\u0000\u0000\u0099\u0096\u0001\u0000\u0000\u0000\u009a\u009d"+
+		"\u0001\u0000\u0000\u0000\u009b\u0099\u0001\u0000\u0000\u0000\u009b\u009c"+
+		"\u0001\u0000\u0000\u0000\u009c\u0013\u0001\u0000\u0000\u0000\u009d\u009b"+
+		"\u0001\u0000\u0000\u0000\u009e\u00a3\u0003\u0012\t\u0000\u009f\u00a0\u0005"+
+		"\u001b\u0000\u0000\u00a0\u00a2\u0003\u0012\t\u0000\u00a1\u009f\u0001\u0000"+
+		"\u0000\u0000\u00a2\u00a5\u0001\u0000\u0000\u0000\u00a3\u00a1\u0001\u0000"+
+		"\u0000\u0000\u00a3\u00a4\u0001\u0000\u0000\u0000\u00a4\u0015\u0001\u0000"+
+		"\u0000\u0000\u00a5\u00a3\u0001\u0000\u0000\u0000\u00a6\u00a7\u0006\u000b"+
+		"\uffff\uffff\u0000\u00a7\u00a8\u0003\u0018\f\u0000\u00a8\u00a9\u0005\u0003"+
+		"\u0000\u0000\u00a9\u00aa\u0003\u001a\r\u0000\u00aa\u00b0\u0001\u0000\u0000"+
+		"\u0000\u00ab\u00ac\n\u0001\u0000\u0000\u00ac\u00ad\u0005\u0003\u0000\u0000"+
+		"\u00ad\u00af\u0003\u001a\r\u0000\u00ae\u00ab\u0001\u0000\u0000\u0000\u00af"+
+		"\u00b2\u0001\u0000\u0000\u0000\u00b0\u00ae\u0001\u0000\u0000\u0000\u00b0"+
+		"\u00b1\u0001\u0000\u0000\u0000\u00b1\u0017\u0001\u0000\u0000\u0000\u00b2"+
+		"\u00b0\u0001\u0000\u0000\u0000\u00b3\u00bc\u0003 \u0010\u0000\u00b4\u00bc"+
+		"\u0005\u0001\u0000\u0000\u00b5\u00bc\u0005\u0002\u0000\u0000\u00b6\u00bc"+
+		"\u0003\"\u0011\u0000\u00b7\u00b8\u0005\t\u0000\u0000\u00b8\u00b9\u0003"+
+		"\u0012\t\u0000\u00b9\u00ba\u0005\n\u0000\u0000\u00ba\u00bc\u0001\u0000"+
+		"\u0000\u0000\u00bb\u00b3\u0001\u0000\u0000\u0000\u00bb\u00b4\u0001\u0000"+
+		"\u0000\u0000\u00bb\u00b5\u0001\u0000\u0000\u0000\u00bb\u00b6\u0001\u0000"+
+		"\u0000\u0000\u00bb\u00b7\u0001\u0000\u0000\u0000\u00bc\u0019\u0001\u0000"+
+		"\u0000\u0000\u00bd\u00c0\u0003 \u0010\u0000\u00be\u00c0\u0005\u0004\u0000"+
+		"\u0000\u00bf\u00bd\u0001\u0000\u0000\u0000\u00bf\u00be\u0001\u0000\u0000"+
+		"\u0000\u00c0\u001b\u0001\u0000\u0000\u0000\u00c1\u00c2\u0005\t\u0000\u0000"+
+		"\u00c2\u00c7\u0003\"\u0011\u0000\u00c3\u00c4\u0005\u001b\u0000\u0000\u00c4"+
+		"\u00c6\u0003\"\u0011\u0000\u00c5\u00c3\u0001\u0000\u0000\u0000\u00c6\u00c9"+
+		"\u0001\u0000\u0000\u0000\u00c7\u00c5\u0001\u0000\u0000\u0000\u00c7\u00c8"+
+		"\u0001\u0000\u0000\u0000\u00c8\u00ca\u0001\u0000\u0000\u0000\u00c9\u00c7"+
+		"\u0001\u0000\u0000\u0000\u00ca\u00cb\u0005\n\u0000\u0000\u00cb\u001d\u0001"+
+		"\u0000\u0000\u0000\u00cc\u00d0\u0005\u000e\u0000\u0000\u00cd\u00cf\u0007"+
+		"\u0005\u0000\u0000\u00ce\u00cd\u0001\u0000\u0000\u0000\u00cf\u00d2\u0001"+
+		"\u0000\u0000\u0000\u00d0\u00ce\u0001\u0000\u0000\u0000\u00d0\u00d1\u0001"+
+		"\u0000\u0000\u0000\u00d1\u00d3\u0001\u0000\u0000\u0000\u00d2\u00d0\u0001"+
+		"\u0000\u0000\u0000\u00d3\u00d5\u0005\u000e\u0000\u0000\u00d4\u00d6\u0005"+
+		"\'\u0000\u0000\u00d5\u00d4\u0001\u0000\u0000\u0000\u00d5\u00d6\u0001\u0000"+
+		"\u0000\u0000\u00d6\u001f\u0001\u0000\u0000\u0000\u00d7\u00d8\u0005!\u0000"+
+		"\u0000\u00d8!\u0001\u0000\u0000\u0000\u00d9\u00df\u0003$\u0012\u0000\u00da"+
+		"\u00df\u0003&\u0013\u0000\u00db\u00df\u0005\u001c\u0000\u0000\u00dc\u00df"+
+		"\u0005\u001d\u0000\u0000\u00dd\u00df\u0005\u001e\u0000\u0000\u00de\u00d9"+
+		"\u0001\u0000\u0000\u0000\u00de\u00da\u0001\u0000\u0000\u0000\u00de\u00db"+
+		"\u0001\u0000\u0000\u0000\u00de\u00dc\u0001\u0000\u0000\u0000\u00de\u00dd"+
+		"\u0001\u0000\u0000\u0000\u00df#\u0001\u0000\u0000\u0000\u00e0\u00e1\u0005"+
+		"\"\u0000\u0000\u00e1%\u0001\u0000\u0000\u0000\u00e2\u00e3\u0005#\u0000"+
+		"\u0000\u00e3\'\u0001\u0000\u0000\u0000\u00e4\u00e5\u0005\u001f\u0000\u0000"+
+		"\u00e5\u00e6\u0005!\u0000\u0000\u00e6\u00e7\u0005 \u0000\u0000\u00e7)"+
+		"\u0001\u0000\u0000\u0000\u0015.8AHO[^adt\u0090\u0099\u009b\u00a3\u00b0"+
+		"\u00bb\u00bf\u00c7\u00d0\u00d5\u00de";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
