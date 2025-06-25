@@ -119,18 +119,15 @@ public class JExprVisitor extends JSubscriptVisitor {
     }
 
     @Override
-    public List<Object> visitInExpression(JQuickJSONPathParser.InExpressionContext ctx) {
+    public Boolean visitInExpression(JQuickJSONPathParser.InExpressionContext ctx) {
         Object value = visit(ctx.expr());
         List<Object> valueList = parseValueList(ctx.valueList());
         JAssert.notNull(value, "The  value for 'in' operator cannot be null.");
-        List<?> list = JObjectConverter.assign(value, List.class);
         List<Object> newList = new ArrayList<>();
-        for (Object item : list) {
-            if (valueList.contains(item)) {
-                newList.add(item);
-            }
+        if (valueList.contains(value)) {
+                return true;
         }
-        return newList;
+        return false;
     }
 
     @Override

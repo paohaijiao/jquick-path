@@ -21,6 +21,7 @@ import com.github.paohaijiao.parser.JQuickJSONPathParser;
 import com.github.paohaijiao.visitor.JSONPathCommonVisitor;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -384,5 +385,99 @@ public class JDotExprTest {
         Object object = tv.visit(tree);
         System.out.println(object);
     }
+
+    @Test
+    public void negationExpression() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("-1"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        JQuickJSONPathParser.ExprContext tree = parser.expr();
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void notExpression() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("!true"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        ParseTree tree = parser.expr();
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void multiplicativeExpression() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("3-2"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        ParseTree tree = parser.expr();
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void multiplicativeExpression1() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("15%8"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        ParseTree tree = parser.expr();
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void comparisonExpression() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("15<5"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        ParseTree tree = parser.expr();
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void equalityExpression() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("15!=5"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        ParseTree tree = parser.expr();
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void inExpression() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("1 in (1,2,3)"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        ParseTree tree = parser.expr();
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void logicalAndExpression() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("true&&false"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        ParseTree tree = parser.expr();
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void logicalOrExpression() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("true||false"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        ParseTree tree = parser.expr();
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+
+
+
 
 }

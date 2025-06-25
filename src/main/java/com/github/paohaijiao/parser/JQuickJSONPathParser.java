@@ -46,7 +46,7 @@ public class JQuickJSONPathParser extends Parser {
 	private static String[] makeLiteralNames() {
 		return new String[] {
 			null, "'$'", "'@'", "'.'", "'*'", "'['", "']'", "'..'", "'?'", "'('", 
-			"')'", "':'", "'-'", "'!'", "'/'", "'%'", "'+'", "'<'", "'>'", "'<='", 
+			"')'", "':'", "'-'", "'+'", "'!'", "'/'", "'%'", "'<'", "'>'", "'<='", 
 			"'>='", "'=='", "'!='", "'=~'", "'in'", "'&&'", "'||'", "','", "'true'", 
 			"'false'", "'null'", "'${'", "'}'"
 		};
@@ -1186,23 +1186,23 @@ public class JQuickJSONPathParser extends Parser {
 			switch ( getInterpreter().adaptivePredict(_input,9,_ctx) ) {
 			case 1:
 				{
-				_localctx = new NetestDotExprContext(_localctx);
+				_localctx = new NegationExpressionContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
 
 				setState(107);
-				dotExpr(0);
+				match(T__11);
+				setState(108);
+				expr(17);
 				}
 				break;
 			case 2:
 				{
-				_localctx = new NegationExpressionContext(_localctx);
+				_localctx = new NetestDotExprContext(_localctx);
 				_ctx = _localctx;
 				_prevctx = _localctx;
-				setState(108);
-				match(T__11);
 				setState(109);
-				expr(15);
+				dotExpr(0);
 				}
 				break;
 			case 3:
@@ -1211,9 +1211,9 @@ public class JQuickJSONPathParser extends Parser {
 				_ctx = _localctx;
 				_prevctx = _localctx;
 				setState(110);
-				match(T__12);
+				match(T__13);
 				setState(111);
-				expr(14);
+				expr(13);
 				}
 				break;
 			case 4:
@@ -1280,13 +1280,13 @@ public class JQuickJSONPathParser extends Parser {
 					switch ( getInterpreter().adaptivePredict(_input,10,_ctx) ) {
 					case 1:
 						{
-						_localctx = new MultiplicativeExpressionContext(new ExprContext(_parentctx, _parentState));
+						_localctx = new AdditiveExpressionContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(122);
-						if (!(precpred(_ctx, 13))) throw new FailedPredicateException(this, "precpred(_ctx, 13)");
+						if (!(precpred(_ctx, 15))) throw new FailedPredicateException(this, "precpred(_ctx, 15)");
 						setState(123);
 						_la = _input.LA(1);
-						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 49168L) != 0)) ) {
+						if ( !(_la==T__11 || _la==T__12) ) {
 						_errHandler.recoverInline(this);
 						}
 						else {
@@ -1295,18 +1295,18 @@ public class JQuickJSONPathParser extends Parser {
 							consume();
 						}
 						setState(124);
-						expr(14);
+						expr(16);
 						}
 						break;
 					case 2:
 						{
-						_localctx = new AdditiveExpressionContext(new ExprContext(_parentctx, _parentState));
+						_localctx = new MultiplicativeExpressionContext(new ExprContext(_parentctx, _parentState));
 						pushNewRecursionContext(_localctx, _startState, RULE_expr);
 						setState(125);
 						if (!(precpred(_ctx, 12))) throw new FailedPredicateException(this, "precpred(_ctx, 12)");
 						setState(126);
 						_la = _input.LA(1);
-						if ( !(_la==T__11 || _la==T__15) ) {
+						if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & 98320L) != 0)) ) {
 						_errHandler.recoverInline(this);
 						}
 						else {
@@ -1962,7 +1962,7 @@ public class JQuickJSONPathParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(210);
-			match(T__13);
+			match(T__14);
 			setState(214);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
@@ -1986,7 +1986,7 @@ public class JQuickJSONPathParser extends Parser {
 				_la = _input.LA(1);
 			}
 			setState(217);
-			match(T__13);
+			match(T__14);
 			setState(219);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,19,_ctx) ) {
@@ -2327,7 +2327,7 @@ public class JQuickJSONPathParser extends Parser {
 	private boolean expr_sempred(ExprContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 0:
-			return precpred(_ctx, 13);
+			return precpred(_ctx, 15);
 		case 1:
 			return precpred(_ctx, 12);
 		case 2:
@@ -2393,19 +2393,19 @@ public class JQuickJSONPathParser extends Parser {
 		"\u0001\u0015\u0001\u0015\u0001\u0016\u0001\u0016\u0001\u0016\u0001\u0016"+
 		"\u0001\u0016\u0000\u0002\u0012\u0016\u0017\u0000\u0002\u0004\u0006\b\n"+
 		"\f\u000e\u0010\u0012\u0014\u0016\u0018\u001a\u001c\u001e \"$&(*,\u0000"+
-		"\u0006\u0001\u0000\u0001\u0002\u0002\u0000\u0004\u0004\u000e\u000f\u0002"+
-		"\u0000\f\f\u0010\u0010\u0001\u0000\u0011\u0014\u0001\u0000\u0015\u0016"+
-		"\u0001\u0000%&\u0107\u0000.\u0001\u0000\u0000\u0000\u00027\u0001\u0000"+
-		"\u0000\u0000\u0004L\u0001\u0000\u0000\u0000\u0006S\u0001\u0000\u0000\u0000"+
-		"\bU\u0001\u0000\u0000\u0000\nZ\u0001\u0000\u0000\u0000\fb\u0001\u0000"+
-		"\u0000\u0000\u000ee\u0001\u0000\u0000\u0000\u0010h\u0001\u0000\u0000\u0000"+
-		"\u0012x\u0001\u0000\u0000\u0000\u0014\u009c\u0001\u0000\u0000\u0000\u0016"+
-		"\u00a4\u0001\u0000\u0000\u0000\u0018\u00b9\u0001\u0000\u0000\u0000\u001a"+
-		"\u00be\u0001\u0000\u0000\u0000\u001c\u00c0\u0001\u0000\u0000\u0000\u001e"+
-		"\u00c7\u0001\u0000\u0000\u0000 \u00d2\u0001\u0000\u0000\u0000\"\u00dd"+
-		"\u0001\u0000\u0000\u0000$\u00df\u0001\u0000\u0000\u0000&\u00e6\u0001\u0000"+
-		"\u0000\u0000(\u00e8\u0001\u0000\u0000\u0000*\u00ea\u0001\u0000\u0000\u0000"+
-		",\u00ec\u0001\u0000\u0000\u0000.2\u0003\u0002\u0001\u0000/1\u0003\u0004"+
+		"\u0006\u0001\u0000\u0001\u0002\u0001\u0000\f\r\u0002\u0000\u0004\u0004"+
+		"\u000f\u0010\u0001\u0000\u0011\u0014\u0001\u0000\u0015\u0016\u0001\u0000"+
+		"%&\u0107\u0000.\u0001\u0000\u0000\u0000\u00027\u0001\u0000\u0000\u0000"+
+		"\u0004L\u0001\u0000\u0000\u0000\u0006S\u0001\u0000\u0000\u0000\bU\u0001"+
+		"\u0000\u0000\u0000\nZ\u0001\u0000\u0000\u0000\fb\u0001\u0000\u0000\u0000"+
+		"\u000ee\u0001\u0000\u0000\u0000\u0010h\u0001\u0000\u0000\u0000\u0012x"+
+		"\u0001\u0000\u0000\u0000\u0014\u009c\u0001\u0000\u0000\u0000\u0016\u00a4"+
+		"\u0001\u0000\u0000\u0000\u0018\u00b9\u0001\u0000\u0000\u0000\u001a\u00be"+
+		"\u0001\u0000\u0000\u0000\u001c\u00c0\u0001\u0000\u0000\u0000\u001e\u00c7"+
+		"\u0001\u0000\u0000\u0000 \u00d2\u0001\u0000\u0000\u0000\"\u00dd\u0001"+
+		"\u0000\u0000\u0000$\u00df\u0001\u0000\u0000\u0000&\u00e6\u0001\u0000\u0000"+
+		"\u0000(\u00e8\u0001\u0000\u0000\u0000*\u00ea\u0001\u0000\u0000\u0000,"+
+		"\u00ec\u0001\u0000\u0000\u0000.2\u0003\u0002\u0001\u0000/1\u0003\u0004"+
 		"\u0002\u00000/\u0001\u0000\u0000\u000014\u0001\u0000\u0000\u000020\u0001"+
 		"\u0000\u0000\u000023\u0001\u0000\u0000\u000035\u0001\u0000\u0000\u0000"+
 		"42\u0001\u0000\u0000\u000056\u0005\u0000\u0000\u00016\u0001\u0001\u0000"+
@@ -2432,15 +2432,15 @@ public class JQuickJSONPathParser extends Parser {
 		"df\u0003*\u0015\u0000ed\u0001\u0000\u0000\u0000ef\u0001\u0000\u0000\u0000"+
 		"f\u000f\u0001\u0000\u0000\u0000gi\u0003*\u0015\u0000hg\u0001\u0000\u0000"+
 		"\u0000hi\u0001\u0000\u0000\u0000i\u0011\u0001\u0000\u0000\u0000jk\u0006"+
-		"\t\uffff\uffff\u0000ky\u0003\u0016\u000b\u0000lm\u0005\f\u0000\u0000m"+
-		"y\u0003\u0012\t\u000fno\u0005\r\u0000\u0000oy\u0003\u0012\t\u000epy\u0003"+
+		"\t\uffff\uffff\u0000kl\u0005\f\u0000\u0000ly\u0003\u0012\t\u0011my\u0003"+
+		"\u0016\u000b\u0000no\u0005\u000e\u0000\u0000oy\u0003\u0012\t\rpy\u0003"+
 		"&\u0013\u0000qy\u0003$\u0012\u0000ry\u0005\u0001\u0000\u0000sy\u0005\u0002"+
 		"\u0000\u0000tu\u0005\t\u0000\u0000uv\u0003\u0012\t\u0000vw\u0005\n\u0000"+
-		"\u0000wy\u0001\u0000\u0000\u0000xj\u0001\u0000\u0000\u0000xl\u0001\u0000"+
+		"\u0000wy\u0001\u0000\u0000\u0000xj\u0001\u0000\u0000\u0000xm\u0001\u0000"+
 		"\u0000\u0000xn\u0001\u0000\u0000\u0000xp\u0001\u0000\u0000\u0000xq\u0001"+
 		"\u0000\u0000\u0000xr\u0001\u0000\u0000\u0000xs\u0001\u0000\u0000\u0000"+
-		"xt\u0001\u0000\u0000\u0000y\u0099\u0001\u0000\u0000\u0000z{\n\r\u0000"+
-		"\u0000{|\u0007\u0001\u0000\u0000|\u0098\u0003\u0012\t\u000e}~\n\f\u0000"+
+		"xt\u0001\u0000\u0000\u0000y\u0099\u0001\u0000\u0000\u0000z{\n\u000f\u0000"+
+		"\u0000{|\u0007\u0001\u0000\u0000|\u0098\u0003\u0012\t\u0010}~\n\f\u0000"+
 		"\u0000~\u007f\u0007\u0002\u0000\u0000\u007f\u0098\u0003\u0012\t\r\u0080"+
 		"\u0081\n\u000b\u0000\u0000\u0081\u0082\u0007\u0003\u0000\u0000\u0082\u0098"+
 		"\u0003\u0012\t\f\u0083\u0084\n\n\u0000\u0000\u0084\u0085\u0007\u0004\u0000"+
@@ -2490,11 +2490,11 @@ public class JQuickJSONPathParser extends Parser {
 		"\u0000\u00cd\u00cb\u0001\u0000\u0000\u0000\u00cd\u00ce\u0001\u0000\u0000"+
 		"\u0000\u00ce\u00d0\u0001\u0000\u0000\u0000\u00cf\u00cd\u0001\u0000\u0000"+
 		"\u0000\u00d0\u00d1\u0005\n\u0000\u0000\u00d1\u001f\u0001\u0000\u0000\u0000"+
-		"\u00d2\u00d6\u0005\u000e\u0000\u0000\u00d3\u00d5\u0007\u0005\u0000\u0000"+
+		"\u00d2\u00d6\u0005\u000f\u0000\u0000\u00d3\u00d5\u0007\u0005\u0000\u0000"+
 		"\u00d4\u00d3\u0001\u0000\u0000\u0000\u00d5\u00d8\u0001\u0000\u0000\u0000"+
 		"\u00d6\u00d4\u0001\u0000\u0000\u0000\u00d6\u00d7\u0001\u0000\u0000\u0000"+
 		"\u00d7\u00d9\u0001\u0000\u0000\u0000\u00d8\u00d6\u0001\u0000\u0000\u0000"+
-		"\u00d9\u00db\u0005\u000e\u0000\u0000\u00da\u00dc\u0005\'\u0000\u0000\u00db"+
+		"\u00d9\u00db\u0005\u000f\u0000\u0000\u00da\u00dc\u0005\'\u0000\u0000\u00db"+
 		"\u00da\u0001\u0000\u0000\u0000\u00db\u00dc\u0001\u0000\u0000\u0000\u00dc"+
 		"!\u0001\u0000\u0000\u0000\u00dd\u00de\u0003$\u0012\u0000\u00de#\u0001"+
 		"\u0000\u0000\u0000\u00df\u00e0\u0005!\u0000\u0000\u00e0%\u0001\u0000\u0000"+
