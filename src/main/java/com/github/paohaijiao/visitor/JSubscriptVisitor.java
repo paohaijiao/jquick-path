@@ -10,7 +10,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JSubscriptVisitor extends JExprVisitor {
+public class JSubscriptVisitor extends JValueVisitor {
 
     @Override
     public Object visitSubscript(JQuickJSONPathParser.SubscriptContext ctx) {

@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class JExprVisitor extends JValueVisitor {
+public class JExprVisitor extends JSubscriptVisitor {
     @Override
     public Object visitNetestDotExpr(JQuickJSONPathParser.NetestDotExprContext ctx) {
         if (ctx.dotExpr() != null) {
@@ -225,16 +225,23 @@ public class JExprVisitor extends JValueVisitor {
         // e.g., obj.property, $.*, @.field
         Object leftValue = new Object();
         String rightValue = "";
-        if (ctx.leftDotExpr() != null) {
-            leftValue = visitLeftDotExpr(ctx.leftDotExpr());
+        try{
+            if (ctx.leftDotExpr() != null) {
+                leftValue = visitLeftDotExpr(ctx.leftDotExpr());
+            }
+            if (ctx.rightDotExpr() != null) {
+                rightValue = visitRightDotExpr(ctx.rightDotExpr());
+            }
+            if (rightValue.equals("*")) {
+                return visitWildcard(leftValue);
+            }
+            Object obj= getValueByKey(leftValue, rightValue);
+            return obj;
+        }catch (Exception e){
+
         }
-        if (ctx.rightDotExpr() != null) {
-            rightValue = visitRightDotExpr(ctx.rightDotExpr());
-        }
-        if (rightValue.equals("*")) {
-            return visitWildcard(leftValue);
-        }
-        return getValueByKey(leftValue, rightValue);
+        JAssert.throwNewException("Cannot apply this expression: " + ctx.getText());
+        return null;
     }
 
     @Override

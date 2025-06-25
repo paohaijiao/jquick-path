@@ -20,17 +20,7 @@ public class JSONPathCommonVisitor extends JRootAndPathVisitor {
         this.context = new JContext();
     }
 
-    /**
-     * ()
-     *
-     * @param ctx the parse tree
-     * @return
-     */
-    @Override
-    public Object visitScriptExpression(JQuickJSONPathParser.ScriptExpressionContext ctx) {
-        JQuickJSONPathParser.ExprContext exprCtx = ctx.expr();
-        return visit(exprCtx);
-    }
+
 
 
     @Override
@@ -62,25 +52,6 @@ public class JSONPathCommonVisitor extends JRootAndPathVisitor {
             throw new RuntimeException("Invalid regular expression: " + pattern, e);
         }
     }
-
-
-//    @Override
-//    public Object visitStringLiteral(JQuickJSONPathParser.StringLiteralContext ctx) {
-//        Object current = currentJsonObject;
-//        String key = ctx.getText().replaceAll("^[\"']|[\"']$", "");
-//        if (current instanceof JSONObject) {
-//            return ((JSONObject) current).has(key) ? ((JSONObject) current).get(key) : null;
-//        } else if (current instanceof List) {
-//            List<Object> results = new ArrayList<>();
-//            for (Object item : (List<?>) current) {
-//                if (item instanceof JSONObject && ((JSONObject) item).has(key)) {
-//                    results.add(((JSONObject) item).get(key));
-//                }
-//            }
-//            return results.isEmpty() ? null : results;
-//        }
-//        return null;
-//    }
 
 
 }

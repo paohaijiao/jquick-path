@@ -15,8 +15,8 @@
  */
 
 import com.github.paohaijiao.executor.JSONPathExecutor;
+import com.github.paohaijiao.model.JSONObject;
 import com.github.paohaijiao.model.JSONPathResult;
-import com.paohaijiao.javelin.model.JSONObject;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -31,7 +31,7 @@ import java.util.Arrays;
  * @date 2025/6/15
  * @description
  */
-public class Jpath06Test {
+public class JpathFilterTest {
 
     @Test
     public void test61() throws IOException {

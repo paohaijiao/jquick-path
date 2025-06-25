@@ -14,10 +14,11 @@
  * Copyright (c) [2025-2099] Martin (goudingcheng@gmail.com)
  */
 
+import com.github.paohaijiao.model.JSONObject;
+import com.github.paohaijiao.param.JContext;
 import com.github.paohaijiao.parser.JQuickJSONPathLexer;
 import com.github.paohaijiao.parser.JQuickJSONPathParser;
 import com.github.paohaijiao.visitor.JSONPathCommonVisitor;
-import com.paohaijiao.javelin.model.JSONObject;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.junit.Test;
@@ -37,6 +38,19 @@ import java.util.Arrays;
 public class JpathValueTest {
 
     @Test
+    public void testVHaha() throws IOException {
+        JContext context = new JContext();
+        context.put("key", "value");
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("${key}"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        JQuickJSONPathParser.VariableContext tree = parser.variable();
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null,context);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+
+    @Test
     public void testValue01() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("1"));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
@@ -48,7 +62,7 @@ public class JpathValueTest {
     }
 
     @Test
-    public void testValue02() throws IOException {
+    public void string() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("\"csdcds\""));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
@@ -144,8 +158,38 @@ public class JpathValueTest {
     }
 
     @Test
-    public void testValue08() throws IOException {
+    public void valueList() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("(1,2,3)"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        JQuickJSONPathParser.ValueListContext tree = parser.valueList();
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void valueList1() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("('a1','a2','a3')"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        JQuickJSONPathParser.ValueListContext tree = parser.valueList();
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void valueList2() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("(true,true,true)"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        JQuickJSONPathParser.ValueListContext tree = parser.valueList();
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void valueList3() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("(null,null,null)"));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
         JQuickJSONPathParser.ValueListContext tree = parser.valueList();

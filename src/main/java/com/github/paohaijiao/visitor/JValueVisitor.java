@@ -13,9 +13,13 @@ public class JValueVisitor extends JSONPathCoreVisitor {
 
     @Override
     public Object visitVariable(JQuickJSONPathParser.VariableContext ctx) {
-        if (null != ctx.STRING()) {
-            return null;
+        if (null != ctx.IDENTIFIER()) {
+            String identifier = ctx.IDENTIFIER().getText();
+            String key=JStringUtils.trim(identifier);
+            JAssert.notNull(key, "identifier is null");
+            return this.context.get(key);
         }
+        JAssert.throwNewException("invalid variable");
         return null;
     }
 
@@ -82,9 +86,7 @@ public class JValueVisitor extends JSONPathCoreVisitor {
         List<Object> values = new ArrayList<>();
         for (JQuickJSONPathParser.LiteralContext literalCtx : ctx.literal()) {
             Object value = visitLiteral(literalCtx);
-            if (value != null) {
-                values.add(value);
-            }
+            values.add(value);
         }
         return values;
     }
