@@ -1,9 +1,12 @@
 package com.github.paohaijiao.visitor;
 
+import com.github.paohaijiao.enums.JMethodEnums;
+import com.github.paohaijiao.function.model.JFunctionCall;
 import com.github.paohaijiao.parser.JQuickJSONPathParser;
 import com.github.paohaijiao.evalue.JEvaluator;
 import com.github.paohaijiao.exception.JAssert;
 import com.github.paohaijiao.util.JObjectConverter;
+import com.github.paohaijiao.util.JStringUtils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -34,22 +37,22 @@ public class JExprVisitor extends JSubscriptVisitor {
     }
 
     @Override
-    public Object visitFunctionCallExpression(JQuickJSONPathParser.FunctionCallExpressionContext ctx) {
-        Object function = null;
-        if (null != ctx.expr()) {
-            function = visit(ctx.expr());
+    public JFunctionCall visitFunctioncall(JQuickJSONPathParser.FunctioncallContext ctx) {
+        JFunctionCall jFunctionCall = new JFunctionCall();
+        String function = null;
+        if (null != ctx.identifier()) {
+            function = visitIdentifier(ctx.identifier());
         }
-        JAssert.notNull(function, "方法不存在");
-        List<Object> arguments = new ArrayList<>();
-        if (ctx.exprList() != null) {
-            for (JQuickJSONPathParser.ExprContext argCtx : ctx.exprList().expr()) {
-                arguments.add(visit(argCtx));
-            }
+        jFunctionCall.setMethod(JMethodEnums.methodOf(JStringUtils.trim(function)));
+        List<Object> args = new ArrayList<>();
+        if (null != ctx.valueList()) {
+            List<Object> data = visitValueList(ctx.valueList());
+            args.add(data);
         }
-        String functionName = (String) function;
-        Object object = JEvaluator.evaluateFunction(functionName, arguments);
-        return object;
+        jFunctionCall.setArgs(args);
+        return jFunctionCall;
     }
+
 
     @Override
     public Object visitMultiplicativeExpression(JQuickJSONPathParser.MultiplicativeExpressionContext ctx) {
@@ -224,24 +227,14 @@ public class JExprVisitor extends JSubscriptVisitor {
     public Object visitDirectDotExpression(JQuickJSONPathParser.DirectDotExpressionContext ctx) {
         // e.g., obj.property, $.*, @.field
         Object leftValue = new Object();
-        String rightValue = "";
-        try{
-            if (ctx.leftDotExpr() != null) {
-                leftValue = visitLeftDotExpr(ctx.leftDotExpr());
-            }
-            if (ctx.rightDotExpr() != null) {
-                rightValue = visitRightDotExpr(ctx.rightDotExpr());
-            }
-            if (rightValue.equals("*")) {
-                return visitWildcard(leftValue);
-            }
-            Object obj= getValueByKey(leftValue, rightValue);
-            return obj;
-        }catch (Exception e){
-
+        Object rightValue = null;
+        if (ctx.leftDotExpr() != null) {
+            leftValue = visitLeftDotExpr(ctx.leftDotExpr());
         }
-        JAssert.throwNewException("Cannot apply this expression: " + ctx.getText());
-        return null;
+        if (ctx.rightDotExpr() != null) {
+            rightValue = visitRightDotExpr(ctx.rightDotExpr());
+        }
+        return invoke(leftValue,rightValue);
     }
 
     @Override
@@ -264,11 +257,13 @@ public class JExprVisitor extends JSubscriptVisitor {
     }
 
     @Override
-    public String visitRightDotExpr(JQuickJSONPathParser.RightDotExprContext ctx) {
+    public Object visitRightDotExpr(JQuickJSONPathParser.RightDotExprContext ctx) {
         if (null != ctx.identifier()) {
             return visitIdentifier(ctx.identifier());
         } else if ("*".equals(ctx.getText())) {
             return "*";
+        } else if (null != ctx.functioncall()) {
+            return visitFunctioncall(ctx.functioncall());
         }
         JAssert.throwNewException("Invalid expression");
         return null;
@@ -278,11 +273,8 @@ public class JExprVisitor extends JSubscriptVisitor {
     public Object visitChainedDotExpression(JQuickJSONPathParser.ChainedDotExpressionContext ctx) {
         //e.g., obj.property.subproperty
         Object currentValue = visit(ctx.dotExpr());
-        String field = visitRightDotExpr(ctx.rightDotExpr());
-        if (field.equals("*")) {
-            return visitWildcard(this.currentJsonObject);
-        }
-        return getValueByKey(currentValue, field);
+        Object field = visitRightDotExpr(ctx.rightDotExpr());
+        return invoke(currentValue, field);
     }
 
     private int parseRegexFlags(String flagsStr) {
@@ -320,5 +312,25 @@ public class JExprVisitor extends JSubscriptVisitor {
         return values;
     }
 
+    private Object invoke(Object leftValue,Object rightValue){
+        if (rightValue != null) {
+            if (rightValue instanceof String) {
+                if (rightValue.equals("*")) {
+                    return visitWildcard(leftValue);
+                }
+                Object obj = getValueByKey(leftValue, (String) rightValue);
+                return obj;
+            }
+            if (rightValue instanceof JFunctionCall) {
+                JFunctionCall functionCall = (JFunctionCall) rightValue;
+                List<Object> args = new ArrayList<>();
+                args.add(leftValue);
+                args.addAll(functionCall.getArgs());
+                Object result = JEvaluator.evaluateFunction(functionCall.getMethod().getMethod(), args);
+                return result;
+            }
+        }
+        return null;
+    }
 
 }

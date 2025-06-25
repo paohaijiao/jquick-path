@@ -63,6 +63,19 @@ public class JDotExprTest {
         Object object = tv.visit(tree);
         System.out.println(object);
     }
+    @Test
+    public void rightDotExpr3() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("length()"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        JQuickJSONPathParser.RightDotExprContext tree = parser.rightDotExpr();
+        JSONObject obj = new JSONObject();
+        obj.put("value", "1");
+        obj.put("type", "string");
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
 
     @Test
     public void leftDotExpr1() throws IOException {
@@ -138,15 +151,33 @@ public class JDotExprTest {
         System.out.println(object);
     }
     @Test
-    public void leftDotExpr7() throws IOException {
+    public void leftDotExpr8() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("null"));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
         JQuickJSONPathParser.LeftDotExprContext tree = parser.leftDotExpr();
-        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(null);
+        JTypeModel obj = new JTypeModel();
+        obj.setValue("1");
+        obj.setType("string");
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
         Object object = tv.visit(tree);
         System.out.println(object);
     }
+    @Test
+    public void leftDotExpr7() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.type.length()"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        JQuickJSONPathParser.DotExprContext tree = parser.dotExpr();
+        JTypeModel obj = new JTypeModel();
+        obj.setValue("1");
+        obj.setType("string");
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+
+
     @Test
     public void identifier() throws IOException {
         JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("xxaxsa"));
@@ -323,13 +354,29 @@ public class JDotExprTest {
     }
     @Test
     public void bracketExpression4() throws IOException {
-        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.value.list[1:2:4]"));
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.value.list[?(@>3)]"));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
         JQuickJSONPathParser.PathContext tree = parser.path();
         JSONObject a = new JSONObject();
         a.put("type", "string");
         a.put("list", Arrays.asList(1, "2", 3, 4, 5, 6, 7));
+        JSONObject obj = new JSONObject();
+        obj.put("key", "1");
+        obj.put("value", a);
+        JSONPathCommonVisitor tv = new JSONPathCommonVisitor(obj);
+        Object object = tv.visit(tree);
+        System.out.println(object);
+    }
+    @Test
+    public void functionCallExpression() throws IOException {
+        JQuickJSONPathLexer lexer = new JQuickJSONPathLexer(CharStreams.fromString("$.value.list[?(@.length()>1)]"));
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        JQuickJSONPathParser parser = new JQuickJSONPathParser(tokens);
+        JQuickJSONPathParser.PathContext tree = parser.path();
+        JSONObject a = new JSONObject();
+        a.put("type", "string");
+        a.put("list", Arrays.asList("xsaxsaxsa1", "xasxsa2", "1234sqw", "1", "2", "qswswqswq", "sqwswqswqswqswqswq"));
         JSONObject obj = new JSONObject();
         obj.put("key", "1");
         obj.put("value", a);

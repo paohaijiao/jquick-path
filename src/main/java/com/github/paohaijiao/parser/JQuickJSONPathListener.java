@@ -315,18 +315,6 @@ public interface JQuickJSONPathListener extends ParseTreeListener {
 	 */
 	void exitLogicalAndExpression(JQuickJSONPathParser.LogicalAndExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code functionCallExpression}
-	 * labeled alternative in {@link JQuickJSONPathParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterFunctionCallExpression(JQuickJSONPathParser.FunctionCallExpressionContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code functionCallExpression}
-	 * labeled alternative in {@link JQuickJSONPathParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitFunctionCallExpression(JQuickJSONPathParser.FunctionCallExpressionContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code regexExpression}
 	 * labeled alternative in {@link JQuickJSONPathParser#expr}.
 	 * @param ctx the parse tree
@@ -405,6 +393,16 @@ public interface JQuickJSONPathListener extends ParseTreeListener {
 	 */
 	void exitRightDotExpr(JQuickJSONPathParser.RightDotExprContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JQuickJSONPathParser#functioncall}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctioncall(JQuickJSONPathParser.FunctioncallContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JQuickJSONPathParser#functioncall}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctioncall(JQuickJSONPathParser.FunctioncallContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JQuickJSONPathParser#valueList}.
 	 * @param ctx the parse tree
 	 */
@@ -424,6 +422,16 @@ public interface JQuickJSONPathListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRegexLiteral(JQuickJSONPathParser.RegexLiteralContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JQuickJSONPathParser#funcname}.
+	 * @param ctx the parse tree
+	 */
+	void enterFuncname(JQuickJSONPathParser.FuncnameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JQuickJSONPathParser#funcname}.
+	 * @param ctx the parse tree
+	 */
+	void exitFuncname(JQuickJSONPathParser.FuncnameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JQuickJSONPathParser#identifier}.
 	 * @param ctx the parse tree

@@ -82,7 +82,7 @@ public class JValueVisitor extends JSONPathCoreVisitor {
     }
 
     @Override
-    public List<?> visitValueList(JQuickJSONPathParser.ValueListContext ctx) {
+    public List<Object> visitValueList(JQuickJSONPathParser.ValueListContext ctx) {
         List<Object> values = new ArrayList<>();
         for (JQuickJSONPathParser.LiteralContext literalCtx : ctx.literal()) {
             Object value = visitLiteral(literalCtx);

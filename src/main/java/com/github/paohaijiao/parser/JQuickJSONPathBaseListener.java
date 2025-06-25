@@ -340,18 +340,6 @@ public class JQuickJSONPathBaseListener implements JQuickJSONPathListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionCallExpression(JQuickJSONPathParser.FunctionCallExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFunctionCallExpression(JQuickJSONPathParser.FunctionCallExpressionContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterRegexExpression(JQuickJSONPathParser.RegexExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -436,6 +424,18 @@ public class JQuickJSONPathBaseListener implements JQuickJSONPathListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFunctioncall(JQuickJSONPathParser.FunctioncallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctioncall(JQuickJSONPathParser.FunctioncallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterValueList(JQuickJSONPathParser.ValueListContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -455,6 +455,18 @@ public class JQuickJSONPathBaseListener implements JQuickJSONPathListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRegexLiteral(JQuickJSONPathParser.RegexLiteralContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFuncname(JQuickJSONPathParser.FuncnameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFuncname(JQuickJSONPathParser.FuncnameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
