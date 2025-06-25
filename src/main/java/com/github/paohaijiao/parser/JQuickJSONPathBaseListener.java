@@ -1,4 +1,4 @@
-package com.github.paohaijiao.parser;// Generated from D:/my/jthornruleGrammer/JSONPath/JQuickJSONPath.g4 by ANTLR 4.13.2
+package com.github.paohaijiao.parser;// Generated from D:/idea/jthornruleGrammer/JSONPath/JQuickJSONPath.g4 by ANTLR 4.13.2
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
@@ -388,6 +388,18 @@ public class JQuickJSONPathBaseListener implements JQuickJSONPathListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExprList(JQuickJSONPathParser.ExprListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExprList(JQuickJSONPathParser.ExprListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterChainedDotExpression(JQuickJSONPathParser.ChainedDotExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -455,18 +467,6 @@ public class JQuickJSONPathBaseListener implements JQuickJSONPathListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRegexLiteral(JQuickJSONPathParser.RegexLiteralContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterExprList(JQuickJSONPathParser.ExprListContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExprList(JQuickJSONPathParser.ExprListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

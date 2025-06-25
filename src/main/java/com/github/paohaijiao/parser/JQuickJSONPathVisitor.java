@@ -1,4 +1,4 @@
-package com.github.paohaijiao.parser;// Generated from D:/my/jthornruleGrammer/JSONPath/JQuickJSONPath.g4 by ANTLR 4.13.2
+package com.github.paohaijiao.parser;// Generated from D:/idea/jthornruleGrammer/JSONPath/JQuickJSONPath.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -218,6 +218,12 @@ public interface JQuickJSONPathVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLiteralExpression(JQuickJSONPathParser.LiteralExpressionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JQuickJSONPathParser#exprList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprList(JQuickJSONPathParser.ExprListContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code chainedDotExpression}
 	 * labeled alternative in {@link JQuickJSONPathParser#dotExpr}.
 	 * @param ctx the parse tree
@@ -255,12 +261,6 @@ public interface JQuickJSONPathVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRegexLiteral(JQuickJSONPathParser.RegexLiteralContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JQuickJSONPathParser#exprList}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExprList(JQuickJSONPathParser.ExprListContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JQuickJSONPathParser#identifier}.
 	 * @param ctx the parse tree
