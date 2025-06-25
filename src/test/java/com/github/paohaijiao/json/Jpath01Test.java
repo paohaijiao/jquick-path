@@ -1,4 +1,4 @@
-/*
+package com.github.paohaijiao.json;/*
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -20,7 +20,6 @@ import com.github.paohaijiao.model.JSONPathResult;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * packageName PACKAGE_NAME
@@ -31,41 +30,39 @@ import java.util.Arrays;
  * @date 2025/6/15
  * @description
  */
-public class Jpath05Test {
+public class Jpath01Test {
+    @Test
+    public void test11() throws IOException {
+        JSONObject obj = new JSONObject();
+        obj.put("a", "1");
+        JSONPathExecutor executor = new JSONPathExecutor(obj);
+        executor.addErrorListener(error -> {
+        });
+        JSONPathResult jsonObject = executor.execute("$");
+        System.out.println("结果: " + jsonObject.getRawData());
+    }
 
     @Test
-    public void test51() throws IOException {
+    public void test12() throws IOException {
         JSONObject b = new JSONObject();
         b.put("b", "2");
         JSONObject a = new JSONObject();
         a.put("a", b);
-        a.put("b", 3);
         JSONPathExecutor executor = new JSONPathExecutor(a);
         executor.addErrorListener(error -> {
         });
-        JSONPathResult jsonObject = executor.execute("$..b");
+        JSONPathResult jsonObject = executor.execute("$.a.b");
         System.out.println("结果: " + jsonObject.getRawData());
     }
 
     @Test
-    public void test52() throws IOException {
-        JSONObject b1 = new JSONObject();
-        b1.put("b", "2");
-
-        JSONObject b2 = new JSONObject();
-        b2.put("b", "3");
+    public void test13() throws IOException {
         JSONObject a = new JSONObject();
-        a.put("a", Arrays.asList(b1, b2));
-        JSONObject d = new JSONObject();
-        d.put("d", "3");
-        a.put("c", Arrays.asList(d));
-
+        a.put("my-property", 3);
         JSONPathExecutor executor = new JSONPathExecutor(a);
         executor.addErrorListener(error -> {
         });
-        JSONPathResult jsonObject = executor.execute("$..[0]");
+        JSONPathResult jsonObject = executor.execute("$['my-property']");
         System.out.println("结果: " + jsonObject.getRawData());
     }
-
-
 }

@@ -1,4 +1,4 @@
-/*
+package com.github.paohaijiao.json;/*
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -15,12 +15,12 @@
  */
 
 import com.github.paohaijiao.executor.JSONPathExecutor;
+import com.github.paohaijiao.model.JSONObject;
 import com.github.paohaijiao.model.JSONPathResult;
 import org.junit.Test;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Arrays;
 
 /**
  * packageName PACKAGE_NAME
@@ -31,18 +31,33 @@ import java.util.List;
  * @date 2025/6/15
  * @description
  */
-public class Jpath03Test {
+public class JpathFilterTest {
 
     @Test
-    public void test31() throws IOException {
-        List<String> list = new ArrayList<>();
-        list.add("a");
-        list.add("b");
-        list.add("c");
-        JSONPathExecutor executor = new JSONPathExecutor(list);
+    public void test61() throws IOException {
+        JSONObject b = new JSONObject();
+        b.put("price", 5);
+        JSONObject a = new JSONObject();
+        a.put("price", 15);
+        JSONPathExecutor executor = new JSONPathExecutor(Arrays.asList(a, b));
         executor.addErrorListener(error -> {
         });
-        JSONPathResult jsonObject = executor.execute("$[*]");
+        JSONPathResult jsonObject = executor.execute("$[?(@.price > 10)]");
+        System.out.println("结果: " + jsonObject.getRawData());
+    }
+
+    @Test
+    public void test62() throws IOException {
+        JSONObject b = new JSONObject();
+        b.put("price", 5);
+        b.put("inStock", true);
+        JSONObject a = new JSONObject();
+        a.put("price", 8);
+        a.put("inStock", true);
+        JSONPathExecutor executor = new JSONPathExecutor(Arrays.asList(a, b));
+        executor.addErrorListener(error -> {
+        });
+        JSONPathResult jsonObject = executor.execute("$[?(@.price < 10 && @.inStock)]");
         System.out.println("结果: " + jsonObject.getRawData());
     }
 
