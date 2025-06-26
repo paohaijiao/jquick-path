@@ -1,4 +1,4 @@
-package com.github.paohaijiao.parser;// Generated from D:/idea/jthornruleGrammer/JSONPath/JQuickJSONPath.g4 by ANTLR 4.13.2
+package com.github.paohaijiao.parser;// Generated from D:/my/jthornruleGrammer/JSONPath/JQuickJSONPath.g4 by ANTLR 4.13.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
@@ -242,6 +242,12 @@ public interface JQuickJSONPathVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitFunctioncall(JQuickJSONPathParser.FunctioncallContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JQuickJSONPathParser#paras}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParas(JQuickJSONPathParser.ParasContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JQuickJSONPathParser#valueList}.
 	 * @param ctx the parse tree

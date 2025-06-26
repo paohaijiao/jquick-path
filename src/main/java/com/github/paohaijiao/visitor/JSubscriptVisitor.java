@@ -29,7 +29,20 @@ public class JSubscriptVisitor extends JValueVisitor {
             return visitFilterExpression(ctx.filterExpression());
         } else if (ctx.getText().equals("*")) {//pass
             return visitWildcard(this.currentJsonObject);
+        }else if (ctx.expr() != null) {
+            Object obj= visit(ctx.expr());
+            if(obj instanceof BigDecimal){
+                BigDecimal numberDecimal = new BigDecimal(obj.toString());
+                Integer index = numberDecimal.intValue();
+                return index;
+            }else if(obj instanceof String){
+                return (String)obj;
+            }else{
+                JAssert.throwNewException("[] express only support Integer or String");
+                return null;
+            }
         }
+        JAssert.throwNewException("invalid expression , only support  Object[String] or Object[Number] or slice [?:?:?] or filter expression");
         return null;
     }
 

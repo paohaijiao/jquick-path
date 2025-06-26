@@ -1,4 +1,4 @@
-package com.github.paohaijiao.json;/*
+package com.github.paohaijiao.object;/*
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
@@ -13,14 +13,6 @@ package com.github.paohaijiao.json;/*
  *
  * Copyright (c) [2025-2099] Martin (goudingcheng@gmail.com)
  */
-
-import com.github.paohaijiao.executor.JSONPathExecutor;
-import com.github.paohaijiao.model.JSONObject;
-import com.github.paohaijiao.model.JSONPathResult;
-import org.junit.Test;
-
-import java.io.IOException;
-import java.util.Arrays;
 
 /**
  * packageName PACKAGE_NAME

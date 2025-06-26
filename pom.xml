@@ -30,10 +30,12 @@
         <dependency>
             <groupId>com.github.paohaijiao</groupId>
             <artifactId>javelin-core</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.github.paohaijiao</groupId>
             <artifactId>jquick-json</artifactId>
+            <version>1.0.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
