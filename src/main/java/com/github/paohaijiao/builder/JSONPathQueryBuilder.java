@@ -26,6 +26,9 @@ public class JSONPathQueryBuilder {
     public static <T> JSONPathQuery<T> from(JSONObject jsonObject) {
         return new JSONPath<>(jsonObject);
     }
+    public static <T> JSONPathQuery<T> root(JSONObject jsonObject) {
+        return new JSONPath<>(jsonObject);
+    }
 
 
 
