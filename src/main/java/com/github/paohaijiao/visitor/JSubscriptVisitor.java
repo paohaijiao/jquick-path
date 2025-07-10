@@ -1,8 +1,8 @@
 package com.github.paohaijiao.visitor;
 
+import com.github.paohaijiao.exception.JAssert;
 import com.github.paohaijiao.model.JSlice;
 import com.github.paohaijiao.parser.JQuickJSONPathParser;
-import com.github.paohaijiao.exception.JAssert;
 import com.github.paohaijiao.util.JObjectConverter;
 import com.github.paohaijiao.util.JStringUtils;
 

@@ -17,7 +17,6 @@ package com.github.paohaijiao.selector.root;
 
 import com.github.paohaijiao.enums.JRoot;
 import com.github.paohaijiao.function.JPredicate;
-import com.github.paohaijiao.model.JSONPathResult;
 import com.github.paohaijiao.selector.segment.JSegment;
 import com.github.paohaijiao.selector.subscript.JSubscripts;
 import com.github.paohaijiao.util.JSegments;

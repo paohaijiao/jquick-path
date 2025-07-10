@@ -6,8 +6,6 @@ import com.github.paohaijiao.factory.JSONSerializerFactory;
 import com.github.paohaijiao.model.JSONPathResult;
 import com.github.paohaijiao.serializer.JSONSerializer;
 
-import java.util.Map;
-
 public class  JObjectContext<T> extends JValueContext<T>  {
 
     public JObjectContext(Object object, Class<T> targetType) {

@@ -2,25 +2,15 @@ package com.github.paohaijiao.core;
 
 import com.github.paohaijiao.console.JConsole;
 import com.github.paohaijiao.enums.JLogLevel;
-import com.github.paohaijiao.enums.JRoot;
 import com.github.paohaijiao.executor.JSONPathExecutor;
 import com.github.paohaijiao.factory.JSONSerializerFactory;
-import com.github.paohaijiao.function.JPredicate;
 import com.github.paohaijiao.model.JSONArray;
 import com.github.paohaijiao.model.JSONObject;
 import com.github.paohaijiao.model.JSONPathResult;
 import com.github.paohaijiao.query.JSONPathQuery;
-import com.github.paohaijiao.query.impl.JFilterBuilder;
-import com.github.paohaijiao.query.impl.JProjectionBuilder;
-import com.github.paohaijiao.query.impl.JSortBuilder;
-import com.github.paohaijiao.selector.filterExpression.JFilterExpression;
 import com.github.paohaijiao.selector.root.JPath;
-import com.github.paohaijiao.selector.segment.JSegment;
-import com.github.paohaijiao.selector.subscript.JSubscript;
-import com.github.paohaijiao.selector.subscript.JSubscripts;
 import com.github.paohaijiao.serializer.JSONSerializer;
 import com.github.paohaijiao.support.JSONArraySorter;
-import com.github.paohaijiao.util.JPaths;
 
 import java.util.List;
 import java.util.Map;

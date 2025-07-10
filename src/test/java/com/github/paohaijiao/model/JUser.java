@@ -1,7 +1,7 @@
 package com.github.paohaijiao.model;
 
-import com.github.paohaijiao.anno.JSONPath;
 import com.github.paohaijiao.anno.JSONObject;
+import com.github.paohaijiao.anno.JSONPath;
 
 @JSONObject
 public class JUser {

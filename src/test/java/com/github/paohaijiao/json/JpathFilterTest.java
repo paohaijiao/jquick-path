@@ -14,14 +14,6 @@ package com.github.paohaijiao.json;/*
  * Copyright (c) [2025-2099] Martin (goudingcheng@gmail.com)
  */
 
-import com.github.paohaijiao.executor.JSONPathExecutor;
-import com.github.paohaijiao.model.JSONObject;
-import com.github.paohaijiao.model.JSONPathResult;
-import org.junit.Test;
-
-import java.io.IOException;
-import java.util.Arrays;
-
 /**
  * packageName PACKAGE_NAME
  *

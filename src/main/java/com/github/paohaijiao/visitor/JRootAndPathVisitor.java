@@ -3,8 +3,6 @@ package com.github.paohaijiao.visitor;
 import com.github.paohaijiao.model.JSONPathResult;
 import com.github.paohaijiao.parser.JQuickJSONPathParser;
 
-import java.util.List;
-
 public class JRootAndPathVisitor extends JSegmentVisitor {
 
 

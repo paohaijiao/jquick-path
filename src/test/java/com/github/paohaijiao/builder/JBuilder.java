@@ -1,12 +1,8 @@
 package com.github.paohaijiao.builder;
 
-import com.github.paohaijiao.core.JSONPath;
 import com.github.paohaijiao.enums.JRoot;
-import com.github.paohaijiao.function.JPredicate;
 import com.github.paohaijiao.model.JSONPathResult;
-import com.github.paohaijiao.selector.filterExpression.JFilterExpression;
 import com.github.paohaijiao.selector.root.JPath;
-import com.github.paohaijiao.selector.subscript.JSubscripts;
 import org.junit.Test;
 
 import java.io.IOException;
