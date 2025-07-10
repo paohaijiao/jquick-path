@@ -1,5 +1,9 @@
 package com.github.paohaijiao.ext;
 
+import com.github.paohaijiao.ext.query.JFilterBuilder;
+import com.github.paohaijiao.ext.query.JProjection;
+import com.github.paohaijiao.ext.query.JQueryBuilder;
+import com.github.paohaijiao.ext.query.JSorting;
 import com.github.paohaijiao.model.JSONArray;
 import com.github.paohaijiao.model.JSONObject;
 

@@ -1,5 +1,7 @@
 package com.github.paohaijiao.query.impl;
 
+import com.github.paohaijiao.function.JPredicate;
+
 public class JFilterBuilder <T>{
 
     private final StringBuilder filterExpression = new StringBuilder();
