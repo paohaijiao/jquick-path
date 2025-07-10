@@ -59,7 +59,6 @@ public class JValueVisitor extends JSONPathCoreVisitor {
     @Override
     public String visitIdentifier(JQuickJSONPathParser.IdentifierContext ctx) {
         String identifier = ctx.getText();
-        //Object object=this.getValue(this.getCurrent(), identifier);
         return identifier;
     }
 

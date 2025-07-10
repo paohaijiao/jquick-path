@@ -31,28 +31,32 @@ public class JSegmentVisitor extends JExprVisitor {
             Object value = visitSubscript(ctx.subscript());
             if (value instanceof String) {//pass
                 Object result = getProperty(this.currentJsonObject, value.toString());
+
                 return result;
             } else if (value instanceof Integer) {//pass
                 Integer index = (Integer) value;
                 if (index >= 0) {
                     Object result = getValueByIndex(this.currentJsonObject, (Integer) index);
+                    this.currentJsonObject = result;
                     return result;
                 } else {
                     index = Math.abs(index);
                     List<?> list = this.getList(this.currentJsonObject);
                     Collections.reverse(list);
                     Object result = getValueByIndex(list, index);
+                    this.currentJsonObject = result;
                     return result;
                 }
             } else if (value instanceof JSlice) {
                 JSlice slice = (JSlice) value;
                 List<?> list = this.getList(this.currentJsonObject);
                 List<?> data = slice(list, slice.getStart(), slice.getEnd(), slice.getStep());
+                this.currentJsonObject = data;
                 return data;
             }
             return value;
         }
-        //Assert.throwNewException("visitSubscriptSegment exception");
+        JAssert.throwNewException("invalid subscript segment only suported like . [] .. or ..[]");
         return null;
     }
 
@@ -63,7 +67,7 @@ public class JSegmentVisitor extends JExprVisitor {
             this.currentJsonObject = result;
             return this.currentJsonObject;
         }
-        JAssert.throwNewException("visitSubscriptSegment exception");
+        JAssert.throwNewException("only support ..attr or ..* expression");
         return null;
     }
 
@@ -76,7 +80,7 @@ public class JSegmentVisitor extends JExprVisitor {
             this.currentJsonObject = results;
             return this.currentJsonObject;
         }
-        JAssert.throwNewException("visitSubscriptSegment exception");
+        JAssert.throwNewException("only support ..[expression] expression");
         return null;
     }
 

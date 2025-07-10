@@ -45,13 +45,24 @@ public class JExprVisitor extends JSubscriptVisitor {
         }
         jFunctionCall.setMethod(JMethodEnums.methodOf(JStringUtils.trim(function)));
         List<Object> args = new ArrayList<>();
-        if (null != ctx.valueList()) {
-            List<Object> data = visitValueList(ctx.valueList());
+        if (null != ctx.paras()) {
+            List<Object> data = visitParas(ctx.paras());
             args.add(data);
         }
         jFunctionCall.setArgs(args);
         return jFunctionCall;
     }
+    @Override
+    public List<Object> visitParas(JQuickJSONPathParser.ParasContext ctx) {
+        List<Object> args = new ArrayList<>();
+        if(ctx.literal()!=null) {
+            for (JQuickJSONPathParser.LiteralContext literalContext : ctx.literal()) {
+                args.add(visitLiteral(literalContext));
+            }
+        }
+        return args;
+    }
+
 
 
     @Override
