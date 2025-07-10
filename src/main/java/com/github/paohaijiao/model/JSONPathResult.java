@@ -4,7 +4,9 @@ import java.util.Collections;
 import java.util.List;
 
 public class JSONPathResult {
+
     private Object data;
+
     private boolean isList;
 
     public JSONPathResult(Object data) {

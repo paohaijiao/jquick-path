@@ -6,6 +6,8 @@ import lombok.Data;
 public class JSlice {
 
     private Integer start;
+
     private Integer end;
+
     private Integer step;
 }

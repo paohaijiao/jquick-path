@@ -2,12 +2,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.github.paohaijiao</groupId>
-        <artifactId>jquick-parent</artifactId>
-        <version>1.0.0</version>
+        <groupId>io.github.paohaijiao</groupId>
+        <artifactId>javelin</artifactId>
+        <version>1.2.0</version>
     </parent>
     <artifactId>jquick-path</artifactId>
-    <name>jquick-path</name>
+
     <dependencies>
         <dependency>
             <groupId>org.antlr</groupId>
@@ -28,17 +28,117 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.paohaijiao</groupId>
+            <groupId>io.github.paohaijiao</groupId>
             <artifactId>javelin-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.github.paohaijiao</groupId>
+            <groupId>io.github.paohaijiao</groupId>
             <artifactId>jquick-json</artifactId>
+            <version>1.2.0</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
     </dependencies>
+
+    <name>jquick-path</name>
+    <description>
+              jquick path is a lightweight, high-performance java library designed specifically
+        for quickly parsing json data and extracting target values through concise path expressions.
+        it provides query capabilities similar to xpath, but optimized for json format, suitable for v
+        arious scenarios such as configuration reading, api response processing, data conversion, etc.
+    </description>
+    <url>https://github.com/paohaijiao/jquick-path</url>
+    <licenses>
+        <license>
+            <name>The Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <name>Martin</name>
+            <email>goudingcheng@gmail.com</email>
+            <organization>Sonatype</organization>
+            <organizationUrl>http://www.sonatype.com</organizationUrl>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://github.com/paohaijiao/jquick-path</url>
+    </scm>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <configuration>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.8.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>ossrh</publishingServerId>
+                    <autoPublish>true</autoPublish>
+                    <waitUntil>published</waitUntil>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.1</version>
+                <configuration>
+                    <compilerArgs>
+                        <arg>-Xlint:none</arg>
+                    </compilerArgs>
+                    <failOnError>false</failOnError>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <version>3.3.0</version>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar-no-fork</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.3.2</version>
+                <configuration>
+                    <failOnError>false</failOnError>
+                    <failOnWarnings>false</failOnWarnings>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>
