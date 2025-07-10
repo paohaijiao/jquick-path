@@ -14,8 +14,10 @@ import com.github.paohaijiao.query.impl.JFilterBuilder;
 import com.github.paohaijiao.query.impl.JProjectionBuilder;
 import com.github.paohaijiao.query.impl.JSortBuilder;
 import com.github.paohaijiao.selector.filterExpression.JFilterExpression;
+import com.github.paohaijiao.selector.root.JPath;
 import com.github.paohaijiao.selector.segment.JSegment;
 import com.github.paohaijiao.selector.subscript.JSubscript;
+import com.github.paohaijiao.selector.subscript.JSubscripts;
 import com.github.paohaijiao.serializer.JSONSerializer;
 import com.github.paohaijiao.support.JSONArraySorter;
 import com.github.paohaijiao.util.JPaths;
@@ -32,22 +34,7 @@ public class JSONPath<T> implements JSONPathQuery<T> {
 
     private  Class<T> type;
 
-    private String pathExpression;
-
-    private String filter;
-
-    private String projection;
-
     private JPath path;
-
-    private boolean currentRoot = false;
-
-    private JRoot root;
-
-
-
-    private JFilterExpression filterExpression;
-
 
     private String sort;
 
@@ -72,69 +59,6 @@ public class JSONPath<T> implements JSONPathQuery<T> {
         this.jsonObject = jsonObject;
     }
 
-    @Override
-    public JSONPathQuery<T> root() {
-        this.currentRoot = true;
-        this.root=JRoot.ROOT;
-        return this;
-    }
-
-    @Override
-    public JSONPathQuery<T> current() {
-        this.currentRoot = true;
-        this.root=JRoot.CURRENT;
-        return this;
-    }
-
-
-    public JSONPath path(JPath path) {
-        this.path = path;
-        return this;
-    }
-//    public JSONPath segment(JSegment segment) {
-//        this.path.segment(segment);
-//        return this;
-//    }
-    public static JSONPath of(Object jsonData) {
-        return new JSONPath(jsonData);
-    }
-    public JSONPath path(String path) {
-        this.pathExpression = path;
-        return this;
-    }
-    public <T> JSONPath filter(JPredicate<T> predicate) {
-        this.filterExpression = JFilterExpression.of(predicate);
-        return this;
-    }
-    public JSONPath filter(String expression) {
-        this.filterExpression = JFilterExpression.of(expression);
-        return this;
-    }
-    public JSONPath at(JSubscript subscript) {
-        this.pathExpression = (pathExpression != null ? pathExpression : "") +
-                "[" + subscript.toJSONPathExpression() + "]";
-        return this;
-    }
-    public JSONPath at(JSubscript... subscripts) {
-        StringBuilder sb = new StringBuilder(pathExpression != null ? pathExpression : "");
-        for (JSubscript subscript : subscripts) {
-            sb.append("[").append(subscript.toJSONPathExpression()).append("]");
-        }
-        this.pathExpression = sb.toString();
-        return this;
-    }
-    public JSONPath segment(JSegment segment) {
-        this.pathExpression = (pathExpression != null ? pathExpression : "") + segment.toJSONPathExpression();
-        return this;
-    }
-    public JSONPath segments(JSegment... segments) {
-        StringBuilder sb = new StringBuilder(pathExpression != null ? pathExpression : "");
-        for (JSegment segment : segments) {
-            sb.append(segment.toJSONPathExpression());
-        }
-        this.pathExpression = sb.toString();
-        return this;
-    }
     public JSONPath  toBean(Class<T> type){
         this.type=type;
         return this;
@@ -147,41 +71,31 @@ public class JSONPath<T> implements JSONPathQuery<T> {
 
 
     @Override
-    public JSONPathResult execute() {
-        StringBuilder fullPath = new StringBuilder("$");
-        if(currentRoot){
-            fullPath.append("");
-        }
-        if (pathExpression != null) {
-            fullPath.append(pathExpression.startsWith("[") ? "" : ".")
-                    .append(pathExpression);
-        }
-        if (filterExpression != null) {
-            fullPath.append(filterExpression);
-        }
-        StringBuilder pathBuilder = new StringBuilder("$");
-        if (filter != null && !filter.isEmpty()) {
-            pathBuilder.append("[?(").append(filter).append(")]");
-        }
-//        if (projectionBuilder != null) {
-//            fullPath.append(".").append(projectionBuilder.build());
-//        }
+    public JSONPathQuery<T> document(JPath path) {
+        this.path=path;
+        return this;
+    }
 
-        if (projection != null && !projection.isEmpty()) {
-            pathBuilder.append(".").append(projection);
+    @Override
+    public JSONPathResult execute() {
+        StringBuilder fullPath = new StringBuilder("");
+        if(null==this.path){
+            return new JSONPathResult(this.jsonObject);
         }
+        fullPath.append(this.path.toJSONPathExpression());
+
         JSONPathExecutor executor = new JSONPathExecutor(jsonObject);
         executor.addErrorListener(error -> {
             String errorMessage =String.format("error: line %d:%d - %s%n",error.getLine(), error.getCharPosition(), error.getMessage());
             console.error(errorMessage);
             console.error(error.getMessage());
         });
-        console.log(JLogLevel.INFO,"the exec content is :"+pathBuilder.toString());
-        JSONPathResult result = executor.execute(pathBuilder.toString());
+        console.log(JLogLevel.INFO,"the exec content is :"+fullPath.toString());
+        JSONPathResult result = executor.execute(fullPath.toString());
         if (sort != null && !sort.isEmpty()) {
             sortResult(result);
         }
-        if (skip != null || limit != null) {
+        if (skip != null && limit != null) {
             paginateResult(result);
         }
         Object object=result.getRawData();
@@ -189,23 +103,23 @@ public class JSONPath<T> implements JSONPathQuery<T> {
         return result;
     }
 
-    @Override
-    public JSONPathQuery<T> filter(JFilterBuilder<T> filterBuilder) {
-        this.filter = filterBuilder.build();
-        return this;
-    }
+//    @Override
+//    public JSONPathQuery<T> filter(JFilterBuilder<T> filterBuilder) {
+//        this.filter = filterBuilder.build();
+//        return this;
+//    }
+//
+//    @Override
+//    public JSONPathQuery<T> select(JProjectionBuilder<T> projectionBuilder) {
+//        this.projection = projectionBuilder.build();
+//        return this;
+//    }
 
-    @Override
-    public JSONPathQuery<T> select(JProjectionBuilder<T> projectionBuilder) {
-        this.projection = projectionBuilder.build();
-        return this;
-    }
-
-    @Override
-    public JSONPathQuery<T> sort(JSortBuilder<T> sortBuilder) {
-        this.sort = sortBuilder.build();
-        return this;
-    }
+//    @Override
+//    public JSONPathQuery<T> sort(JSortBuilder<T> sortBuilder) {
+//        this.sort = sortBuilder.build();
+//        return this;
+//    }
 
     @Override
     public JSONPathQuery<T> limit(int limit) {

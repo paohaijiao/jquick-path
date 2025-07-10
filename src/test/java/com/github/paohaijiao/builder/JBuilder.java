@@ -1,15 +1,15 @@
 package com.github.paohaijiao.builder;
 
-import com.github.paohaijiao.core.JPath;
 import com.github.paohaijiao.core.JSONPath;
+import com.github.paohaijiao.enums.JRoot;
 import com.github.paohaijiao.function.JPredicate;
 import com.github.paohaijiao.model.JSONPathResult;
 import com.github.paohaijiao.selector.filterExpression.JFilterExpression;
+import com.github.paohaijiao.selector.root.JPath;
+import com.github.paohaijiao.selector.subscript.JSubscripts;
 import org.junit.Test;
 
-import java.awt.print.Book;
 import java.io.IOException;
-import java.util.List;
 
 public class JBuilder {
     @Test
@@ -21,22 +21,7 @@ public class JBuilder {
                 "] } }";
 
         JSONPathResult result = JSONPathQueryBuilder.from(json)
-                .currentRoot()
-                .filter(
-                        JSONPathQueryBuilder.filter(Object.class)
-                                .eq("author", "Author 1")
-                                .and()
-                                .lt("price", 15)
-                )
-                .select(
-                        JSONPathQueryBuilder.select(Object.class)
-                                .field("title")
-                                .field("price")
-                )
-                .sort(
-                        JSONPathQueryBuilder.sort(Object.class)
-                                .desc("price")
-                )
+                .document(JPath.fromRoot(JRoot.ROOT).property("store").property("books"))
                 .limit(10)
                 .execute();
         System.out.println(result.getRawData());

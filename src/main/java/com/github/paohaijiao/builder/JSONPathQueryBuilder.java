@@ -9,6 +9,7 @@ import com.github.paohaijiao.query.impl.JProjectionBuilder;
 import com.github.paohaijiao.query.impl.JSortBuilder;
 import com.github.paohaijiao.selector.filterExpression.JFilterExpression;
 import com.github.paohaijiao.selector.subscript.JSubscript;
+import com.github.paohaijiao.selector.subscript.JSubscripts;
 
 import java.util.Map;
 
@@ -26,8 +27,8 @@ public class JSONPathQueryBuilder {
     public static <T> JSONPathQuery<T> from(JSONObject jsonObject) {
         return new JSONPath<>(jsonObject);
     }
-    public static <T> JSONPathQuery<T> root(JSONObject jsonObject) {
-        return new JSONPath<>(jsonObject);
+    public static <T> JSONPathQuery<T> root(JSubscripts subscripts) {
+        return new JSONPath<>(subscripts);
     }
 
 
