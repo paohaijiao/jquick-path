@@ -41,24 +41,24 @@
 //        System.out.println(result.getRawData());
 //    }
 //
-//    @Test
-//    public void object2() throws IOException {
-//        String json="";
-//        List<Book> books = JSONPath.of(json)
-//                .path("store.books")
-//                .filter(JPath.filter(Book.class)
-//                        .eq("category", "fiction")
-//                        .and()
-//                        .gt("price", 10))
-//                .select(JPath.select(Book.class)
-//                        .field("title")
-//                        .field("author"))
-//                .sort(JPath.sort(Book.class)
-//                        .asc("price")
-//                        .desc("publishDate"))
-//                .limit(10)
-//                .skip(20)
-//                .execute()
-//                //.toList(Book.class);
-//    }
+////    @Test
+////    public void object2() throws IOException {
+////        String json="";
+////        List<Book> books = JSONPath.of(json)
+////                .path("store.books")
+////                .filter(JPath.filter(Book.class)
+////                        .eq("category", "fiction")
+////                        .and()
+////                        .gt("price", 10))
+////                .select(JPath.select(Book.class)
+////                        .field("title")
+////                        .field("author"))
+////                .sort(JPath.sort(Book.class)
+////                        .asc("price")
+////                        .desc("publishDate"))
+////                .limit(10)
+////                .skip(20)
+////                .execute()
+////                //.toList(Book.class);
+////    }
 //}

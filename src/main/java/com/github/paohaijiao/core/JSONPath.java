@@ -2,8 +2,10 @@ package com.github.paohaijiao.core;
 
 import com.github.paohaijiao.console.JConsole;
 import com.github.paohaijiao.executor.JSONPathExecutor;
+import com.github.paohaijiao.factory.JSONSerializerFactory;
 import com.github.paohaijiao.function.JPredicate;
 import com.github.paohaijiao.model.JSONArray;
+import com.github.paohaijiao.model.JSONObject;
 import com.github.paohaijiao.model.JSONPathResult;
 import com.github.paohaijiao.query.JSONPathQuery;
 import com.github.paohaijiao.query.impl.JFilterBuilder;
@@ -12,16 +14,18 @@ import com.github.paohaijiao.query.impl.JSortBuilder;
 import com.github.paohaijiao.selector.filterExpression.JFilterExpression;
 import com.github.paohaijiao.selector.segment.JSegment;
 import com.github.paohaijiao.selector.subscript.JSubscript;
+import com.github.paohaijiao.serializer.JSONSerializer;
 import com.github.paohaijiao.support.JSONArraySorter;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class JSONPath<T> implements JSONPathQuery<T> {
 
     JConsole console = new JConsole();
 
-    private final Object jsonData;
+    private final JSONObject jsonObject;
 
     private  Class<T> type;
     private String pathExpression;
@@ -41,12 +45,20 @@ public class JSONPath<T> implements JSONPathQuery<T> {
 
     private Integer skip;
 
-    public JSONPath(Object jsonData, Class<T> type) {
-        this.jsonData = jsonData;
-        this.type = type;
+    public JSONPath(String jsonData) {
+        JSONSerializer serializer=JSONSerializerFactory.getDefaultSerializer();
+        this.jsonObject = serializer.deserialize(jsonData,JSONObject.class);
     }
-    private JSONPath(Object jsonData) {
-        this.jsonData = jsonData;
+    public JSONPath(Map map) {
+        this.jsonObject = new JSONObject(map);
+    }
+    public JSONPath(Object object) {
+        JSONSerializer serializer=JSONSerializerFactory.getDefaultSerializer();
+        String jsonString= serializer.serialize(object);
+        this.jsonObject = serializer.deserialize(jsonString,JSONObject.class);
+    }
+    private JSONPath(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
     }
     public static JSONPath of(Object jsonData) {
         return new JSONPath(jsonData);
@@ -89,7 +101,14 @@ public class JSONPath<T> implements JSONPathQuery<T> {
         this.pathExpression = sb.toString();
         return this;
     }
-
+    public JSONPath  toBean(Class<T> type){
+        this.type=type;
+        return this;
+    }
+    public JSONPath  toList(Class<T> type){
+        this.type=type;
+        return this;
+    }
     @Override
     public JSONPathResult execute() {
         StringBuilder fullPath = new StringBuilder("$");
@@ -111,7 +130,7 @@ public class JSONPath<T> implements JSONPathQuery<T> {
         if (projection != null && !projection.isEmpty()) {
             pathBuilder.append(".").append(projection);
         }
-        JSONPathExecutor executor = new JSONPathExecutor(jsonData);
+        JSONPathExecutor executor = new JSONPathExecutor(jsonObject);
         executor.addErrorListener(error -> {
             String errorMessage =String.format("error: line %d:%d - %s%n",error.getLine(), error.getCharPosition(), error.getMessage());
             console.error(errorMessage);
@@ -124,6 +143,7 @@ public class JSONPath<T> implements JSONPathQuery<T> {
         if (skip != null || limit != null) {
             paginateResult(result);
         }
+        Object object=result.getRawData();
 
         return result;
     }
