@@ -6,6 +6,7 @@ import com.github.paohaijiao.function.JPredicate;
 import com.github.paohaijiao.model.JBookModel;
 import com.github.paohaijiao.model.JSONObject;
 import com.github.paohaijiao.model.JSONPathResult;
+import com.github.paohaijiao.model.Storre;
 import com.github.paohaijiao.query.impl.JSortBuilder;
 import com.github.paohaijiao.selector.root.JPath;
 import com.github.paohaijiao.selector.segment.JSubscriptSegment;
@@ -44,6 +45,7 @@ public class JSortTest {
         extract.put("price", 20);
 
         books.put("extract", extract);
+        System.out.println(books);
 
         return  books;
     }
@@ -66,6 +68,17 @@ public class JSortTest {
                 .document(JPath.fromRoot(JRoot.ROOT).property("books"))
                 .sort(new JSortBuilder<JBookModel>().desc("price"))
                 .asList(JBookModel.class)
+                .limit(10)
+                .execute();
+
+        System.out.println(result);
+    }
+    @Test
+    public void clazz() throws IOException {
+        JSONObject jsonData = getData1();
+        JSONPathResult result = JSONPathQueryBuilder.<Storre>from(jsonData)  // 明确指定泛型类型
+                .document(JPath.fromRoot(JRoot.ROOT).property("books"))
+                .as(Storre.class)
                 .limit(10)
                 .execute();
 
