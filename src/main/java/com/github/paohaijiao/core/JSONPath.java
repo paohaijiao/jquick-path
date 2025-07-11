@@ -1,5 +1,6 @@
 package com.github.paohaijiao.core;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.github.paohaijiao.console.JConsole;
 import com.github.paohaijiao.enums.JLogLevel;
 import com.github.paohaijiao.executor.JSONPathExecutor;
@@ -7,11 +8,14 @@ import com.github.paohaijiao.factory.JSONSerializerFactory;
 import com.github.paohaijiao.model.JSONArray;
 import com.github.paohaijiao.model.JSONObject;
 import com.github.paohaijiao.model.JSONPathResult;
+import com.github.paohaijiao.model.JSortConditionModel;
 import com.github.paohaijiao.query.JSONPathQuery;
+import com.github.paohaijiao.query.impl.JSortBuilder;
 import com.github.paohaijiao.selector.root.JPath;
 import com.github.paohaijiao.serializer.JSONSerializer;
 import com.github.paohaijiao.support.JSONArraySorter;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -24,9 +28,11 @@ public class JSONPath<T> implements JSONPathQuery<T> {
 
     private  Class<T> type;
 
+    private  boolean isList;
+
     private JPath path;
 
-    private String sort;
+    private List<JSortConditionModel<T, ?>> sort=new ArrayList<>();
 
 
     private Integer limit;
@@ -49,14 +55,6 @@ public class JSONPath<T> implements JSONPathQuery<T> {
         this.jsonObject = jsonObject;
     }
 
-    public JSONPath  toBean(Class<T> type){
-        this.type=type;
-        return this;
-    }
-    public JSONPath  toList(Class<T> type){
-        this.type=type;
-        return this;
-    }
 
 
 
@@ -82,34 +80,37 @@ public class JSONPath<T> implements JSONPathQuery<T> {
         });
         console.log(JLogLevel.INFO,"the exec content is :"+fullPath.toString());
         JSONPathResult result = executor.execute(fullPath.toString());
-        if (sort != null && !sort.isEmpty()) {
-            sortResult(result);
+        if(this.isList){//only list support
+            if (sort != null && !sort.isEmpty()) {
+                sortResult(result,this.type);
+            }
         }
+
         if (skip != null && limit != null) {
             paginateResult(result);
         }
-        Object object=result.getRawData();
 
         return result;
     }
 
-//    @Override
-//    public JSONPathQuery<T> filter(JFilterBuilder<T> filterBuilder) {
-//        this.filter = filterBuilder.build();
-//        return this;
-//    }
-//
-//    @Override
-//    public JSONPathQuery<T> select(JProjectionBuilder<T> projectionBuilder) {
-//        this.projection = projectionBuilder.build();
-//        return this;
-//    }
+    @Override
+    public JSONPathQuery<T> sort(JSortBuilder<T> sortBuilder) {
+        this.sort = sortBuilder.build();
+        return this;
+    }
 
-//    @Override
-//    public JSONPathQuery<T> sort(JSortBuilder<T> sortBuilder) {
-//        this.sort = sortBuilder.build();
-//        return this;
-//    }
+    @Override
+    public JSONPathQuery<T> as(Class<T> type) {
+        this.type=type;
+        return this;
+    }
+
+    @Override
+    public JSONPathQuery<T> asList(Class<T> clazz) {
+        this.type=clazz;
+        this.isList=true;
+        return this;
+    }
 
     @Override
     public JSONPathQuery<T> limit(int limit) {
@@ -123,13 +124,29 @@ public class JSONPath<T> implements JSONPathQuery<T> {
         return this;
     }
 
-    private void sortResult(JSONPathResult result) {
-        if(result.isList()) {
-            List<Object> list= result.getAsList();
-            JSONArray jsonArray = new JSONArray(list);
-            JSONArray jsonArraySorted=  JSONArraySorter.sortJSONArray(jsonArray,sort);
-            result=new JSONPathResult(jsonArraySorted);
+    private <T, U extends Comparable<? super U>> void sortResult(JSONPathResult result, Class<T> type) {
+        if (result == null || !result.isList()) {
+            return;
         }
+        List<Object> rawList = result.getAsList();
+        List<T> typedList = new ArrayList<>(rawList.size());
+        for (Object o : rawList) {
+             JSONObject obj = (JSONObject) o;
+             T t=obj.toBean(type);
+            typedList.add(t);
+        }
+
+        if (sort == null || sort.isEmpty()) {
+            return;
+        }
+        List<JSortConditionModel<T, U>> convertedConditions = new ArrayList<>();
+        for (JSortConditionModel<?, ?> condition : sort) {
+            @SuppressWarnings("unchecked")
+            JSortConditionModel<T, U> convertedCondition = (JSortConditionModel<T, U>) condition;
+            convertedConditions.add(convertedCondition);
+        }
+        List<T> sortedList = JSONArraySorter.<T, U>dynamicSort(typedList, convertedConditions);
+        result=new JSONPathResult(sortedList);
     }
 
     private void paginateResult(JSONPathResult result) {

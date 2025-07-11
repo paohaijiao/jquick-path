@@ -32,6 +32,7 @@ public class JSONPathExecutor extends JAbstractAntlrExecutor<String, JSONPathRes
         JQuickJSONPathParser calcParser = (JQuickJSONPathParser) parser;
         JQuickJSONPathParser.PathContext tree = calcParser.path();
         JSONPathCommonVisitor visitor = new JSONPathCommonVisitor(json);
-        return visitor.visitPath(tree);
+        JSONPathResult result= visitor.visitPath(tree);
+        return result;
     }
 }

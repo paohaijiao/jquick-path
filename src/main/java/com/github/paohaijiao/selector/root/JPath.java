@@ -32,7 +32,9 @@ import java.util.List;
  * @since 2025/7/10
  */
 public class JPath {
+
     private final JRoot root;
+
     private final List<JSegment> segments;
 
     private JPath(JRoot root) {

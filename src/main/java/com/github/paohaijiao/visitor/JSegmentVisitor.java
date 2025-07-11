@@ -122,7 +122,7 @@ public class JSegmentVisitor extends JExprVisitor {
     private Object visitDotWildcard(Object current) {
         if (current instanceof JSONObject) {
             JSONObject jsonObj = (JSONObject) current;
-            return new ArrayList<>(jsonObj.toMap().values());
+            return jsonObj;
         } else if (current instanceof List) {
             return ((List<?>) current);
         }

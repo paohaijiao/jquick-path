@@ -31,7 +31,7 @@ public class JSubscriptVisitor extends JValueVisitor {
             return visitWildcard(this.currentJsonObject);
         }else if (ctx.expr() != null) {
             Object obj= visit(ctx.expr());
-            if(obj instanceof BigDecimal){
+            if(obj instanceof BigDecimal||obj instanceof Double||obj instanceof Float||obj instanceof Integer||obj instanceof Long){
                 BigDecimal numberDecimal = new BigDecimal(obj.toString());
                 Integer index = numberDecimal.intValue();
                 return index;

@@ -1,0 +1,78 @@
+package com.github.paohaijiao.sort;
+
+import com.github.paohaijiao.builder.JSONPathQueryBuilder;
+import com.github.paohaijiao.enums.JRoot;
+import com.github.paohaijiao.function.JPredicate;
+import com.github.paohaijiao.model.JBookModel;
+import com.github.paohaijiao.model.JSONObject;
+import com.github.paohaijiao.model.JSONPathResult;
+import com.github.paohaijiao.query.impl.JSortBuilder;
+import com.github.paohaijiao.selector.root.JPath;
+import com.github.paohaijiao.selector.segment.JSubscriptSegment;
+import com.github.paohaijiao.selector.subscript.JSubscripts;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.util.Arrays;
+
+public class JSortTest {
+
+    public static JSONObject getData1() {
+        JSONObject book1=new JSONObject();
+        book1.put("title", "Book 1");
+        book1.put("author", "Author 1");
+        book1.put("price", 10);
+        book1.put("isbn", true);
+
+        JSONObject book2=new JSONObject();
+        book2.put("title", "Book 2");
+        book2.put("author", "Author 2");
+        book2.put("price", 15);
+        book2.put("isbn", false);
+
+        JSONObject book3=new JSONObject();
+        book3.put("title", "Book 3");
+        book3.put("author", "Author 3");
+        book3.put("price", 20);
+        book3.put("isbn", true);
+
+        JSONObject books = new JSONObject();
+        books.put("books", Arrays.asList(book1, book2, book3));
+        JSONObject extract=new JSONObject();
+        extract.put("title", "Book 3");
+        extract.put("author", "Author 3");
+        extract.put("price", 20);
+
+        books.put("extract", extract);
+
+        return  books;
+    }
+    @Test
+    public void asc() throws IOException {
+        JSONObject jsonData = getData1();
+        JSONPathResult result = JSONPathQueryBuilder.<JBookModel>from(jsonData)  // 明确指定泛型类型
+                .document(JPath.fromRoot(JRoot.ROOT).property("books"))
+                .sort(new JSortBuilder<JBookModel>().asc("price"))
+                .asList(JBookModel.class)
+                .limit(10)
+                .execute();
+
+        System.out.println(result);
+    }
+    @Test
+    public void desc() throws IOException {
+        JSONObject jsonData = getData1();
+        JSONPathResult result = JSONPathQueryBuilder.<JBookModel>from(jsonData)  // 明确指定泛型类型
+                .document(JPath.fromRoot(JRoot.ROOT).property("books"))
+                .sort(new JSortBuilder<JBookModel>().desc("price"))
+                .asList(JBookModel.class)
+                .limit(10)
+                .execute();
+
+        System.out.println(result);
+    }
+
+
+
+
+}

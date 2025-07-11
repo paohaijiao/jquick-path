@@ -47,6 +47,6 @@ public class JSONPathQueryBuilder {
     }
 
     public static <T> JSortBuilder<T> sort(Class<T> type) {
-        return new JSortBuilder<>(type);
+        return null;
     }
 }
