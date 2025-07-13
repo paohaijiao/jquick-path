@@ -25,7 +25,7 @@ It provides a concise way to locate and extract specific parts of JSON structure
 </dependency>
 ```
 ## Basic usage
-### rootSegement
+### 1.rootSegement
 ```json
 {"store":{"books":[{"title":"Book 1","author":"Author 1","price":10}, {"title":"Book 2","author":"Author 2","price":15}, {"title":"Book 3","author":"Author 3","price":20}]}}
 ```
@@ -34,6 +34,19 @@ It provides a concise way to locate and extract specific parts of JSON structure
                 .document(JPath.fromRoot(JRoot.ROOT).property("store").property("books"))
                 .limit(10)
                 .execute();
+```
+```json
+[{"title":"Book 1","author":"Author 1","price":10}, {"title":"Book 2","author":"Author 2","price":15}, {"title":"Book 3","author":"Author 3","price":20}]
+```
+### 1.currentSegement
+```json
+{"store":{"books":[{"title":"Book 1","author":"Author 1","price":10}, {"title":"Book 2","author":"Author 2","price":15}, {"title":"Book 3","author":"Author 3","price":20}]}}
+```
+```java
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonObject)
+        .document(JPath.fromRoot(JRoot.CURRENT).property("store").property("books"))
+        .limit(10)
+        .execute();
 ```
 ```json
 [{"title":"Book 1","author":"Author 1","price":10}, {"title":"Book 2","author":"Author 2","price":15}, {"title":"Book 3","author":"Author 3","price":20}]
