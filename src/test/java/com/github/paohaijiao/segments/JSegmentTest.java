@@ -49,6 +49,7 @@ public class JSegmentTest {
 
         JSONObject store = new JSONObject();
         store.put("store",books);
+        System.out.println(store);
         return  store;
     }
     @Test
