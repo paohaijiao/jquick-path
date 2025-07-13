@@ -27,6 +27,7 @@ import com.github.paohaijiao.query.impl.JSortBuilder;
 import com.github.paohaijiao.selector.root.JPath;
 import com.github.paohaijiao.serializer.JSONSerializer;
 import com.github.paohaijiao.support.JSONArraySorter;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,6 +45,8 @@ public class JSONPath<T> implements JSONPathQuery<T> {
     private  boolean isList;
 
     private JPath path;
+
+    private String pathString;
 
     private List<JSortConditionModel<T, ?>> sort=new ArrayList<>();
 
@@ -78,12 +81,23 @@ public class JSONPath<T> implements JSONPathQuery<T> {
     }
 
     @Override
+    public JSONPathQuery<T> path(String pathString) {
+        this.pathString=pathString;
+        return this;
+    }
+
+    @Override
     public JSONPathResult execute() {
-        StringBuilder fullPath = new StringBuilder("");
-        if(null==this.path){
-            return new JSONPathResult(this.jsonObject);
+        String fullPath = "";
+        if(StringUtils.isNotEmpty(pathString)){
+                fullPath=pathString;
+        }else{
+            if(null!=this.path){
+                fullPath=fullPath+this.path.toJSONPathExpression();
+            }else{
+                fullPath="$";
+            }
         }
-        fullPath.append(this.path.toJSONPathExpression());
 
         JSONPathExecutor executor = new JSONPathExecutor(jsonObject);
         executor.addErrorListener(error -> {

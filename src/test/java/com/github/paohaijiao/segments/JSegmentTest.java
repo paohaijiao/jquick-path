@@ -125,4 +125,11 @@ public class JSegmentTest {
                 .execute();
         System.out.println(result.getRawData());
     }
+    @Test
+    public void path() throws IOException {
+        JSONObject jsonData=getData1();
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonData).path("$.store.books..[2]").limit(10)
+                .execute();
+        System.out.println(result.getRawData());
+    }
 }

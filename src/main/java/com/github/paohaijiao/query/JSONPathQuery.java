@@ -23,6 +23,8 @@ public interface JSONPathQuery <T>{
 
     JSONPathQuery<T> document(JPath jSubscript);
 
+    JSONPathQuery<T> path(String path);
+
 
     JSONPathResult execute();
 

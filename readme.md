@@ -556,3 +556,14 @@ $.books[?(@.title in ('Book 3','Book 2') ||@.isbn)]
 ```json
 [{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}]
 ```
+### 18.path 
+```json
+{"store":{"books":[{"title":"Book 1","author":"Author 1","price":10}, {"title":"Book 2","author":"Author 2","price":15}, {"title":"Book 3","author":"Author 3","price":20}]}}
+```
+```java
+      JSONPathResult result = JSONPathQueryBuilder.from(jsonData).path("$.store.books..[2]").limit(10)
+                .execute();
+```
+```json
+[{"title":"Book 3","author":"Author 3","price":20}]
+```
