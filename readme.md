@@ -1,7 +1,7 @@
 # jquick Path Document
 Jquick Path is a query language used to extract data from JSON documents, similar to the role of XPath in XML.
 It provides a concise way to locate and extract specific parts of JSON structures through path expressions.
-# 基本语法
+# Basic Grammmer
 | expression           | description                                    |
 |----------------------|------------------------------------------------|
 | **S**                | root object                                    |
