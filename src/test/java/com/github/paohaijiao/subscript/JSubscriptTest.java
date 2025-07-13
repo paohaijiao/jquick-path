@@ -53,6 +53,7 @@ public class JSubscriptTest {
         extract.put("author", "Author 3");
         extract.put("price", 20);
         books.put("extract", extract);
+        System.out.println(books);
         return  books;
     }
     @Test
