@@ -61,11 +61,12 @@ public class JRootAndCurrentTest {
 
         JSONObject store = new JSONObject();
         store.put("store",books);
+        System.out.println(store.toString());
         return  store;
     }
     @Test
     public void string() throws IOException {
-        JSONObject jsonObject = getData();
+        JSONObject jsonObject = getData1();
         JSONPathResult result = JSONPathQueryBuilder.from(jsonObject)
                 .document(JPath.fromRoot(JRoot.ROOT).property("store").property("books"))
                 .limit(10)

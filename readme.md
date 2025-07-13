@@ -17,8 +17,22 @@ It provides a concise way to locate and extract specific parts of JSON structure
 - [Basic Requests](#basic-requests)
     
 - [Appendix](#appendix)
-
 ## Introduction
-This document provides comprehensive examples for using JCurlInvoker, a Java-based HTTP client that uses cURL-style annotations to simplify API testing and integration.
-
-## Basic Requests
+<dependency>
+    <groupId>io.github.paohaijiao</groupId>
+     <artifactId>jquick-path</artifactId>
+</dependency>
+## Basic usage
+1.root 
+```json
+{"store":{"books":[{"title":"Book 1","author":"Author 1","price":10}, {"title":"Book 2","author":"Author 2","price":15}, {"title":"Book 3","author":"Author 3","price":20}]}}
+```
+```java
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonObject)
+                .document(JPath.fromRoot(JRoot.ROOT).property("store").property("books"))
+                .limit(10)
+                .execute();
+```
+```json
+[{"title":"Book 1","author":"Author 1","price":10}, {"title":"Book 2","author":"Author 2","price":15}, {"title":"Book 3","author":"Author 3","price":20}]
+```
