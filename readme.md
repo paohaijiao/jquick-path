@@ -18,12 +18,14 @@ It provides a concise way to locate and extract specific parts of JSON structure
     
 - [Appendix](#appendix)
 ## Introduction
+```xml
 <dependency>
     <groupId>io.github.paohaijiao</groupId>
      <artifactId>jquick-path</artifactId>
 </dependency>
+```
 ## Basic usage
-
+### rootSegement
 ```json
 {"store":{"books":[{"title":"Book 1","author":"Author 1","price":10}, {"title":"Book 2","author":"Author 2","price":15}, {"title":"Book 3","author":"Author 3","price":20}]}}
 ```
