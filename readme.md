@@ -249,3 +249,310 @@ $.books[0*1]
 ```json
 {"title":"Book 1","author":"Author 1","price":10}
 ```
+## expr
+### 1.negationExpression
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[-2]
+```
+```java
+JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+.document(JPath.fromRoot(JRoot.ROOT).property("books")
+.segment(JSubscriptSegment.of(JSubscripts.expr("-2"))))
+.limit(10)
+.execute();
+```
+```json
+{"title":"Book 1","author":"Author 1","price":10,"isbn":true}
+```
+### 2.bracketExpression
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[2]
+```
+```java
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.expr("2"))))
+                .limit(10)
+                .execute();
+```
+```json
+{"title":"Book 3","author":"Author 3","price":20,"isbn":true}
+```
+### 3.additiveExpression
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[1+1]
+```
+```java
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.expr("1+1"))))
+                .limit(10)
+                .execute();
+```
+```json
+{"title":"Book 3","author":"Author 3","price":20,"isbn":true}
+```
+### 3.additiveExpression1
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[1-1]
+```
+```java
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.expr("1-1"))))
+                .limit(10)
+                .execute();
+```
+```json
+{"title":"Book 1","author":"Author 1","price":10,"isbn":true}
+```
+### 4.netestDotExpr
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[(@.length())-1]
+```
+```java
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.expr("(@.length())-1"))))
+                .limit(10)
+                .execute();
+```
+```json
+{"title":"Book 3","author":"Author 3","price":20,"isbn":true}
+```
+### 5.notExpression
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[?(!@.isbn)]
+```
+```java
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("!@.isbn")))))
+                .limit(10);
+```
+```json
+[{"title":"Book 2","author":"Author 2","price":15,"isbn":false}]
+```
+### 6.multiplicativeExpression
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[1*1]
+```
+```java
+JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+.document(JPath.fromRoot(JRoot.ROOT).property("books")
+.segment(JSubscriptSegment.of(JSubscripts.expr("1*1"))))
+.limit(10)
+.execute();
+```
+```json
+{"title":"Book 2","author":"Author 2","price":15,"isbn":false}
+```
+### 7.multiplicativeExpression1
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[1/1]
+```
+```java
+    JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.expr("1/1"))))
+                .limit(10)
+                .execute();
+```
+```json
+{"title":"Book 2","author":"Author 2","price":15,"isbn":false}
+```
+### 8.multiplicativeExpression2
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[1%1]
+```
+```java
+     JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.expr("1%1"))))
+                .limit(10)
+                .execute();
+```
+```json
+{"title":"Book 1","author":"Author 1","price":10,"isbn":true}
+```
+### 9.comparisonExpression
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[?(@.price>15)]
+```
+```java
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price>15")))))
+                .limit(10)
+                .execute();
+```
+```json
+[{"title":"Book 3","author":"Author 3","price":20,"isbn":true}]
+```
+### 10.comparisonExpression1
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[?(@.price>=15)]
+```
+```java
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price>=15")))))
+                .limit(10)
+                .execute();
+```
+```json
+[{"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}]
+```
+### 11.comparisonExpression2
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[?(@.price<15)]
+```
+```java
+        JSONObject jsonData=getData1();
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price<15")))))
+                .limit(10)
+                .execute();
+```
+```json
+[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}]
+```
+### 12.comparisonExpression3
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[?(@.price<=15)]
+```
+```java
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price<=15")))))
+                .limit(10)
+                .execute();
+```
+```json
+[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}]
+```
+### 13.equalityExpression
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[?(@.price==15)]
+```
+```java
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price==15")))))
+                .limit(10)
+                .execute();
+```
+```json
+[{"title":"Book 2","author":"Author 2","price":15,"isbn":false}]
+```
+### 14.equalityExpression1
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[?(@.price!=15)]
+```
+```java
+       JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price!=15")))))
+                .limit(10)
+                .execute();
+```
+```json
+[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}]
+```
+### 15.inExpression
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[?(@.title in ('Book 3','Book 2'))]
+```
+```java
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2')")))))
+                .limit(10)
+                .execute();
+```
+```json
+[{"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}]
+```
+### 16.logicalAndExpression
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[?(@.title in ('Book 3','Book 2') &&@.isbn)]
+```
+```java
+JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+.document(JPath.fromRoot(JRoot.ROOT).property("books")
+.segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2') &&@.isbn")))))
+.limit(10)
+.execute();
+```
+```json
+[{"title":"Book 3","author":"Author 3","price":20,"isbn":true}]
+```
+### 17.logicalOrExpression
+```json
+{"books":[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}],"extract":{"title":"Book 3","author":"Author 3","price":20}}
+```
+```String
+$.books[?(@.title in ('Book 3','Book 2') ||@.isbn)]
+```
+```java
+        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books")
+                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2') ||@.isbn")))))
+                .limit(10)
+                .execute();
+```
+```json
+[{"title":"Book 1","author":"Author 1","price":10,"isbn":true}, {"title":"Book 2","author":"Author 2","price":15,"isbn":false}, {"title":"Book 3","author":"Author 3","price":20,"isbn":true}]
+```

@@ -57,7 +57,7 @@ public class JExprTest {
         extract.put("price", 20);
 
         books.put("extract", extract);
-
+        System.out.println(books);
         return  books;
     }
     @Test
