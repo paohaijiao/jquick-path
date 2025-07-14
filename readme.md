@@ -24,6 +24,51 @@ It provides a concise way to locate and extract specific parts of JSON structure
      <artifactId>jquick-path</artifactId>
 </dependency>
 ```
+# JEvaluator Function Reference
+## 📊 Type Conversion Functions
+| Function       | Syntax                  | Parameters       | Return Type | Description                     |
+|----------------|-------------------------|------------------|-------------|---------------------------------|
+| `toInteger`    | `toInteger(value)`      | 1 (any type)     | Integer     | Converts value to Integer       |
+| `toDouble`     | `toDouble(value)`       | 1 (any type)     | Double      | Converts value to Double        |
+| `toFloat`      | `toFloat(value)`        | 1 (any type)     | Float       | Converts value to Float         |
+| `toString`     | `toString(value)`       | 1 (any type)     | String      | Converts value to String        |
+| `parseToDate`  | `parseToDate(str,format)` | 2 (String)     | Date        | Parses string to Date           |
+## 🔢 Math Functions
+| Function | Syntax              | Parameters            | Return Type | Description                     |
+|----------|---------------------|-----------------------|-------------|---------------------------------|
+| `ceil`   | `ceil(number)`      | 1 (Number)            | Double      | Rounds up to nearest integer    |
+| `floor`  | `floor(number)`     | 1 (Number)            | Double      | Rounds down to nearest integer  |
+| `round`  | `round(num,digits)` | 2 (Number, Integer)   | Double      | Rounds to specified decimals    |
+| `sum`    | `sum(values...)`    | ≥1 (Numbers)          | Number      | Sums all arguments              |
+| `max`    | `max(values...)`    | ≥1 (Numbers)          | Number      | Returns maximum value           |
+| `min`    | `min(values...)`    | ≥1 (Numbers)          | Number      | Returns minimum value           |
+| `avg`    | `avg(values...)`    | ≥1 (Numbers)          | Double      | Calculates average              |
+## 🔤 String Functions
+| Function     | Syntax                    | Parameters            | Return Type | Description                     |
+|--------------|---------------------------|-----------------------|-------------|---------------------------------|
+| `toLower`    | `toLower(str)`            | 1 (String)            | String      | Converts to lowercase           |
+| `toUpper`    | `toUpper(str)`            | 1 (String)            | String      | Converts to uppercase           |
+| `contains`   | `contains(str,substr)`    | 2 (String)            | Boolean     | Checks if contains substring    |
+| `join`       | `join(delimiter,items...)`| ≥2 (String, Objects)  | String      | Joins with delimiter            |
+| `split`      | `split(str,delimiter)`    | 2 (String)            | String[]    | Splits string by delimiter      |
+| `substring`  | `substring(str,start,end)`| 3 (String, int, int)  | String      | Extracts substring              |
+| `replace`    | `replace(str,target,rep)` | 3 (String)            | String      | Replaces all occurrences        |
+| `startsWith` | `startsWith(str,prefix)`  | 2 (String)            | Boolean     | Checks string prefix            |
+| `endsWith`   | `endsWith(str,suffix)`    | 2 (String)            | Boolean     | Checks string suffix            |
+
+## 📅 Date Functions
+
+| Function      | Syntax                  | Parameters       | Return Type | Description                     |
+|---------------|-------------------------|------------------|-------------|---------------------------------|
+| `dateFormat`  | `dateFormat(date,format)` | 2 (Date, String) | String    | Formats date to string          |
+
+## 📦 Collection Functions
+
+| Function | Syntax            | Parameters | Return Type | Description                     |
+|----------|-------------------|------------|-------------|---------------------------------|
+| `length` | `length(array)`   | 1 (Array)  | Integer     | Returns array/list length       |
+| `trans`  | `trans(src,dest)` | 2 (Objects)| Object      | Transforms between types        |
+
 ## root
 ### 1.rootSegement
 ```json
