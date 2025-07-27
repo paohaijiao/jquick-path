@@ -1007,7 +1007,8 @@ $.books[?(!@.isbn)]
 		"author": "Author 3",
 		"price": 20
 	}
-}```
+}
+```
 ```String
 $.books[1*1]
 ```
@@ -1054,7 +1055,8 @@ JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
 		"author": "Author 3",
 		"price": 20
 	}
-}```
+}
+```
 ```String
 $.books[1/1]
 ```
@@ -1101,7 +1103,8 @@ $.books[1/1]
 		"author": "Author 3",
 		"price": 20
 	}
-}```
+}
+```
 ```String
 $.books[1%1]
 ```
@@ -1148,7 +1151,8 @@ $.books[1%1]
 		"author": "Author 3",
 		"price": 20
 	}
-}```
+}
+```
 ```String
 $.books[?(@.price>15)]
 ```
