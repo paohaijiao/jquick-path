@@ -1227,7 +1227,8 @@ $.books[?(@.price>=15)]
 		"price": 20,
 		"isbn": true
 	}
-]```
+]
+```
 ### 11.comparisonExpression2
 ```json
 {
@@ -1256,7 +1257,8 @@ $.books[?(@.price>=15)]
 		"author": "Author 3",
 		"price": 20
 	}
-}```
+}
+```
 ```String
 $.books[?(@.price<15)]
 ```
@@ -1468,7 +1470,8 @@ $.books[?(@.price!=15)]
 		"author": "Author 3",
 		"price": 20
 	}
-}```
+}
+```
 ```String
 $.books[?(@.title in ('Book 3','Book 2'))]
 ```
@@ -1493,7 +1496,8 @@ $.books[?(@.title in ('Book 3','Book 2'))]
 		"price": 20,
 		"isbn": true
 	}
-]```
+]
+```
 ### 16.logicalAndExpression
 ```json
 {
@@ -1522,7 +1526,8 @@ $.books[?(@.title in ('Book 3','Book 2'))]
 		"author": "Author 3",
 		"price": 20
 	}
-}```
+}
+```
 ```String
 $.books[?(@.title in ('Book 3','Book 2') &&@.isbn)]
 ```
@@ -1571,7 +1576,8 @@ JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
 		"author": "Author 3",
 		"price": 20
 	}
-}```
+}
+```
 ```String
 $.books[?(@.title in ('Book 3','Book 2') ||@.isbn)]
 ```
@@ -1602,7 +1608,8 @@ $.books[?(@.title in ('Book 3','Book 2') ||@.isbn)]
 		"price": 20,
 		"isbn": true
 	}
-]```
+]
+```
 ### 18.path 
 ```json
 {
@@ -1625,7 +1632,8 @@ $.books[?(@.title in ('Book 3','Book 2') ||@.isbn)]
 			}
 		]
 	}
-}```
+}
+```
 ```java
       JSONPathResult result = JSONPathQueryBuilder.from(jsonData).path("$.store.books..[2]").limit(10)
                 .execute();
