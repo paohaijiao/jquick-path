@@ -1,6 +1,8 @@
 # jquick Path Document
-Jquick Path is a query language used to extract data from JSON documents, similar to the role of XPath in XML.
+```string
+        Jquick Path is a query language used to extract data from JSON documents, similar to the role of XPath in XML.
 It provides a concise way to locate and extract specific parts of JSON structures through path expressions.
+```
 # Basic Grammmer
 | expression           | description                                    |
 |----------------------|------------------------------------------------|
@@ -13,10 +15,47 @@ It provides a concise way to locate and extract specific parts of JSON structure
 | **?()**              | filter expression                                       |
 | **@**                | The current node is used for filtering in expressions                                  |
 ## Table of Contents
+- [jquick Path Document](#jquick-path-document)
+- [Basic Grammar](#basic-grammmer)
+    - [Expression Descriptions](#expression-descriptions)
 - [Introduction](#introduction)
-- [Basic Requests](#basic-requests)
-    
-- [Appendix](#appendix)
+- [root](#root)
+    - [rootSegment](#1-rootsegement)
+    - [currentSegment](#2-currentsegement)
+- [segment](#segment)
+    - [identifierSegment](#1-identifiersegment)
+    - [conditionIdentifierSegmentStar](#2-conditionidentifiersegmentstar)
+    - [subscriptSegment](#3-subscriptsegment)
+    - [subscript](#4-subscript)
+    - [childIdentifierSegment](#5-childidentifiersegment)
+    - [childSubscriptSegment](#6-childsubscriptsegment)
+- [subscript](#subscript)
+    - [number](#1-number)
+    - [wildcard](#2-wildcard)
+    - [stringLiteral](#3-stringliteral)
+    - [slice](#4-slice)
+    - [filterExpression](#5-filterexpression)
+    - [expr](#6-expr)
+- [expr](#expr)
+    - [negationExpression](#1-negationexpression)
+    - [bracketExpression](#2-bracketexpression)
+    - [additiveExpression](#3-additiveexpression)
+    - [additiveExpression1](#4-additiveexpression1)
+    - [netestDotExpr](#5-netestdotexpr)
+    - [notExpression](#6-notexpression)
+    - [multiplicativeExpression](#7-multiplicativeexpression)
+    - [multiplicativeExpression1](#8-multiplicativeexpression1)
+    - [multiplicativeExpression2](#9-multiplicativeexpression2)
+    - [comparisonExpression](#10-comparisonexpression)
+    - [comparisonExpression1](#11-comparisonexpression1)
+    - [comparisonExpression2](#12-comparisonexpression2)
+    - [comparisonExpression3](#13-comparisonexpression3)
+    - [equalityExpression](#14-equalityexpression)
+    - [equalityExpression1](#15-equalityexpression1)
+    - [inExpression](#16-inexpression)
+    - [logicalAndExpression](#17-logicalandexpression)
+    - [logicalOrExpression](#18-logicalorexpression)
+    - [path](#19-path)
 ## Introduction
 ```xml
 <dependency>
@@ -24,53 +63,8 @@ It provides a concise way to locate and extract specific parts of JSON structure
      <artifactId>jquick-path</artifactId>
 </dependency>
 ```
-# JEvaluator Function Reference
-## 📊 Type Conversion Functions
-| Function       | Syntax                  | Parameters       | Return Type | Description                     |
-|----------------|-------------------------|------------------|-------------|---------------------------------|
-| `toInteger`    | `toInteger(value)`      | 1 (string type)     | Integer     | Converts value to Integer       |
-| `toDouble`     | `toDouble(value)`       | 1 (string type)     | Double      | Converts value to Double        |
-| `toFloat`      | `toFloat(value)`        | 1 (string type)     | Float       | Converts value to Float         |
-| `toString`     | `toString(value)`       | 1 (any type)        | String      | Converts value to String        |
-| `parseToDate`  | `parseToDate(str,format)` | 2 (String)        | Date        | Parses string to Date           |
-## 🔢 Math Functions
-| Function | Syntax              | Parameters            | Return Type | Description                     |
-|----------|---------------------|-----------------------|-------------|---------------------------------|
-| `ceil`   | `ceil(number)`      | 1 (Number)            | Double      | Rounds up to nearest integer    |
-| `floor`  | `floor(number)`     | 1 (Number)            | Double      | Rounds down to nearest integer  |
-| `round`  | `round(num,digits)` | 2 (Number, Integer)   | Double      | Rounds to specified decimals    |
-| `sum`    | `sum(values...)`    | ≥1 (Numbers)          | Number      | Sums all arguments              |
-| `max`    | `max(values...)`    | ≥1 (Numbers)          | Number      | Returns maximum value           |
-| `min`    | `min(values...)`    | ≥1 (Numbers)          | Number      | Returns minimum value           |
-| `avg`    | `avg(values...)`    | ≥1 (Numbers)          | Double      | Calculates average              |
-## 🔤 String Functions
-| Function     | Syntax                    | Parameters            | Return Type | Description                     |
-|--------------|---------------------------|-----------------------|-------------|---------------------------------|
-| `toLower`    | `toLower(str)`            | 1 (String)            | String      | Converts to lowercase           |
-| `toUpper`    | `toUpper(str)`            | 1 (String)            | String      | Converts to uppercase           |
-| `contains`   | `contains(str,substr)`    | 2 (String)            | Boolean     | Checks if contains substring    |
-| `join`       | `join(delimiter,items...)`| ≥2 (String, Objects)  | String      | Joins with delimiter            |
-| `split`      | `split(str,delimiter)`    | 2 (String)            | String[]    | Splits string by delimiter      |
-| `substring`  | `substring(str,start,end)`| 3 (String, int, int)  | String      | Extracts substring              |
-| `replace`    | `replace(str,target,rep)` | 3 (String)            | String      | Replaces all occurrences        |
-| `startsWith` | `startsWith(str,prefix)`  | 2 (String)            | Boolean     | Checks string prefix            |
-| `endsWith`   | `endsWith(str,suffix)`    | 2 (String)            | Boolean     | Checks string suffix            |
-
-## 📅 Date Functions
-
-| Function      | Syntax                  | Parameters       | Return Type | Description                     |
-|---------------|-------------------------|------------------|-------------|---------------------------------|
-| `dateFormat`  | `dateFormat(date,format)` | 2 (Date, String) | String    | Formats date to string          |
-
-## 📦 Collection Functions
-
-| Function | Syntax            | Parameters | Return Type | Description                     |
-|----------|-------------------|------------|-------------|---------------------------------|
-| `length` | `length(array)`   | 1 (Array)  | Integer     | Returns array/list length       |
-| `trans`  | `trans(src,dest)` | 2 (Objects)| Object      | Transforms between types        |
-
 ## root
-### 1.rootSegement
+1. rootSegement
 ```json
 {
 	"store": {
@@ -119,7 +113,7 @@ It provides a concise way to locate and extract specific parts of JSON structure
 	}
 ]
 ```
-### 2.currentSegement
+2. currentSegement
 ```json
 {
 	"store": {
@@ -169,7 +163,7 @@ It provides a concise way to locate and extract specific parts of JSON structure
 ]
 ```
 ## segment
-### 1.identifierSegment
+1. identifierSegment
 ```json data
 {
 	"store": {
@@ -221,7 +215,7 @@ It provides a concise way to locate and extract specific parts of JSON structure
 	]
 }
 ```
-### 2.conditionIdentifierSegmentStar
+2. conditionIdentifierSegmentStar
 ```json
 {
 	"store": {
@@ -271,7 +265,7 @@ It provides a concise way to locate and extract specific parts of JSON structure
 	}
 ]
 ```
-### 3.subscriptSegment
+3. subscriptSegment
 ```json
 {
 	"store": {
@@ -310,7 +304,7 @@ It provides a concise way to locate and extract specific parts of JSON structure
 	"price": 20
 }
 ```
-### 4.subscript
+4. subscript
 ```json data
 {
 	"store": {
@@ -348,7 +342,7 @@ path:$.store.books[2].price
 ```json result
 20
 ```
-### 5.childIdentifierSegment
+5. childIdentifierSegment
 ```json data
 {
 	"store": {
@@ -386,7 +380,7 @@ path:$.store.books..price
 ```json result
 [10, 15, 20]
 ```
-### 6.childSubscriptSegment
+6. childSubscriptSegment
 ```json data
 {
 	"store": {
@@ -432,7 +426,7 @@ $.store.books..[2]
 ```
 
 ## subscript
-### 1.number
+1. number
 ```json data
 {
 	"books": [
@@ -475,7 +469,7 @@ $.books[0]
 	"price": 10
 }
 ```
-### 2.wildcard
+2. wildcard
 ```json data
 {
 	"books": [
@@ -514,7 +508,7 @@ $.books[*]
 ```json result
 [{"title":"Book 1","author":"Author 1","price":10}, {"title":"Book 2","author":"Author 2","price":15}, {"title":"Book 3","author":"Author 3","price":20}]
 ```
-### 3.stringLiteral
+3. stringLiteral
 ```json data
 {
 	"books": [
@@ -554,7 +548,7 @@ $.extract['title']
 ```json
 Book 3
 ```
-### 4.slice
+4. slice
 ```json data
 {
 	"books": [
@@ -599,7 +593,7 @@ $.books[0:1:2]
 	}
 ]
 ```
-### 5.filterExpression
+5. filterExpression
 ```json
 {
 	"books": [
@@ -645,7 +639,7 @@ $.books[?(@.title == 'Book 1')]
 	}
 ]
 ```
-### 6.expr
+6. expr
 ```json
 {
 	"books": [
@@ -690,7 +684,7 @@ $.books[0*1]
 }
 ```
 ## expr
-### 1.negationExpression
+1. negationExpression
 ```json
 {
 	"books": [
@@ -738,7 +732,7 @@ JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
 	"isbn": true
 }
 ```
-### 2.bracketExpression
+2. bracketExpression
 ```json
 {
 	"books": [
@@ -786,7 +780,7 @@ $.books[2]
 	"isbn": true
 }
 ```
-### 3.additiveExpression
+3. additiveExpression
 ```json
 {
 	"books": [
@@ -834,7 +828,7 @@ $.books[1+1]
 	"isbn": true
 }
 ```
-### 3.additiveExpression1
+4. additiveExpression1
 ```json
 {
 	"books": [
@@ -882,7 +876,7 @@ $.books[1-1]
 	"isbn": true
 }
 ```
-### 4.netestDotExpr
+5. netestDotExpr
 ```json
 {
 	"books": [
@@ -930,7 +924,7 @@ $.books[(@.length())-1]
 	"isbn": true
 }
 ```
-### 5.notExpression
+6. notExpression
 ```json
 {
 	"books": [
@@ -979,7 +973,7 @@ $.books[?(!@.isbn)]
 	}
 ]
 ```
-### 6.multiplicativeExpression
+7. multiplicativeExpression
 ```json
 {
 	"books": [
@@ -1027,7 +1021,7 @@ JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
 	"isbn": false
 }
 ```
-### 7.multiplicativeExpression1
+8. multiplicativeExpression1
 ```json
 {
 	"books": [
@@ -1075,7 +1069,7 @@ $.books[1/1]
 	"isbn": false
 }
 ```
-### 8.multiplicativeExpression2
+9. multiplicativeExpression2
 ```json
 {
 	"books": [
@@ -1123,7 +1117,7 @@ $.books[1%1]
 	"isbn": true
 }
 ```
-### 9.comparisonExpression
+10. comparisonExpression
 ```json
 {
 	"books": [
@@ -1173,7 +1167,7 @@ $.books[?(@.price>15)]
 	}
 ]
 ```
-### 10.comparisonExpression1
+11. comparisonExpression1
 ```json
 {
 	"books": [
@@ -1229,7 +1223,7 @@ $.books[?(@.price>=15)]
 	}
 ]
 ```
-### 11.comparisonExpression2
+12. comparisonExpression2
 ```json
 {
 	"books": [
@@ -1280,7 +1274,7 @@ $.books[?(@.price<15)]
 	}
 ]
 ```
-### 12.comparisonExpression3
+13. comparisonExpression3
 ```json
 {
 	"books": [
@@ -1336,7 +1330,7 @@ $.books[?(@.price<=15)]
 	}
 ]
 ```
-### 13.equalityExpression
+14. equalityExpression
 ```json
 {
 	"books": [
@@ -1386,7 +1380,7 @@ $.books[?(@.price==15)]
 	}
 ]
 ```
-### 14.equalityExpression1
+15. equalityExpression1
 ```json
 {
 	"books": [
@@ -1442,7 +1436,7 @@ $.books[?(@.price!=15)]
 	}
 ]
 ```
-### 15.inExpression
+16. inExpression
 ```json
 {
 	"books": [
@@ -1498,7 +1492,7 @@ $.books[?(@.title in ('Book 3','Book 2'))]
 	}
 ]
 ```
-### 16.logicalAndExpression
+17. logicalAndExpression
 ```json
 {
 	"books": [
@@ -1548,7 +1542,7 @@ JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
 	}
 ]
 ```
-### 17.logicalOrExpression
+18. logicalOrExpression
 ```json
 {
 	"books": [
@@ -1610,7 +1604,7 @@ $.books[?(@.title in ('Book 3','Book 2') ||@.isbn)]
 	}
 ]
 ```
-### 18.path 
+19. path 
 ```json
 {
 	"store": {
