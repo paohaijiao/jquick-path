@@ -63,6 +63,7 @@ It provides a concise way to locate and extract specific parts of JSON structure
      <artifactId>jquick-path</artifactId>
 </dependency>
 ```
+**[support function](https://github.com/paohaijiao/javelin?tab=readme-ov-file#jevaluator-function-reference "support function")**
 ## root
 1. rootSegement
 ```json
