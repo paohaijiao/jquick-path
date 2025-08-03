@@ -14,48 +14,49 @@ It provides a concise way to locate and extract specific parts of JSON structure
 | **[start:end:step]** | array slicing operation                                         |
 | **?()**              | filter expression                                       |
 | **@**                | The current node is used for filtering in expressions                                  |
-## Table of Contents
+# Table of Contents
+
 - [jquick Path Document](#jquick-path-document)
-- [Basic Grammar](#basic-grammmer)
-    - [Expression Descriptions](#expression-descriptions)
+- [Basic Grammar](#basic-grammar)
+  - [Expression Descriptions](#expression-descriptions)
 - [Introduction](#introduction)
-- [root](#root)
-    - [rootSegment](#1-rootsegement)
-    - [currentSegment](#2-currentsegement)
-- [segment](#segment)
-    - [identifierSegment](#1-identifiersegment)
-    - [conditionIdentifierSegmentStar](#2-conditionidentifiersegmentstar)
-    - [subscriptSegment](#3-subscriptsegment)
-    - [subscript](#4-subscript)
-    - [childIdentifierSegment](#5-childidentifiersegment)
-    - [childSubscriptSegment](#6-childsubscriptsegment)
-- [subscript](#subscript)
-    - [number](#1-number)
-    - [wildcard](#2-wildcard)
-    - [stringLiteral](#3-stringliteral)
-    - [slice](#4-slice)
-    - [filterExpression](#5-filterexpression)
-    - [expr](#6-expr)
-- [expr](#expr)
-    - [negationExpression](#1-negationexpression)
-    - [bracketExpression](#2-bracketexpression)
-    - [additiveExpression](#3-additiveexpression)
-    - [additiveExpression1](#4-additiveexpression1)
-    - [netestDotExpr](#5-netestdotexpr)
-    - [notExpression](#6-notexpression)
-    - [multiplicativeExpression](#7-multiplicativeexpression)
-    - [multiplicativeExpression1](#8-multiplicativeexpression1)
-    - [multiplicativeExpression2](#9-multiplicativeexpression2)
-    - [comparisonExpression](#10-comparisonexpression)
-    - [comparisonExpression1](#11-comparisonexpression1)
-    - [comparisonExpression2](#12-comparisonexpression2)
-    - [comparisonExpression3](#13-comparisonexpression3)
-    - [equalityExpression](#14-equalityexpression)
-    - [equalityExpression1](#15-equalityexpression1)
-    - [inExpression](#16-inexpression)
-    - [logicalAndExpression](#17-logicalandexpression)
-    - [logicalOrExpression](#18-logicalorexpression)
-    - [path](#19-path)
+- [Root](#root)
+  - [Root Segment](#1-root-segment)
+  - [Current Segment](#2-current-segment)
+- [Segment](#segment)
+  - [Identifier Segment](#1-identifier-segment)
+  - [Wildcard Segment](#2-wildcard-segment)
+  - [Number Subscript Segment](#3-number-subscript-segment)
+  - [Subscript Segment](#4-subscript-segment)
+  - [Child Identifier Segment](#5-child-identifier-segment)
+  - [Child Subscript Segment](#6-child-subscript-segment)
+- [Subscript](#subscript)
+  - [Number Subscript](#1-number-subscript)
+  - [Wildcard Subscript](#2-wildcard-subscript)
+  - [String Literal Subscript](#3-string-literal-subscript)
+  - [Slice Subscript](#4-slice-subscript)
+  - [Filter Expression Subscript](#5-filter-expression-subscript)
+  - [Expression Subscript](#6-expression-subscript)
+- [Expression](#expr)
+  - [Negation Expression](#1-negation-expression)
+  - [Bracket Expression](#2-bracket-expression)
+  - [Additive Expression](#3-additive-expression)
+  - [Additive Expression (Subtraction)](#4-additive-expression-subtraction)
+  - [Nested Dot Expression](#5-nested-dot-expression)
+  - [Not Expression](#6-not-expression)
+  - [Multiplicative Expression](#7-multiplicative-expression)
+  - [Multiplicative Expression (Division)](#8-multiplicative-expression-division)
+  - [Multiplicative Expression (Modulo)](#9-multiplicative-expression-modulo)
+  - [Comparison Expression (Greater Than)](#10-comparison-expression-greater-than)
+  - [Comparison Expression (Greater Than or Equal)](#11-comparison-expression-greater-than-or-equal)
+  - [Comparison Expression (Less Than)](#12-comparison-expression-less-than)
+  - [Comparison Expression (Less Than or Equal)](#13-comparison-expression-less-than-or-equal)
+  - [Equality Expression (Equal)](#14-equality-expression-equal)
+  - [Equality Expression (Not Equal)](#15-equality-expression-not-equal)
+  - [In Expression](#16-in-expression)
+  - [Logical AND Expression](#17-logical-and-expression)
+  - [Logical OR Expression](#18-logical-or-expression)
+  - [Path Expression](#19-path-expression)
 ## Introduction
 ```xml
 <dependency>
@@ -65,7 +66,7 @@ It provides a concise way to locate and extract specific parts of JSON structure
 ```
 **[support function](https://github.com/paohaijiao/javelin?tab=readme-ov-file#jevaluator-function-reference "support function")**
 ## root
-1. rootSegement
+1. root
 ```json
 {
 	"store": {
@@ -114,7 +115,7 @@ It provides a concise way to locate and extract specific parts of JSON structure
 	}
 ]
 ```
-2. currentSegement
+2. current
 ```json
 {
 	"store": {
@@ -164,7 +165,7 @@ It provides a concise way to locate and extract specific parts of JSON structure
 ]
 ```
 ## segment
-1. identifierSegment
+1. identifier
 ```json data
 {
 	"store": {
@@ -216,7 +217,7 @@ It provides a concise way to locate and extract specific parts of JSON structure
 	]
 }
 ```
-2. conditionIdentifierSegmentStar
+2. wildcard
 ```json
 {
 	"store": {
@@ -266,7 +267,7 @@ It provides a concise way to locate and extract specific parts of JSON structure
 	}
 ]
 ```
-3. subscriptSegment
+3. number subscript
 ```json
 {
 	"store": {
@@ -343,7 +344,7 @@ path:$.store.books[2].price
 ```json result
 20
 ```
-5. childIdentifierSegment
+5. childIdentifier
 ```json data
 {
 	"store": {
@@ -381,7 +382,7 @@ path:$.store.books..price
 ```json result
 [10, 15, 20]
 ```
-6. childSubscriptSegment
+6. childSubscript
 ```json data
 {
 	"store": {
@@ -594,7 +595,7 @@ $.books[0:1:2]
 	}
 ]
 ```
-5. filterExpression
+5. filter
 ```json
 {
 	"books": [
@@ -640,7 +641,7 @@ $.books[?(@.title == 'Book 1')]
 	}
 ]
 ```
-6. expr
+6. expression
 ```json
 {
 	"books": [
@@ -685,7 +686,7 @@ $.books[0*1]
 }
 ```
 ## expr
-1. negationExpression
+1. expression of negation
 ```json
 {
 	"books": [
@@ -733,7 +734,7 @@ JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
 	"isbn": true
 }
 ```
-2. bracketExpression
+2. expression of negation bracket
 ```json
 {
 	"books": [
@@ -781,7 +782,7 @@ $.books[2]
 	"isbn": true
 }
 ```
-3. additiveExpression
+3. expression of  additive
 ```json
 {
 	"books": [
@@ -829,7 +830,7 @@ $.books[1+1]
 	"isbn": true
 }
 ```
-4. additiveExpression1
+4. expression of  additive
 ```json
 {
 	"books": [
@@ -877,7 +878,7 @@ $.books[1-1]
 	"isbn": true
 }
 ```
-5. netestDotExpr
+5. expression of  netest
 ```json
 {
 	"books": [
@@ -907,6 +908,7 @@ $.books[1-1]
 	}
 }
 ```
+**[support function](https://github.com/paohaijiao/javelin?tab=readme-ov-file#jevaluator-function-reference "support function")**
 ```String
 $.books[(@.length())-1]
 ```
@@ -925,7 +927,7 @@ $.books[(@.length())-1]
 	"isbn": true
 }
 ```
-6. notExpression
+6. expression of   not
 ```json
 {
 	"books": [
@@ -974,7 +976,7 @@ $.books[?(!@.isbn)]
 	}
 ]
 ```
-7. multiplicativeExpression
+7. expression of   multiplicative
 ```json
 {
 	"books": [
@@ -1022,7 +1024,7 @@ JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
 	"isbn": false
 }
 ```
-8. multiplicativeExpression1
+8. expression of   multiplicative
 ```json
 {
 	"books": [
@@ -1070,7 +1072,7 @@ $.books[1/1]
 	"isbn": false
 }
 ```
-9. multiplicativeExpression2
+9. expression of   multiplicative
 ```json
 {
 	"books": [
@@ -1118,7 +1120,7 @@ $.books[1%1]
 	"isbn": true
 }
 ```
-10. comparisonExpression
+10. expression of comparison
 ```json
 {
 	"books": [
@@ -1168,7 +1170,7 @@ $.books[?(@.price>15)]
 	}
 ]
 ```
-11. comparisonExpression1
+11. expression of comparison
 ```json
 {
 	"books": [
@@ -1224,7 +1226,7 @@ $.books[?(@.price>=15)]
 	}
 ]
 ```
-12. comparisonExpression2
+12. expression of  comparison
 ```json
 {
 	"books": [
@@ -1275,7 +1277,7 @@ $.books[?(@.price<15)]
 	}
 ]
 ```
-13. comparisonExpression3
+13. expression of  comparison
 ```json
 {
 	"books": [
@@ -1331,7 +1333,7 @@ $.books[?(@.price<=15)]
 	}
 ]
 ```
-14. equalityExpression
+14. expression of  equality
 ```json
 {
 	"books": [
@@ -1381,7 +1383,7 @@ $.books[?(@.price==15)]
 	}
 ]
 ```
-15. equalityExpression1
+15. expression of equality
 ```json
 {
 	"books": [
@@ -1437,7 +1439,7 @@ $.books[?(@.price!=15)]
 	}
 ]
 ```
-16. inExpression
+16. expression of in 
 ```json
 {
 	"books": [
@@ -1493,7 +1495,7 @@ $.books[?(@.title in ('Book 3','Book 2'))]
 	}
 ]
 ```
-17. logicalAndExpression
+17. expression of and logical
 ```json
 {
 	"books": [
@@ -1543,7 +1545,7 @@ JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
 	}
 ]
 ```
-18. logicalOrExpression
+18. expression of or logical
 ```json
 {
 	"books": [
@@ -1605,7 +1607,7 @@ $.books[?(@.title in ('Book 3','Book 2') ||@.isbn)]
 	}
 ]
 ```
-19. path 
+19. expression of path 
 ```json
 {
 	"store": {
