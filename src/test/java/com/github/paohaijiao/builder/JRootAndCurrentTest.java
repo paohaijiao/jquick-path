@@ -66,7 +66,7 @@ public class JRootAndCurrentTest {
     }
     @Test
     public void string() throws IOException {
-        JSONObject jsonObject = getData1();
+        JSONObject jsonObject = getData();
         JSONPathResult result = JSONPathQueryBuilder.from(jsonObject)
                 .document(JPath.fromRoot(JRoot.ROOT).property("store").property("books"))
                 .limit(10)
