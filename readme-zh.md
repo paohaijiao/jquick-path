@@ -1,4 +1,5 @@
 # jquick Path 文档
+简体中文 | [英文](./readme-en.md)
 ```string
       Jquick Path 是一种用于从JSON文档中提取数据的查询语言，类似于XPath在XML中的作用。  
 它通过路径表达式提供了一种简洁的方式来定位和提取JSON结构中的特定部分。 
@@ -63,9 +64,9 @@
      <artifactId>jquick-path</artifactId>
 </dependency>
 ```
-**[support function](https://github.com/paohaijiao/javelin?tab=readme-ov-file#jevaluator-function-reference "support function")**
+**[函数支持](https://github.com/paohaijiao/javelin?tab=readme-ov-file#jevaluator-function-reference "support function")**
 ## root
-1. root
+1. 根节点表达式
 ```json
 {
 	"store": {
@@ -114,7 +115,7 @@
 	}
 ]
 ```
-2. current
+2. 当前节点表达式
 ```json
 {
 	"store": {
@@ -164,7 +165,7 @@
 ]
 ```
 ## segment
-1. identifier
+1. 属性取值器
 ```json data
 {
 	"store": {
@@ -216,7 +217,7 @@
 	]
 }
 ```
-2. wildcard
+2. 通配符取值器
 ```json
 {
 	"store": {
@@ -266,7 +267,7 @@
 	}
 ]
 ```
-3. number subscript
+3. 数值下标取值器
 ```json
 {
 	"store": {
@@ -305,7 +306,7 @@
 	"price": 20
 }
 ```
-4. subscript
+4. 下标提取器
 ```json data
 {
 	"store": {
@@ -343,7 +344,7 @@ path:$.store.books[2].price
 ```json result
 20
 ```
-5. childIdentifier
+5. 子属性提取器
 ```json data
 {
 	"store": {
@@ -381,7 +382,7 @@ path:$.store.books..price
 ```json result
 [10, 15, 20]
 ```
-6. childSubscript
+6. 子元素下标提取器
 ```json data
 {
 	"store": {
@@ -427,7 +428,7 @@ $.store.books..[2]
 ```
 
 ## subscript
-1. number
+1. 数字
 ```json data
 {
 	"books": [
@@ -470,7 +471,7 @@ $.books[0]
 	"price": 10
 }
 ```
-2. wildcard
+2. 通配符
 ```json data
 {
 	"books": [
@@ -509,7 +510,7 @@ $.books[*]
 ```json result
 [{"title":"Book 1","author":"Author 1","price":10}, {"title":"Book 2","author":"Author 2","price":15}, {"title":"Book 3","author":"Author 3","price":20}]
 ```
-3. stringLiteral
+3. 字面量
 ```json data
 {
 	"books": [
@@ -549,7 +550,7 @@ $.extract['title']
 ```json
 Book 3
 ```
-4. slice
+4. 列表切片
 ```json data
 {
 	"books": [
@@ -594,7 +595,7 @@ $.books[0:1:2]
 	}
 ]
 ```
-5. filter
+5. 列表过滤
 ```json
 {
 	"books": [
@@ -640,7 +641,7 @@ $.books[?(@.title == 'Book 1')]
 	}
 ]
 ```
-6. expression
+6. 表达式提取
 ```json
 {
 	"books": [
@@ -684,8 +685,8 @@ $.books[0*1]
 	"price": 10
 }
 ```
-## expr
-1. expression of negation
+## 表达式
+1. 负数表达式
 ```json
 {
 	"books": [
@@ -781,7 +782,7 @@ $.books[2]
 	"isbn": true
 }
 ```
-3. expression of  additive
+3. 加法表达式
 ```json
 {
 	"books": [
@@ -829,7 +830,7 @@ $.books[1+1]
 	"isbn": true
 }
 ```
-4. expression of  additive
+4. 减法表达式
 ```json
 {
 	"books": [
@@ -907,7 +908,7 @@ $.books[1-1]
 	}
 }
 ```
-**[support function](https://github.com/paohaijiao/javelin?tab=readme-ov-file#jevaluator-function-reference "support function")**
+**[支持函数](https://github.com/paohaijiao/javelin?tab=readme-ov-file#jevaluator-function-reference "support function")**
 ```String
 $.books[(@.length())-1]
 ```
@@ -926,7 +927,7 @@ $.books[(@.length())-1]
 	"isbn": true
 }
 ```
-6. expression of   not
+6. 非表达式
 ```json
 {
 	"books": [
@@ -975,7 +976,7 @@ $.books[?(!@.isbn)]
 	}
 ]
 ```
-7. expression of   multiplicative
+7. 乘法表达式
 ```json
 {
 	"books": [
@@ -1023,7 +1024,7 @@ JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
 	"isbn": false
 }
 ```
-8. expression of   multiplicative
+8. 除法表达式
 ```json
 {
 	"books": [
@@ -1071,7 +1072,7 @@ $.books[1/1]
 	"isbn": false
 }
 ```
-9. expression of   multiplicative
+9. 取模表达式
 ```json
 {
 	"books": [
@@ -1119,7 +1120,7 @@ $.books[1%1]
 	"isbn": true
 }
 ```
-10. expression of comparison
+10. 大于比较表达式
 ```json
 {
 	"books": [
@@ -1169,7 +1170,7 @@ $.books[?(@.price>15)]
 	}
 ]
 ```
-11. expression of comparison
+11. 大于等于比较表达式
 ```json
 {
 	"books": [
@@ -1225,7 +1226,7 @@ $.books[?(@.price>=15)]
 	}
 ]
 ```
-12. expression of  comparison
+12. 小于比较表达式
 ```json
 {
 	"books": [
@@ -1276,7 +1277,7 @@ $.books[?(@.price<15)]
 	}
 ]
 ```
-13. expression of  comparison
+13. 小于等于比较表达式
 ```json
 {
 	"books": [
@@ -1332,7 +1333,7 @@ $.books[?(@.price<=15)]
 	}
 ]
 ```
-14. expression of  equality
+14. 等于表达式
 ```json
 {
 	"books": [
@@ -1382,7 +1383,7 @@ $.books[?(@.price==15)]
 	}
 ]
 ```
-15. expression of equality
+15. 不等于表达式
 ```json
 {
 	"books": [
@@ -1438,7 +1439,7 @@ $.books[?(@.price!=15)]
 	}
 ]
 ```
-16. expression of in 
+16. in 表达式
 ```json
 {
 	"books": [
@@ -1494,7 +1495,7 @@ $.books[?(@.title in ('Book 3','Book 2'))]
 	}
 ]
 ```
-17. expression of and logical
+17. 与表达式
 ```json
 {
 	"books": [
@@ -1544,7 +1545,7 @@ JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
 	}
 ]
 ```
-18. expression of or logical
+18. 或表达式
 ```json
 {
 	"books": [
@@ -1606,7 +1607,7 @@ $.books[?(@.title in ('Book 3','Book 2') ||@.isbn)]
 	}
 ]
 ```
-19. expression of path 
+19. 路径表达式
 ```json
 {
 	"store": {
