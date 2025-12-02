@@ -454,8 +454,9 @@ $.store.books..[2]
 ```
 
 ## subscript
-1. 数字
-```json data
+
+### 输入数据
+```json 
 {
 	"books": [
 		{
@@ -484,13 +485,15 @@ $.store.books..[2]
 ```String
 $.books[0]
 ```
+### java 代码(1. 数字)
 ```java
         JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
                 .document(JPath.fromRoot(JRoot.ROOT).property("books").segment(JSubscriptSegment.of(JSubscripts.index(0))))
                 .limit(10)
                 .execute();
 ```
-```json result
+### 输出数据
+```json 
 {
 	"title": "Book 1",
 	"author": "Author 1",
