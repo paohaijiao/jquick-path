@@ -365,8 +365,8 @@ path:$.store.books[2].price
 ```json 
 20
 ```
-5. 子属性提取器
-```json data
+### 输入数据
+```json 
 {
 	"store": {
 		"books": [
@@ -392,6 +392,7 @@ path:$.store.books[2].price
 ```String
 path:$.store.books..price
 ```
+### java 代码(5. 子属性提取器)
 ```java
       JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
                 .document(JPath.fromRoot(JRoot.ROOT)
@@ -400,7 +401,8 @@ path:$.store.books..price
                 .limit(10)
                 .execute();
 ```
-```json result
+### 输出数据
+```json 
 [10, 15, 20]
 ```
 6. 子元素下标提取器
