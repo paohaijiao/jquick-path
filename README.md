@@ -104,7 +104,7 @@
                 .limit(10)
                 .execute();
 ```
-```json result
+``` 输出结果
 [
 	{
 		"title": "Book 1",
