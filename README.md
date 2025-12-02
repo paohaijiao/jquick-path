@@ -74,7 +74,7 @@
 ```
 **[函数支持](https://github.com/paohaijiao/javelin?tab=readme-ov-file#jevaluator-function-reference "support function")**
 ## root
-### 1. 根节点表达式 输入数据
+### 输入数据
 
 ```json
 {
@@ -99,7 +99,7 @@
 	}
 }
 ```
-### java 代码
+### 1. 根节点表达式  代码
 ```java
         JSONPathResult result = JSONPathQueryBuilder.from(jsonObject)
                 .document(JPath.fromRoot(JRoot.ROOT).property("store").property("books"))
@@ -126,7 +126,7 @@
 	}
 ]
 ```
-2. 当前节点表达式
+### 输入数据
 ```json
 {
 	"store": {
@@ -150,13 +150,15 @@
 	}
 }
 ```
+### 2. 当前节点表达式 java 代码
 ```java
         JSONPathResult result = JSONPathQueryBuilder.from(jsonObject)
         .document(JPath.fromRoot(JRoot.CURRENT).property("store").property("books"))
         .limit(10)
         .execute();
 ```
-```json  result
+### 输出结果
+```json  
 [
 	{
 		"title": "Book 1",
