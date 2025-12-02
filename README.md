@@ -284,7 +284,7 @@
 	}
 ]
 ```
-3. 数值下标取值器
+### 输入数据
 ```json
 {
 	"store": {
@@ -308,6 +308,7 @@
 	}
 }
 ```
+### java代码(3. 数值下标取值器)
 ```java
         JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
                 .document(JPath.fromRoot(JRoot.ROOT)
@@ -316,7 +317,8 @@
                 .limit(10)
                 .execute();
 ```
-```json result
+### 输出数据
+```json 
 {
 	"title": "Book 3",
 	"author": "Author 3",
