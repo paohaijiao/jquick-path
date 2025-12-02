@@ -500,8 +500,9 @@ $.books[0]
 	"price": 10
 }
 ```
-2. 通配符
-```json data
+
+### 输入数据
+```json 
 {
 	"books": [
 		{
@@ -530,13 +531,15 @@ $.books[0]
 ```String
 $.books[*]
 ```
+### java 代码(2. 通配符)
 ```java
         JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
                 .document(JPath.fromRoot(JRoot.ROOT).property("books").segment(JSubscriptSegment.of(JSubscripts.wildcard())))
                 .limit(10)
                 .execute();
 ```
-```json result
+### 输出数据
+```json 
 [{"title":"Book 1","author":"Author 1","price":10}, {"title":"Book 2","author":"Author 2","price":15}, {"title":"Book 3","author":"Author 3","price":20}]
 ```
 3. 字面量
