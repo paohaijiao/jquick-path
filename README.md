@@ -178,7 +178,7 @@
 ]
 ```
 ## segment
-1. 属性取值器
+### 输入数据
 ```json data
 {
 	"store": {
@@ -203,13 +203,15 @@
 }
 
 ```
+### java 代码(属性取值器)
 ```java
         JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
                 .document(JPath.fromRoot(JRoot.ROOT).property("*"))
                 .limit(10)
                 .execute();
 ```
-```json result
+### 输出数据
+```json 
 {
 	"books": [
 		{
