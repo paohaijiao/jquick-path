@@ -1,9 +1,17 @@
 # jquick Path 文档
-简体中文 | [英文](./readme-en.md)
+简体中文 | [英文](./README-EN.md)
 ```string
       Jquick Path 是一种用于从JSON文档中提取数据的查询语言，类似于XPath在XML中的作用。  
 它通过路径表达式提供了一种简洁的方式来定位和提取JSON结构中的特定部分。 
 ```
+## 项目状态
+[![License](https://img.shields.io/badge/License-Apache%202.0-5470c6.svg)](https://github.com/paohaijiao/jquick-path/blob/master/LICENSE)
+[![Latest Version](https://img.shields.io/badge/Version-1.0.0-91cc75.svg)](https://github.com/paohaijiao/jquick-path/releases)
+[![Monthly Downloads](https://img.shields.io/badge/Downloads-Coming%20Soon-fac858.svg)](https://github.com/paohaijiao/jquick-path)
+[![Contributors](https://img.shields.io/badge/Contributors-1-3ba272.svg)](https://github.com/paohaijiao/jquick-path/graphs/contributors)
+[![Build Status](https://img.shields.io/badge/Build-Passing-ee6666.svg)](https://github.com/paohaijiao/jquick-path/actions)
+[![Test Coverage](https://img.shields.io/badge/Coverage-Coming%20Soon-73c0de.svg)](https://github.com/paohaijiao/jquick-path)
+[![Open Issues](https://img.shields.io/badge/Issues-Coming%20Soon-9a60b4.svg)](https://github.com/paohaijiao/jquick-path/issues)
 # 基础语法
 | expression           | description     |
 |----------------------|-----------------|
