@@ -80,7 +80,12 @@
 - **输入数据**：包含store对象，其下有books数组，数组内是包含title、author、price的书籍对象
 - **路径表达式逻辑**：从根节点开始，依次访问store属性和books属性 
 - **Java代码逻辑**：使用JSONPathQueryBuilder，从根节点构建路径，指定store和books属性，设置limit为10后执行查询
-- JSONPathQueryBuilder.from(jsonObject).document(JPath.fromRoot(JRoot.ROOT).property("store").property("books")).limit(10).execute();
+```string
+      JSONPathQueryBuilder.from(jsonObject)
+         .document(JPath.fromRoot(JRoot.ROOT)
+         .property("store").property("books"))
+         .limit(10).execute();
+```
 - 等价路径表达式:$.store.books
 - **输出结果**：books数组中的所有书籍对象
 
