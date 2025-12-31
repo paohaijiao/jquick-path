@@ -50,9 +50,10 @@
 **[函数支持](https://github.com/paohaijiao/javelin?tab=readme-ov-file#jevaluator-function-reference "support function")**
 ## root
 ### 1. 根节点表达式  代码
-```string
+
 # 路径表达式(参考代码样例)
 - 参考数据
+```string
 {
 	"store": {
 		"books": [
@@ -165,30 +166,33 @@
 - **输出结果**：books数组中索引为2的书籍对象（Book 3）
 
 ## 下标（subscript）相关示例
-- 参考json {
+- 参考json
+```string
+{
   "books": [
-  {
-  "title": "Book 1",
-  "author": "Author 1",
-  "price": 10
-  },
-  {
-  "title": "Book 2",
-  "author": "Author 2",
-  "price": 15
-  },
-  {
-  "title": "Book 3",
-  "author": "Author 3",
-  "price": 20
+     {
+        "title": "Book 1",
+        "author": "Author 1",
+        "price": 10
+     },
+     {
+        "title": "Book 2",
+        "author": "Author 2",
+        "price": 15
+     },
+     {
+        "title": "Book 3",
+        "author": "Author 3",
+        "price": 20
+     }
+     ],
+     "extract": {
+        "title": "Book 3",
+        "author": "Author 3",
+        "price": 20
+     }
   }
-  ],
-  "extract": {
-  "title": "Book 3",
-  "author": "Author 3",
-  "price": 20
-  }
-  }
+```
 ### 9. 数字下标
 - **输入数据**：包含books数组和extract对象的JSON数据，books数组有三本图书信息
 - **路径表达式逻辑**：获取books数组索引为0的元素
@@ -215,1699 +219,303 @@
 - **输入数据**：包含books数组和extract对象的JSON数据
 - **路径表达式逻辑**：获取extract对象的title属性值
 - **Java代码逻辑**：构建路径到extract对象后，使用JSubscripts.property("title")获取title属性，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("extract")
+    .segment(JSubscriptSegment.of(JSubscripts.property("title"))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.extract['title']
 - **输出结果**：extract对象的title属性值（Book 3）
 
 ### 12. 列表切片
 - **输入数据**：同属性提取的输入数据
 - **路径表达式逻辑**：对books数组进行切片，从索引0开始，到索引1结束，步长为2
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.slice(0,1,2)进行切片，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books").segment(JSubscriptSegment.of(JSubscripts.slice(0,1,2))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.books[0:1:2]
 - **输出结果**：切片片后的数组，包含索引为0的书籍对象（Book 1）
 
 ### 13. 列表过滤
 - **输入数据**：包含books数组和extract对象的JSON数据
 - **路径表达式逻辑**：过滤出books数组中title为'Book 1'的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.eq("title", "Book 1"))进行过滤，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books")
+    .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.eq("title", "Book 1")))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.books[?(@.title == 'Book 1')]
 - **输出结果**：符合条件的书籍对象（Book 1）
 
 ### 14. 表达式提取
 - **输入数据**：同列表过滤的输入数据
 - **路径表达式逻辑**：通过表达式0*1计算索引，获取books数组对应索引的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.expr("0*1")指定索引表达式，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books")
+    .segment(JSubscriptSegment.of(JSubscripts.expr("0*1"))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.books[0*1]
 - **输出结果**：books数组中索引为0的书籍对象（Book 1）
 
 ## 表达式相关示例
+- 参考json
+```string
+{
+	"books": [
+		{
+			"title": "Book 1",
+			"author": "Author 1",
+			"price": 10,
+			"isbn": true
+		},
+		{
+			"title": "Book 2",
+			"author": "Author 2",
+			"price": 15,
+			"isbn": false
+		},
+		{
+			"title": "Book 3",
+			"author": "Author 3",
+			"price": 20,
+			"isbn": true
+		}
+	],
+	"extract": {
+		"title": "Book 3",
+		"author": "Author 3",
+		"price": 20
+	}
+}
+```
 ### 15. 负数表达式
 - **输入数据**：包含books数组和extract对象的JSON数据，books数组有三本图书，含isbn属性
 - **路径表达式逻辑**：获取books数组中索引为-2的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.expr("-2")指定负数索引，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books")
+    .segment(JSubscriptSegment.of(JSubscripts.expr("-2"))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.books[-2]
 - **输出结果**：books数组中索引为-2的书籍对象（Book 1）
 
 ### 16. 数字表达式（正整数）
 - **输入数据**：同负数表达式的输入数据
 - **路径表达式逻辑**：获取books数组中索引为2的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.expr("2")指定索引，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books")
+    .segment(JSubscriptSegment.of(JSubscripts.expr("2"))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.books[2]
 - **输出结果**：books数组中索引为2的书籍对象（Book 3）
 
 ### 17. 加法表达式
 - **输入数据**：同负数表达式的输入数据
 - **路径表达式逻辑**：通过表达式1+1计算索引，获取books数组对应索引的元素
--** Java代码逻辑 **：构建路径到books数组后，使用JSubscripts.expr("1+1")指定加法表达式，执行查询
--** 输出结果 **：books数组中索引为2的书籍对象（Book 3）
+- ** Java代码逻辑 **：构建路径到books数组后，使用JSubscripts.expr("1+1")指定加法表达式，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books")
+    .segment(JSubscriptSegment.of(JSubscripts.expr("1+1"))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.books[1+1]
+- ** 输出结果 **：books数组中索引为2的书籍对象（Book 3）
 
 ### 18. 减法表达式
 -** 输入数据 **：同负数表达式的输入数据
 -** 路径表达式逻辑 **：通过表达式1-1计算索引，获取books数组对应索引的元素
 -** Java代码逻辑 **：构建路径到books数组后，使用JSubscripts.expr("1-1")指定减法法表达式，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books")
+    .segment(JSubscriptSegment.of(JSubscripts.expr("1-1"))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.books[1-1]
 -** 输出结果 **：books数组中索引为0的书籍对象（Book 1）
 
 ### 19. 嵌套函数表达式
 -** 输入数据 **：同负数表达式的输入数据
 -** 路径表达式逻辑 **：通过函数@.length()获取books数组长度，再减1得到索引，获取对应元素
 -** Java代码逻辑 **：构建路径到books数组后，使用JSubscripts.expr("(@.length())-1")指定包含函数的表达式，执行查询
--** 输出结果 **：books数组的最后一个元素（Book 3）
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books")
+    .segment(JSubscriptSegment.of(JSubscripts.expr("(@.length())-1"))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.books[(@.length())-1]
+- ** 输出结果 **：books数组的最后一个元素（Book 3）
 
 ### 20. 非表达式
 -** 输入数据 **：同负数表达式的输入数据
 -** 路径表达式逻辑 **：过滤出books数组中isbn为false的元素
 -** Java代码逻辑 **：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("!@.isbn"))进行非逻辑过滤，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books")
+    .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("!@.isbn")))))
+    .limit(10);
+- 等价路径表达式:$.books[?(!@.isbn)]
 -** 输出结果 **：isbn为false的书籍对象（Book 2）
 
 ### 21. 乘法表达式
 -** 输入数据 **：同负数表达式的输入数据
 -** 路径表达式逻辑 **：通过表达式1*1计算索引，获取books**数组对应索引的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.expr("1*1")指定乘法表达式，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books")
+    .segment(JSubscriptSegment.of(JSubscripts.expr("1*1"))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.books[1*1]
 - **输出结果**：books数组中索引为1的书籍对象（Book 2）
 
 ### 22. 除法表达式
 - **输入数据**：同负数表达式的输入数据
 - **路径表达式逻辑**：通过表达式1/1计算索引，获取books数组对应索引的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.expr("1/1")指定除法表达式，执行查询
+-  JSONPathQueryBuilder.from(jsonData)
+     .document(JPath.fromRoot(JRoot.ROOT).property("books")
+     .segment(JSubscriptSegment.of(JSubscripts.expr("1/1"))))
+     .limit(10)
+     .execute();
+- 等价路径表达式:$.books[1/1]
 - **输出结果**：books数组中索引为1的书籍对象（Book 2）
 
 ### 23. 取模表达式
 - **输入数据**：同负数表达式的输入数据
 - **路径表达式逻辑**：通过表达式1%1计算索引，获取books数组对应索引的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.expr("1%1")指定取模表达式，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books")
+    .segment(JSubscriptSegment.of(JSubscripts.expr("1%1"))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.books[1%1]
 - **输出结果**：books数组中索引为0的书籍对象（Book 1）
 
 ### 24. 大于比较表达式
 - **输入数据**：同负数表达式的输入数据
 - **路径表达式逻辑**：过滤出books数组中price大于15的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.price>15"))进行大于比较过滤，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books")
+    .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price>15")))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.books[?(@.price>15)]
 - **输出结果**：price大于15的书籍对象（Book 3）
 
 ### 25. 大于等于比较表达式
 - **输入数据**：同负数表达式的输入数据
 - **路径表达式逻辑**：过滤出books数组中price大于等于15的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.price>=15"))进行大于等于比较过滤，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books")
+    .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price>=15")))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.books[?(@.price>=15)]
 - **输出结果**：price大于等于15的书籍对象（Book 2、Book 3）
 
 ### 26. 小于比较表达式
 - **输入数据**：同负数表达式的输入数据
 - **路径表达式逻辑**：过滤出books数组中price小于15的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.price<15"))进行小于比较过滤，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books")
+    .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price<15")))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.books[?(@.price<15)]
 - **输出结果**：price小于15的书籍对象（Book 1）
 
 ### 27. 小于等于比较表达式
 - **输入数据**：同负数表达式的输入数据
 - **路径表达式逻辑**：过滤出books数组中price小于等于15的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.price<=15"))进行小于等于比较过滤，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+    .document(JPath.fromRoot(JRoot.ROOT).property("books")
+    .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price<=15")))))
+    .limit(10)
+    .execute();
+- 等价路径表达式:$.books[?(@.price<=15)]
 - **输出结果**：price小于等于15的书籍对象（Book 1、Book 2）
 
 ### 28. 等于表达式
 - **输入数据**：同负数表达式的输入数据
 - **路径表达式逻辑**：过滤出books数组中price等于15的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.price==15"))进行等于比较过滤，执行查询
+-  JSONPathQueryBuilder.from(jsonData)
+   .document(JPath.fromRoot(JRoot.ROOT).property("books")
+   .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price==15")))))
+   .limit(10)
+   .execute();
+- 等价路径表达式: $.books[?(@.price==15)]
 - **输出结果**：price等于15的书籍对象（Book 2）
 
 ### 29. 不等于表达式
 - **输入数据**：同负数表达式的输入数据
 - **路径表达式逻辑**：过滤出books数组中price不等于15的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.price!=15"))进行不等于比较过滤，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+  .document(JPath.fromRoot(JRoot.ROOT).property("books")
+  .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price!=15")))))
+  .limit(10)
+  .execute();
+- 等价路径表达式: $.books[?(@.price!=15)]
 - **输出结果**：price不等于15的书籍对象（Book 1、Book 3）
 
 ### 30. in表达式
 - **输入数据**：同负数表达式的输入数据
 - **路径表达式逻辑**：过滤出books数组中title在('Book 3','Book 2')中的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2')"))进行in逻辑过滤，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+  .document(JPath.fromRoot(JRoot.ROOT).property("books")
+  .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2')")))))
+  .limit(10)
+  .execute();
+- 等价路径表达式: $.books[?(@.title in ('Book 3','Book 2'))]
 - **输出结果**：title在指定范围内的书籍对象（Book 2、Book 3）
 
 ### 31. 与表达式
 - **输入数据**：同负数表达式的输入数据
 - **路径表达式逻辑**：过滤出books数组中title在('Book 3','Book 2')且isbn为true的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2') &&@.isbn"))进行与逻辑过滤，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+  .document(JPath.fromRoot(JRoot.ROOT).property("books")
+  .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2') &&@.isbn")))))
+  .limit(10)
+  .execute();
+- 等价路径表达式: $.books[?(@.title in ('Book 3','Book 2') &&@.isbn)]
 - **输出结果**：符合与逻辑条件的书籍对象（Book 3）
 
 ### 32. 或表达式
 - **输入数据**：同负数表达式的输入数据
 - **路径表达式逻辑**：过滤出books数组中title在('Book 3','Book 2')或isbn为true的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2') ||@.isbn"))进行或逻辑过滤，执行查询
+-  JSONPathQueryBuilder.from(jsonData)
+   .document(JPath.fromRoot(JRoot.ROOT).property("books")
+   .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2') ||@.isbn")))))
+   .limit(10)
+   .execute();
+- 等价路径表达式: $.books[?(@.title in ('Book 3','Book 2') ||@.isbn)]
 - **输出结果**：符合或逻辑条件的书籍对象（Book 1、Book 2、Book 3）
 
 ### 33. 路径表达式直接使用
 - **输入数据**：包含store对象及books数组的JSON数据
 - **路径表达式逻辑**：直接使用路径表达式"$.store.books..[2]"获取对应元素
 - **Java代码逻辑**：使用JSONPathQueryBuilder的path方法直接传入路径表达式，执行查询
+- JSONPathQueryBuilder.from(jsonData).path("$.store.books..[2]").limit(10).execute();
 - **输出结果**：books数组中索引为2的书籍对象（Book 3）
 ```
-```java
 
-
-
-```
-### 输入数据
-```json
-{
-	"store": {
-		"books": [
-			{
-				"title": "Book 1",
-				"author": "Author 1",
-				"price": 10
-			},
-			{
-				"title": "Book 2",
-				"author": "Author 2",
-				"price": 15
-			},
-			{
-				"title": "Book 3",
-				"author": "Author 3",
-				"price": 20
-			}
-		]
-	}
-}
-```
-### 2. 当前节点表达式 java 代码
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonObject)
-        .document(JPath.fromRoot(JRoot.CURRENT).property("store").property("books"))
-        .limit(10)
-        .execute();
-```
-### 输出结果
-```json  
-[
-	{
-		"title": "Book 1",
-		"author": "Author 1",
-		"price": 10
-	},
-	{
-		"title": "Book 2",
-		"author": "Author 2",
-		"price": 15
-	},
-	{
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-]
-```
-## segment
-### 输入数据
-```json data
-{
-	"store": {
-		"books": [
-			{
-				"title": "Book 1",
-				"author": "Author 1",
-				"price": 10
-			},
-			{
-				"title": "Book 2",
-				"author": "Author 2",
-				"price": 15
-			},
-			{
-				"title": "Book 3",
-				"author": "Author 3",
-				"price": 20
-			}
-		]
-	}
-}
-
-```
-### java 代码(属性取值器)
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("*"))
-                .limit(10)
-                .execute();
-```
-### 输出数据
-```json 
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20
-		}
-	]
-}
-```
-### 输入数据
-```json
-{
-	"store": {
-		"books": [
-			{
-				"title": "Book 1",
-				"author": "Author 1",
-				"price": 10
-			},
-			{
-				"title": "Book 2",
-				"author": "Author 2",
-				"price": 15
-			},
-			{
-				"title": "Book 3",
-				"author": "Author 3",
-				"price": 20
-			}
-		]
-	}
-}
-```
-### java代码(通配符取值器)
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT)
-                .property("store").property("books").property("*"))
-                .limit(10)
-                .execute();
-```
-### 输出数据
-```json 
-[
-	{
-		"title": "Book 1",
-		"author": "Author 1",
-		"price": 10
-	},
-	{
-		"title": "Book 2",
-		"author": "Author 2",
-		"price": 15
-	},
-	{
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-]
-```
-### 输入数据
-```json
-{
-	"store": {
-		"books": [
-			{
-				"title": "Book 1",
-				"author": "Author 1",
-				"price": 10
-			},
-			{
-				"title": "Book 2",
-				"author": "Author 2",
-				"price": 15
-			},
-			{
-				"title": "Book 3",
-				"author": "Author 3",
-				"price": 20
-			}
-		]
-	}
-}
-```
-### java代码(3. 数值下标取值器)
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT)
-                        .property("store").property("books")
-                        .segment(JSegments.subscript(JIndexSubscript.of(2))))
-                .limit(10)
-                .execute();
-```
-### 输出数据
-```json 
-{
-	"title": "Book 3",
-	"author": "Author 3",
-	"price": 20
-}
-```
-### 输入数据
-```json 
-{
-	"store": {
-		"books": [
-			{
-				"title": "Book 1",
-				"author": "Author 1",
-				"price": 10
-			},
-			{
-				"title": "Book 2",
-				"author": "Author 2",
-				"price": 15
-			},
-			{
-				"title": "Book 3",
-				"author": "Author 3",
-				"price": 20
-			}
-		]
-	}
-}
-```
-```String
-path:$.store.books[2].price 
-```
-### java 代码(4. 下标提取器)
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT)
-                        .property("store").property("books")
-                        .segment(JSegments.subscript(JIndexSubscript.of(2))).property("price"))
-                .limit(10)
-                .execute();
-```
-### 输出
-```json 
-20
-```
-### 输入数据
-```json 
-{
-	"store": {
-		"books": [
-			{
-				"title": "Book 1",
-				"author": "Author 1",
-				"price": 10
-			},
-			{
-				"title": "Book 2",
-				"author": "Author 2",
-				"price": 15
-			},
-			{
-				"title": "Book 3",
-				"author": "Author 3",
-				"price": 20
-			}
-		]
-	}
-}
-```
-```String
-path:$.store.books..price
-```
-### java 代码(5. 子属性提取器)
-```java
-      JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT)
-                        .property("store").property("books")
-                        .segment(JSegments.recursiveId("price")))
-                .limit(10)
-                .execute();
-```
-### 输出数据
-```json 
-[10, 15, 20]
-```
-### 输入数据
-
-```json data
-{
-	"store": {
-		"books": [
-			{
-				"title": "Book 1",
-				"author": "Author 1",
-				"price": 10
-			},
-			{
-				"title": "Book 2",
-				"author": "Author 2",
-				"price": 15
-			},
-			{
-				"title": "Book 3",
-				"author": "Author 3",
-				"price": 20
-			}
-		]
-	}
-}
-```
-```String
-$.store.books..[2]
-```
-### java 代码（6. 子元素下标提取器）
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT)
-                        .property("store").property("books")
-                        .segment(JSegments.recursiveSubscript(JIndexSubscript.of(2)))
-                ).limit(10)
-                .execute();
-```
-### 输出数据
-```json
-[
-	{
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-]
-```
-
-## subscript
-
-### 输入数据
-```json 
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[0]
-```
-### java 代码(1. 数字)
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books").segment(JSubscriptSegment.of(JSubscripts.index(0))))
-                .limit(10)
-                .execute();
-```
-### 输出数据
-```json 
-{
-	"title": "Book 1",
-	"author": "Author 1",
-	"price": 10
-}
-```
-
-### 输入数据
-```json 
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[*]
-```
-### java 代码(2. 通配符)
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books").segment(JSubscriptSegment.of(JSubscripts.wildcard())))
-                .limit(10)
-                .execute();
-```
-### 输出数据
-```json 
-[{"title":"Book 1","author":"Author 1","price":10}, {"title":"Book 2","author":"Author 2","price":15}, {"title":"Book 3","author":"Author 3","price":20}]
-```
-
-### 输入数据
-```json 
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.extract['title']
-```
-### java 代码(属性提取)
-```java
-       JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("extract")
-                        .segment(JSubscriptSegment.of(JSubscripts.property("title"))))
-                .limit(10)
-                .execute();
-```
-### 输出
-```json
-Book 3
-```
-4. 列表切片
-```json data
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[0:1:2]
-```
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books").segment(JSubscriptSegment.of(JSubscripts.slice(0,1,2))))
-                .limit(10)
-                .execute();
-```
-```json result
-[
-	{
-		"title": "Book 1",
-		"author": "Author 1",
-		"price": 10
-	}
-]
-```
-5. 列表过滤
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[?(@.title == 'Book 1')]
-```
-```java
-       JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                 .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.eq("title", "Book 1")))))
-                .limit(10)
-                .execute();
-```
-```json result
-[
-	{
-		"title": "Book 1",
-		"author": "Author 1",
-		"price": 10
-	}
-]
-```
-6. 表达式提取
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[0*1]
-```
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.expr("0*1"))))
-                .limit(10)
-                .execute();
-```
-```json
-{
-	"title": "Book 1",
-	"author": "Author 1",
-	"price": 10
-}
-```
-## 表达式
-1. 负数表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[-2]
-```
-```java
-JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-.document(JPath.fromRoot(JRoot.ROOT).property("books")
-.segment(JSubscriptSegment.of(JSubscripts.expr("-2"))))
-.limit(10)
-.execute();
-```
-```json
-{
-	"title": "Book 1",
-	"author": "Author 1",
-	"price": 10,
-	"isbn": true
-}
-```
-2. expression of negation bracket
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[2]
-```
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.expr("2"))))
-                .limit(10)
-                .execute();
-```
-```json
-{
-	"title": "Book 3",
-	"author": "Author 3",
-	"price": 20,
-	"isbn": true
-}
-```
-3. 加法表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[1+1]
-```
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.expr("1+1"))))
-                .limit(10)
-                .execute();
-```
-```json
-{
-	"title": "Book 3",
-	"author": "Auhor 3",
-	"price": 20,
-	"isbn": true
-}
-```
-4. 减法表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[1-1]
-```
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.expr("1-1"))))
-                .limit(10)
-                .execute();
-```
-```json
-{
-	"title": "Book 1",
-	"author": "Author 1",
-	"price": 10,
-	"isbn": true
-}
-```
-5. expression of  netest
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-**[支持函数](https://github.com/paohaijiao/javelin?tab=readme-ov-file#jevaluator-function-reference "support function")**
-```String
-$.books[(@.length())-1]
-```
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.expr("(@.length())-1"))))
-                .limit(10)
-                .execute();
-```
-```json
-{
-	"title": "Book 3",
-	"author": "Author 3",
-	"price": 20,
-	"isbn": true
-}
-```
-6. 非表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[?(!@.isbn)]
-```
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("!@.isbn")))))
-                .limit(10);
-```
-```json
-[
-	{
-		"title": "Book 2",
-		"author": "Author 2",
-		"price": 15,
-		"isbn": false
-	}
-]
-```
-7. 乘法表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[1*1]
-```
-```java
-JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-.document(JPath.fromRoot(JRoot.ROOT).property("books")
-.segment(JSubscriptSegment.of(JSubscripts.expr("1*1"))))
-.limit(10)
-.execute();
-```
-```json
-{
-	"title": "Book 2",
-	"author": "Author 2",
-	"price": 15,
-	"isbn": false
-}
-```
-8. 除法表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[1/1]
-```
-```java
-    JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.expr("1/1"))))
-                .limit(10)
-                .execute();
-```
-```json
-{
-	"title": "Book 2",
-	"author": "Author 2",
-	"price": 15,
-	"isbn": false
-}
-```
-9. 取模表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[1%1]
-```
-```java
-     JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.expr("1%1"))))
-                .limit(10)
-                .execute();
-```
-```json
-{
-	"title": "Book 1",
-	"author": "Author 1",
-	"price": 10,
-	"isbn": true
-}
-```
-10. 大于比较表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[?(@.price>15)]
-```
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price>15")))))
-                .limit(10)
-                .execute();
-```
-```json
-[
-	{
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20,
-		"isbn": true
-	}
-]
-```
-11. 大于等于比较表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[?(@.price>=15)]
-```
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price>=15")))))
-                .limit(10)
-                .execute();
-```
-```json
-[
-	{
-		"title": "Book 2",
-		"author": "Author 2",
-		"price": 15,
-		"isbn": false
-	},
-	{
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20,
-		"isbn": true
-	}
-]
-```
-12. 小于比较表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[?(@.price<15)]
-```
-```java
-        JSONObject jsonData=getData1();
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price<15")))))
-                .limit(10)
-                .execute();
-```
-```json
-[
-	{
-		"title": "Book 1",
-		"author": "Author 1",
-		"price": 10,
-		"isbn": true
-	}
-]
-```
-13. 小于等于比较表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[?(@.price<=15)]
-```
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price<=15")))))
-                .limit(10)
-                .execute();
-```
-```json
-[
-	{
-		"title": "Book 1",
-		"author": "Author 1",
-		"price": 10,
-		"isbn": true
-	},
-	{
-		"title": "Book 2",
-		"author": "Author 2",
-		"price": 15,
-		"isbn": false
-	}
-]
-```
-14. 等于表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[?(@.price==15)]
-```
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price==15")))))
-                .limit(10)
-                .execute();
-```
-```json
-[
-	{
-		"title": "Book 2",
-		"author": "Author 2",
-		"price": 15,
-		"isbn": false
-	}
-]
-```
-15. 不等于表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[?(@.price!=15)]
-```
-```java
-       JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.price!=15")))))
-                .limit(10)
-                .execute();
-```
-```json
-[
-	{
-		"title": "Book 1",
-		"author": "Author 1",
-		"price": 10,
-		"isbn": true
-	},
-	{
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20,
-		"isbn": true
-	}
-]
-```
-16. in 表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[?(@.title in ('Book 3','Book 2'))]
-```
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2')")))))
-                .limit(10)
-                .execute();
-```
-```json
-[
-	{
-		"title": "Book 2",
-		"author": "Author 2",
-		"price": 15,
-		"isbn": false
-	},
-	{
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20,
-		"isbn": true
-	}
-]
-```
-17. 与表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[?(@.title in ('Book 3','Book 2') &&@.isbn)]
-```
-```java
-JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-.document(JPath.fromRoot(JRoot.ROOT).property("books")
-.segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2') &&@.isbn")))))
-.limit(10)
-.execute();
-```
-```json
-[
-	{
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20,
-		"isbn": true
-	}
-]
-```
-18. 或表达式
-```json
-{
-	"books": [
-		{
-			"title": "Book 1",
-			"author": "Author 1",
-			"price": 10,
-			"isbn": true
-		},
-		{
-			"title": "Book 2",
-			"author": "Author 2",
-			"price": 15,
-			"isbn": false
-		},
-		{
-			"title": "Book 3",
-			"author": "Author 3",
-			"price": 20,
-			"isbn": true
-		}
-	],
-	"extract": {
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-}
-```
-```String
-$.books[?(@.title in ('Book 3','Book 2') ||@.isbn)]
-```
-```java
-        JSONPathResult result = JSONPathQueryBuilder.from(jsonData)
-                .document(JPath.fromRoot(JRoot.ROOT).property("books")
-                        .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2') ||@.isbn")))))
-                .limit(10)
-                .execute();
-```
-```json
-[
-	{
-		"title": "Book 1",
-		"author": "Author 1",
-		"price": 10,
-		"isbn": true
-	},
-	{
-		"title": "Book 2",
-		"author": "Author 2",
-		"price": 15,
-		"isbn": false
-	},
-	{
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20,
-		"isbn": true
-	}
-]
-```
-19. 路径表达式
-```json
-{
-	"store": {
-		"books": [
-			{
-				"title": "Book 1",
-				"author": "Author 1",
-				"price": 10
-			},
-			{
-				"title": "Book 2",
-				"author": "Author 2",
-				"price": 15
-			},
-			{
-				"title": "Book 3",
-				"author": "Author 3",
-				"price": 20
-			}
-		]
-	}
-}
-```
-```java
-      JSONPathResult result = JSONPathQueryBuilder.from(jsonData).path("$.store.books..[2]").limit(10)
-                .execute();
-```
-```json
-[
-	{
-		"title": "Book 3",
-		"author": "Author 3",
-		"price": 20
-	}
-]
-```
 # **捐献 ☕**
 
 感谢您使用这个开源项目！它完全免费并将持续维护，但开发者确实需要您的支持。
