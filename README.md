@@ -165,7 +165,30 @@
 - **输出结果**：books数组中索引为2的书籍对象（Book 3）
 
 ## 下标（subscript）相关示例
-
+- 参考json {
+  "books": [
+  {
+  "title": "Book 1",
+  "author": "Author 1",
+  "price": 10
+  },
+  {
+  "title": "Book 2",
+  "author": "Author 2",
+  "price": 15
+  },
+  {
+  "title": "Book 3",
+  "author": "Author 3",
+  "price": 20
+  }
+  ],
+  "extract": {
+  "title": "Book 3",
+  "author": "Author 3",
+  "price": 20
+  }
+  }
 ### 9. 数字下标
 - **输入数据**：包含books数组和extract对象的JSON数据，books数组有三本图书信息
 - **路径表达式逻辑**：获取books数组索引为0的元素
