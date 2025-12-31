@@ -49,9 +49,10 @@
 ```
 **[函数支持](https://github.com/paohaijiao/javelin?tab=readme-ov-file#jevaluator-function-reference "support function")**
 ## root
-### 输入数据
-
-```json
+### 1. 根节点表达式  代码
+```string
+# 路径表达式(参考代码样例)
+- 参考数据
 {
 	"store": {
 		"books": [
@@ -74,9 +75,6 @@
 	}
 }
 ```
-### 1. 根节点表达式  代码
-```string
-# 路径表达式(参考代码样例)
 ### 1. 根节点表达式
 - **输入数据**：包含store对象，其下有books数组，数组内是包含title、author、price的书籍对象
 - **路径表达式逻辑**：从根节点开始，依次访问store属性和books属性 
@@ -118,37 +116,76 @@
 - **输入数据**：包含store对象及books数组的JSON数据
 - **路径表达式逻辑**：访问store下的books数组，获取索引为2的元素
 - **Java代码逻辑**：构建路径到books数组后，通过segment方法指定下标为2的元素，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT)
+                .property("store").property("books")
+                .segment(JSegments.subscript(JIndexSubscript.of(2))))
+                .limit(10)
+                .execute();
+- 等价路径表达式:$.store.booksp[2]
 - **输出结果**：books数组中索引为2的书籍对象（Book 3）
 
 ### 6. 下标提取器（属性值）
 - **输入数据**：同数值下标取值器的输入数据
 - **路径表达式逻辑**：获取books数组索引为2的元素的price属性值
 - **Java代码逻辑**：在获取到索引为2的元素后，继续指定property("price")获取价格属性，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT)
+                .property("store").property("books")
+                .segment(JSegments.subscript(JIndexSubscript.of(2))).property("price"))
+                .limit(10)
+                .execute();
+- 等价路径表达式:$.store.books[2].price 
 - **输出结果**：索引为2的书籍的价格（20）
 
 ### 7. 子属性提取器（递归搜索）
 - **输入数据**：包含store对象及books数组的JSON数据
 - **路径表达式逻辑**：递归递归方式搜索books数组下所有的price属性值
 - **Java代码逻辑**：构建路径到books数组后，使用segment(JSegments.recursiveId("price"))递归获取price属性，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT)
+                .property("store").property("books")
+                .segment(JSegments.recursiveId("price")))
+                .limit(10)
+                .execute();
+- 等价路径表达式:$.store.books..price
 - **输出结果**：所有书籍的价格组成的数组（[10, 15, 20]）
 
 ### 8. 子元素下标提取器（递归下标）
 - **输入数据**：同子属性提取器的输入数据
 - **路径表达式逻辑**：递归搜索books数组下索引为2的元素
 - **Java代码逻辑**：构建路径到books数组后，通过segment(JSegments.recursiveSubscript(JIndexSubscript.of(2)))获取指定下标元素，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT)
+                .property("store").property("books")
+                .segment(JSegments.recursiveSubscript(JIndexSubscript.of(2)))
+                ).limit(10)
+                .execute();
+- 等价路径表达式:$.store.books..[2]
 - **输出结果**：books数组中索引为2的书籍对象（Book 3）
 
 ## 下标（subscript）相关示例
+
 ### 9. 数字下标
 - **输入数据**：包含books数组和extract对象的JSON数据，books数组有三本图书信息
 - **路径表达式逻辑**：获取books数组索引为0的元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.index(0)指定下标，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books").segment(JSubscriptSegment.of(JSubscripts.index(0))))
+                .limit(10)
+                .execute();
+- 等价路径表达式:$.books[0]
 - **输出结果**：books数组中索引为0的书籍对象（Book 1）
 
 ### 10. 通配符下标
 - **输入数据**：同数字下标的的输入数据
 - **路径表达式逻辑**：获取books数组的所有元素
 - **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.wildcard()获取所有元素，执行查询
+- JSONPathQueryBuilder.from(jsonData)
+                .document(JPath.fromRoot(JRoot.ROOT).property("books").segment(JSubscriptSegment.of(JSubscripts.wildcard())))
+                .limit(10)
+                .execute();
+- 等价路径表达式:$.books[*]
 - **输出结果**：books数组中的所有书籍对象
 
 ### 11. 属性提取（对象属性）
