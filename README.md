@@ -44,7 +44,7 @@
 <dependency>
   <groupId>io.github.paohaijiao</groupId>
   <artifactId>jquick-path</artifactId>
-  <version>1.0.0</version>
+  <version>最新版本</version>
 </dependency>
 ```
 **[函数支持](https://github.com/paohaijiao/javelin?tab=readme-ov-file#jevaluator-function-reference "support function")**
