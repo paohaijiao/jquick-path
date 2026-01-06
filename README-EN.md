@@ -1,9 +1,9 @@
-# jquick Path 文档
+# jquick Path document
 [简体中文](./README.md) | ENGLISH
 
-> Jquick Path 是一种用于从JSON文档中提取数据的查询语言，类似于XPath在XML中的作用。  
-> 它通过路径表达式提供了一种简洁的方式来定位和提取JSON结构中的特定部分。
-## 项目状态
+> Jquick Path is a query language used to extract data from JSON documents, similar to the role of XPath in XML.   
+> It provides a concise way to locate and extract specific parts of JSON structures through path expressions.
+## Project Status
 [![License](https://img.shields.io/badge/License-Apache%202.0-5470c6.svg)](https://github.com/paohaijiao/jquick-path/blob/master/LICENSE)
 [![Latest Version](https://img.shields.io/badge/Version-1.0.0-91cc75.svg)](https://github.com/paohaijiao/jquick-path/releases)
 [![Monthly Downloads](https://img.shields.io/badge/Downloads-Coming%20Soon-fac858.svg)](https://github.com/paohaijiao/jquick-path)
@@ -12,18 +12,18 @@
 [![Test Coverage](https://img.shields.io/badge/Coverage-Coming%20Soon-73c0de.svg)](https://github.com/paohaijiao/jquick-path)
 [![Open Issues](https://img.shields.io/badge/Issues-Coming%20Soon-9a60b4.svg)](https://github.com/paohaijiao/jquick-path/issues)
 
-## 📖 目录
-- [基础语法](#基础语法)
-- [简介与安装](#简介与安装)
-- [根节点](#根节点)
-- [段](#段)
-- [下标](#下标)
-- [表达式](#表达式)
-- [捐献支持](#捐献支持)
+## 📖 Catalogue
+- [BasicSyntax](#BasicSyntax)
+- [Introduction and Installation](#IntroductionAndInstallation)
+- [Root](#Root)
+- [Paragraph](#Paragraph)
+- [Subscript](#Subscript)
+- [Expression](#Expression)
+- [DonationSupport](#DonationSupport)
 
 ---
 
-## 🧠 基础语法
+## 🧠 BasicSyntax
 
 | 表达式 | 说明 |
 |--------|------|
