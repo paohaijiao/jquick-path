@@ -25,21 +25,21 @@
 
 ## 🧠 BasicSyntax
 
-| 表达式 | 说明 |
-|--------|------|
-| **S** | 根对象 |
-| **. 或 [ ]** | 子操作符，用于访问对象属性 |
-| **...** | 递归下降，搜索所有子元素 |
-| **\*** | 通配符，匹配所有对象或数组元素 |
-| **[ ]** | 下标操作符，用于数组索引或过滤 |
-| **[start:end:step]** | 数组切片操作 |
-| **?()** | 过滤表达式 |
-| **@** | 当前节点，用于过滤表达式 |
+| Expression           | Description |
+|----------------------|-------------|
+| **$**                | Root object |
+| **. or [ ]**         | Child operator, used to access object properties |
+| **...**              | Recursive descent, searches all child elements |
+| **\***               | Wildcard, matches all objects or array elements |
+| **[ ]**              | Subscript operator, used for array indexing or filtering |
+| **[start:end:step]** | Array slice operation |
+| **?()**              | Filter expression |
+| **@**                | Current node, used in filter expressions |
 
 ---
-## 🚀 简介与安装
+## 🚀 Introduction and Installation
 
-### Maven 依赖
+### Maven Dependency
 ```xml
 <dependency>
   <groupId>io.github.paohaijiao</groupId>
@@ -47,12 +47,12 @@
   <version>${latest.version}</version>
 </dependency>
 ```
-**[函数支持](https://github.com/paohaijiao/javelin?tab=readme-ov-file#jevaluator-function-reference "support function")**
+**[Function Support](https://github.com/paohaijiao/javelin?tab=readme-ov-file#jevaluator-function-reference "support function")**
 ## root
-### 1. 根节点表达式  代码
+### 1. Root Node Expression  Code
 
-# 路径表达式(参考代码样例)
-- 参考数据
+# Path Expression (Refer to Code Sample)
+- Reference Data
 ```string
 {
 	"store": {
@@ -76,18 +76,18 @@
 	}
 }
 ```
-### 1. 根节点表达式
-- **输入数据**：包含store对象，其下有books数组，数组内是包含title、author、price的书籍对象
-- **路径表达式逻辑**：从根节点开始，依次访问store属性和books属性
-- **Java代码逻辑**：使用JSONPathQueryBuilder，从根节点构建路径，指定store和books属性，设置limit为10后执行查询
+### 1. Root Node Expression
+- **Input Data**: Contains a `store` object, under which there is a `books` array, and the array contains book objects with `title`, `author`, and `price` attributes.
+- **Path Expression Logic**: Starting from the root node, access the `store` attribute and `books` attribute in sequence.
+- **Java Code Logic**: Use `JSONPathQueryBuilder` to build a path from the root node, specify the `store` and `books` attributes, set the `limit` to 10, and then execute the query.
 ```string
       JSONPathQueryBuilder.from(jsonObject)
          .document(JPath.fromRoot(JRoot.ROOT)
          .property("store").property("books"))
          .limit(10).execute();
 ```
-- 等价路径表达式:$.store.books
-- **输出结果**：books数组中的所有书籍对象
+- Equivalent Path Expression: $.store.books
+- **Output Result**: All book objects in the `books` array
 
 ### 2. 当前节点表达式
 - **输入数据**：同根节点表达式的输入数据
