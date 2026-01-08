@@ -89,36 +89,36 @@
 - Equivalent Path Expression: $.store.books
 - **Output Result**: All book objects in the `books` array
 
-### 2. 当前节点表达式
-- **输入数据**：同根节点表达式的输入数据
-- **路径表达式逻辑**：从当前节点开始，依次访问store属性和books属性
-- **Java代码逻辑**：与根节点表达式类似，区别在于路径从当前节点（JRoot.CURRENT）开始构建
+### 2. Current Node Expression
+- **Input Data**: Same as the input data of the Root Node Expression
+- **Path Expression Logic**: Starting from the current node, access the `store` attribute and `books` attribute in sequence.
+- **Java Code Logic**: Similar to the Root Node Expression, the difference is that the path is built starting from the current node (`JRoot.CURRENT`).
 ```string
     JSONPathQueryBuilder.from(jsonObject)
     .document(JPath.fromRoot(JRoot.CURRENT)
     .property("store").property("books"))
     .limit(10).execute();
 ```
-- 等价路径表达式:@.store.books
-- **输出结果**：与根节点表达式输出结果相同，均为books数组中的所有书籍对象
+- Equivalent Path Expression: @.store.books
+- **Output Result**: Same as the output result of the Root Node Expression, both are all book objects in the `books` array
 
-## 段（segment）相关示例
-### 3. 属性取值器（通配符*）
-- **输入数据**：包含store对象，其下有books数组的JSON数据
-- **路径表达式逻辑**：从根节点开始，使用通配符*获取根节点下的所有属性
-- **Java代码逻辑**：构建从根节点出发，使用property("*")获取所有属性的路径，执行查询
+## Segment-related Examples
+### 3. Property Accessor (Wildcard *)
+- **Input Data**: JSON data containing a `store` object with a `books` array underneath it
+- **Path Expression Logic**: Starting from the root node, use the wildcard `*` to get all attributes under the root node
+- **Java Code Logic**: Build a path starting from the root node, use `property("*")` to get all attributes, and execute the query
 ```string
    JSONPathQueryBuilder.from(jsonData)
    .document(JPath.fromRoot(JRoot.ROOT)
    .property("*")).limit(10).execute();
 ```
-- 等价路径表达式:$.*
-- **输出结果**：根节点下的store对象中的books数组
+- Equivalent Path Expression: $.*
+- **Output Result**: The `books` array in the `store` object under the root node
 
-### 4. 通配符取值器（数组元素）
-- **输入数据**：同属性取值器的输入数据
-- **路径表达式逻辑**：从根节点开始，依次访问store、books属性，再用通配符*获取books数组的所有元素
-- **Java代码逻辑**：构建路径依次指定store、books属性，再通过property("*")获取数组所有元素，执行查询
+### 4. Wildcard Accessor (Array Elements)
+- **Input Data**: Same as the input data of the Property Accessor
+- **Path Expression Logic**: Starting from the root node, access the `store` and `books` attributes in sequence, then use the wildcard `*` to get all elements of the `books` array
+- **Java Code Logic**: Build a path to specify the `store` and `books` attributes in sequence, then get all elements of the array through `property("*")`, and execute the query
 ```string
   JSONPathQueryBuilder.from(jsonData)
                 .document(JPath.fromRoot(JRoot.ROOT)
@@ -126,13 +126,13 @@
                 .limit(10)
                 .execute();
 ```
-- 等价路径表达式:$.store.books.*
-- **输出结果**：books数组中的所有书籍对象
+- Equivalent Path Expression: $.store.books.*
+- **Output Result**: All book objects in the `books` array
 
-### 5. 数值下标取值器
-- **输入数据**：包含store对象及books数组的JSON数据
-- **路径表达式逻辑**：访问store下的books数组，获取索引为2的元素
-- **Java代码逻辑**：构建路径到books数组后，通过segment方法指定下标为2的元素，执行查询
+### 5. Numeric Subscript Accessor
+- **Input Data**: JSON data containing a `store` object and a `books` array
+- **Path Expression Logic**: Access the `books` array under `store` and get the element with index 2
+- **Java Code Logic**: After building the path to the `books` array, specify the element with subscript 2 through the `segment` method, and execute the query
 ```string
 - JSONPathQueryBuilder.from(jsonData)
                 .document(JPath.fromRoot(JRoot.ROOT)
@@ -141,13 +141,13 @@
                 .limit(10)
                 .execute();
 ```
-- 等价路径表达式:$.store.booksp[2]
-- **输出结果**：books数组中索引为2的书籍对象（Book 3）
+- Equivalent Path Expression: $.store.books[2]
+- **Output Result**: The book object with index 2 in the `books` array (Book 3)
 
-### 6. 下标提取器（属性值）
-- **输入数据**：同数值下标取值器的输入数据
-- **路径表达式逻辑**：获取books数组索引为2的元素的price属性值
-- **Java代码逻辑**：在获取到索引为2的元素后，继续指定property("price")获取价格属性，执行查询
+### 6. Subscript Extractor (Property Value)
+- **Input Data**: Same as the input data of the Numeric Subscript Accessor
+- **Path Expression Logic**: Get the `price` property value of the element with index 2 in the `books` array
+- **Java Code Logic**: After getting the element with index 2, continue to specify `property("price")` to get the price attribute, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
                 .document(JPath.fromRoot(JRoot.ROOT)
@@ -156,13 +156,13 @@
                 .limit(10)
                 .execute();
 ```
-- 等价路径表达式:$.store.books[2].price
-- **输出结果**：索引为2的书籍的价格（20）
+- Equivalent Path Expression: $.store.books[2].price
+- **Output Result**: The price of the book with index 2 (20)
 
-### 7. 子属性提取器（递归搜索）
-- **输入数据**：包含store对象及books数组的JSON数据
-- **路径表达式逻辑**：递归递归方式搜索books数组下所有的price属性值
-- **Java代码逻辑**：构建路径到books数组后，使用segment(JSegments.recursiveId("price"))递归获取price属性，执行查询
+### 7. Subproperty Extractor (Recursive Search)
+- **Input Data**: JSON data containing a `store` object and a `books` array
+- **Path Expression Logic**: Recursively search for all `price` property values under the `books` array
+- **Java Code Logic**: After building the path to the `books` array, use `segment(JSegments.recursiveId("price"))` to recursively get the `price` attribute, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
                 .document(JPath.fromRoot(JRoot.ROOT)
@@ -171,13 +171,13 @@
                 .limit(10)
                 .execute();
 ```
-- 等价路径表达式:$.store.books..price
-- **输出结果**：所有书籍的价格组成的数组（[10, 15, 20]）
+- Equivalent Path Expression: $.store.books..price
+- **Output Result**: An array composed of the prices of all books ([10, 15, 20])
 
-### 8. 子元素下标提取器（递归下标）
-- **输入数据**：同子属性提取器的输入数据
-- **路径表达式逻辑**：递归搜索books数组下索引为2的元素
-- **Java代码逻辑**：构建路径到books数组后，通过segment(JSegments.recursiveSubscript(JIndexSubscript.of(2)))获取指定下标元素，执行查询
+### 8. Subelement Subscript Extractor (Recursive Subscript)
+- **Input Data**: Same as the input data of the Subproperty Extractor
+- **Path Expression Logic**: Recursively search for the element with index 2 under the `books` array
+- **Java Code Logic**: After building the path to the `books` array, get the element with the specified subscript through `segment(JSegments.recursiveSubscript(JIndexSubscript.of(2)))`, and execute the query
 ```string
 JSONPathQueryBuilder.from(jsonData)
                 .document(JPath.fromRoot(JRoot.ROOT)
@@ -186,11 +186,11 @@ JSONPathQueryBuilder.from(jsonData)
                 ).limit(10)
                 .execute();
 ```
-- 等价路径表达式:$.store.books..[2]
-- **输出结果**：books数组中索引为2的书籍对象（Book 3）
+- Equivalent Path Expression: $.store.books..[2]
+- **Output Result**: The book object with index 2 in the `books` array (Book 3)
 
-## 下标（subscript）相关示例
-- 参考json
+## Subscript-related Examples
+- Reference JSON
 ```string
 {
   "books": [
@@ -217,10 +217,10 @@ JSONPathQueryBuilder.from(jsonData)
      }
   }
 ```
-### 9. 数字下标
-- **输入数据**：包含books数组和extract对象的JSON数据，books数组有三本图书信息
-- **路径表达式逻辑**：获取books数组索引为0的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.index(0)指定下标，执行查询
+### 9. Numeric Subscript
+- **Input Data**: JSON data containing a `books` array and an `extract` object, with the `books` array having information for three books
+- **Path Expression Logic**: Get the element with index 0 in the `books` array
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.index(0)` to specify the subscript, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
                 .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -228,26 +228,26 @@ JSONPathQueryBuilder.from(jsonData)
                 .limit(10)
                 .execute();
 ```
-- 等价路径表达式:$.books[0]
-- **输出结果**：books数组中索引为0的书籍对象（Book 1）
+- Equivalent Path Expression: $.books[0]
+- **Output Result**: The book object with index 0 in the `books` array (Book 1)
 
-### 10. 通配符下标
-- **输入数据**：同数字下标的的输入数据
-- **路径表达式逻辑**：获取books数组的所有元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.wildcard()获取所有元素，执行查询
+### 10. Wildcard Subscript
+- **Input Data**: Same as the input data of the Numeric Subscript
+- **Path Expression Logic**: Get all elements of the `books` array
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.wildcard()` to get all elements, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
                 .document(JPath.fromRoot(JRoot.ROOT).property("books").segment(JSubscriptSegment.of(JSubscripts.wildcard())))
                 .limit(10)
                 .execute();
 ```
-- 等价路径表达式:$.books[*]
-- **输出结果**：books数组中的所有书籍对象
+- Equivalent Path Expression: $.books[*]
+- **Output Result**: All book objects in the `books` array
 
-### 11. 属性提取（对象属性）
-- **输入数据**：包含books数组和extract对象的JSON数据
-- **路径表达式逻辑**：获取extract对象的title属性值
-- **Java代码逻辑**：构建路径到extract对象后，使用JSubscripts.property("title")获取title属性，执行查询
+### 11. Property Extraction (Object Property)
+- **Input Data**: JSON data containing a `books` array and an `extract` object
+- **Path Expression Logic**: Get the `title` property value of the `extract` object
+- **Java Code Logic**: After building the path to the `extract` object, use `JSubscripts.property("title")` to get the `title` attribute, and execute the query
 ```string
    JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("extract")
@@ -255,26 +255,26 @@ JSONPathQueryBuilder.from(jsonData)
     .limit(10)
     .execute();
 ```
-- 等价路径表达式:$.extract['title']
-- **输出结果**：extract对象的title属性值（Book 3）
+- Equivalent Path Expression: $.extract['title']
+- **Output Result**: The `title` property value of the `extract` object (Book 3)
 
-### 12. 列表切片
-- **输入数据**：同属性提取的输入数据
-- **路径表达式逻辑**：对books数组进行切片，从索引0开始，到索引1结束，步长为2
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.slice(0,1,2)进行切片，执行查询
+### 12. List Slicing
+- **Input Data**: Same as the input data of the Property Extraction
+- **Path Expression Logic**: Slice the `books` array, starting from index 0, ending at index 1, with a step size of 2
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.slice(0,1,2)` to perform slicing, and execute the query
 ```string
   JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books").segment(JSubscriptSegment.of(JSubscripts.slice(0,1,2))))
     .limit(10)
     .execute();
 ```
-- 等价路径表达式:$.books[0:1:2]
-- **输出结果**：切片片后的数组，包含索引为0的书籍对象（Book 1）
+- Equivalent Path Expression: $.books[0:1:2]
+- **Output Result**: The sliced array containing the book object with index 0 (Book 1)
 
-### 13. 列表过滤
-- **输入数据**：包含books数组和extract对象的JSON数据
-- **路径表达式逻辑**：过滤出books数组中title为'Book 1'的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.eq("title", "Book 1"))进行过滤，执行查询
+### 13. List Filtering
+- **Input Data**: JSON data containing a `books` array and an `extract` object
+- **Path Expression Logic**: Filter out the elements in the `books` array where the `title` is 'Book 1'
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.filter(JPredicate.eq("title", "Book 1"))` to perform filtering, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -282,13 +282,13 @@ JSONPathQueryBuilder.from(jsonData)
     .limit(10)
     .execute();
 ```
-- 等价路径表达式:$.books[?(@.title == 'Book 1')]
-- **输出结果**：符合条件的书籍对象（Book 1）
+- Equivalent Path Expression: $.books[?(@.title == 'Book 1')]
+- **Output Result**: The book object that meets the criteria (Book 1)
 
-### 14. 表达式提取
-- **输入数据**：同列表过滤的输入数据
-- **路径表达式逻辑**：通过表达式0*1计算索引，获取books数组对应索引的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.expr("0*1")指定索引表达式，执行查询
+### 14. Expression Extraction
+- **Input Data**: Same as the input data of the List Filtering
+- **Path Expression Logic**: Calculate the index through the expression `0*1`, and get the element of the `books` array at the corresponding index
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.expr("0*1")` to specify the index expression, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -296,11 +296,11 @@ JSONPathQueryBuilder.from(jsonData)
     .limit(10)
     .execute();
 ```
-- 等价路径表达式:$.books[0*1]
-- **输出结果**：books数组中索引为0的书籍对象（Book 1）
+- Equivalent Path Expression: $.books[0*1]
+- **Output Result**: The book object with index 0 in the `books` array (Book 1)
 
-## 表达式相关示例
-- 参考json
+## Expression-related Examples
+- Reference JSON
 ```string
 {
 	"books": [
@@ -330,10 +330,10 @@ JSONPathQueryBuilder.from(jsonData)
 	}
 }
 ```
-### 15. 负数表达式
-- **输入数据**：包含books数组和extract对象的JSON数据，books数组有三本图书，含isbn属性
-- **路径表达式逻辑**：获取books数组中索引为-2的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.expr("-2")指定负数索引，执行查询
+### 15. Negative Number Expression
+- **Input Data**: JSON data containing a `books` array and an `extract` object, with the `books` array having three books including the `isbn` attribute
+- **Path Expression Logic**: Get the element with index -2 in the `books` array
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.expr("-2")` to specify the negative index, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -341,13 +341,13 @@ JSONPathQueryBuilder.from(jsonData)
     .limit(10)
     .execute();
 ```
-- 等价路径表达式:$.books[-2]
-- **输出结果**：books数组中索引为-2的书籍对象（Book 1）
+- Equivalent Path Expression: $.books[-2]
+- **Output Result**: The book object with index -2 in the `books` array (Book 1)
 
-### 16. 数字表达式（正整数）
-- **输入数据**：同负数表达式的输入数据
-- **路径表达式逻辑**：获取books数组中索引为2的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.expr("2")指定索引，执行查询
+### 16. Numeric Expression (Positive Integer)
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Get the element with index 2 in the `books` array
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.expr("2")` to specify the index, and execute the query
 ```string
   JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -355,13 +355,13 @@ JSONPathQueryBuilder.from(jsonData)
     .limit(10)
     .execute();
 ```
-- 等价路径表达式:$.books[2]
-- **输出结果**：books数组中索引为2的书籍对象（Book 3）
+- Equivalent Path Expression: $.books[2]
+- **Output Result**: The book object with index 2 in the `books` array (Book 3)
 
-### 17. 加法表达式
-- **输入数据**：同负数表达式的输入数据
-- **路径表达式逻辑**：通过表达式1+1计算索引，获取books数组对应索引的元素
-- ** Java代码逻辑 **：构建路径到books数组后，使用JSubscripts.expr("1+1")指定加法表达式，执行查询
+### 17. Addition Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Calculate the index through the expression `1+1`, and get the element of the `books` array at the corresponding index
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.expr("1+1")` to specify the addition expression, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -369,13 +369,13 @@ JSONPathQueryBuilder.from(jsonData)
     .limit(10)
     .execute();
 ```
-- 等价路径表达式:$.books[1+1]
-- ** 输出结果 **：books数组中索引为2的书籍对象（Book 3）
+- Equivalent Path Expression: $.books[1+1]
+- **Output Result**: The book object with index 2 in the `books` array (Book 3)
 
-### 18. 减法表达式
--** 输入数据 **：同负数表达式的输入数据
--** 路径表达式逻辑 **：通过表达式1-1计算索引，获取books数组对应索引的元素
--** Java代码逻辑 **：构建路径到books数组后，使用JSubscripts.expr("1-1")指定减法法表达式，执行查询
+### 18. Subtraction Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Calculate the index through the expression `1-1`, and get the element of the `books` array at the corresponding index
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.expr("1-1")` to specify the subtraction expression, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -383,13 +383,13 @@ JSONPathQueryBuilder.from(jsonData)
     .limit(10)
     .execute();
  ```
-- 等价路径表达式:$.books[1-1]
-  -** 输出结果 **：books数组中索引为0的书籍对象（Book 1）
+- Equivalent Path Expression: $.books[1-1]
+- **Output Result**: The book object with index 0 in the `books` array (Book 1)
 
-### 19. 嵌套函数表达式
--** 输入数据 **：同负数表达式的输入数据
--** 路径表达式逻辑 **：通过函数@.length()获取books数组长度，再减1得到索引，获取对应元素
--** Java代码逻辑 **：构建路径到books数组后，使用JSubscripts.expr("(@.length())-1")指定包含函数的表达式，执行查询
+### 19. Nested Function Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Get the length of the `books` array through the function `@.length()`, then subtract 1 to get the index and retrieve the corresponding element
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.expr("(@.length())-1")` to specify the expression containing the function, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -397,26 +397,26 @@ JSONPathQueryBuilder.from(jsonData)
     .limit(10)
     .execute();
 ```
-- 等价路径表达式:$.books[(@.length())-1]
-- ** 输出结果 **：books数组的最后一个元素（Book 3）
+- Equivalent Path Expression: $.books[(@.length())-1]
+- **Output Result**: The last element of the `books` array (Book 3)
 
-### 20. 非表达式
--** 输入数据 **：同负数表达式的输入数据
--** 路径表达式逻辑 **：过滤出books数组中isbn为false的元素
--** Java代码逻辑 **：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("!@.isbn"))进行非逻辑过滤，执行查询
+### 20. NOT Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Filter out the elements in the `books` array where the `isbn` is false
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.filter(JPredicate.custom("!@.isbn"))` to perform NOT logic filtering, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books")
     .segment(JSubscriptSegment.of(JSubscripts.filter(JPredicate.custom("!@.isbn")))))
     .limit(10);
 ```
-- 等价路径表达式:$.books[?(!@.isbn)]
-  -** 输出结果 **：isbn为false的书籍对象（Book 2）
+- Equivalent Path Expression: $.books[?(!@.isbn)]
+- **Output Result**: The book object where `isbn` is false (Book 2)
 
-### 21. 乘法表达式
--** 输入数据 **：同负数表达式的输入数据
--** 路径表达式逻辑 **：通过表达式1*1计算索引，获取books**数组对应索引的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.expr("1*1")指定乘法表达式，执行查询
+### 21. Multiplication Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Calculate the index through the expression `1*1`, and get the element of the `books` array at the corresponding index
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.expr("1*1")` to specify the multiplication expression, and execute the query
 ```string
   JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -424,13 +424,13 @@ JSONPathQueryBuilder.from(jsonData)
     .limit(10)
     .execute();
 ```
-- 等价路径表达式:$.books[1*1]
-- **输出结果**：books数组中索引为1的书籍对象（Book 2）
+- Equivalent Path Expression: $.books[1*1]
+- **Output Result**: The book object with index 1 in the `books` array (Book 2)
 
-### 22. 除法表达式
-- **输入数据**：同负数表达式的输入数据
-- **路径表达式逻辑**：通过表达式1/1计算索引，获取books数组对应索引的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.expr("1/1")指定除法表达式，执行查询
+### 22. Division Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Calculate the index through the expression `1/1`, and get the element of the `books` array at the corresponding index
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.expr("1/1")` to specify the division expression, and execute the query
 ```string
   JSONPathQueryBuilder.from(jsonData)
      .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -438,13 +438,13 @@ JSONPathQueryBuilder.from(jsonData)
      .limit(10)
      .execute();
 ```
-- 等价路径表达式:$.books[1/1]
-- **输出结果**：books数组中索引为1的书籍对象（Book 2）
+- Equivalent Path Expression: $.books[1/1]
+- **Output Result**: The book object with index 1 in the `books` array (Book 2)
 
-### 23. 取模表达式
-- **输入数据**：同负数表达式的输入数据
-- **路径表达式逻辑**：通过表达式1%1计算索引，获取books数组对应索引的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.expr("1%1")指定取模表达式，执行查询
+### 23. Modulo Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Calculate the index through the expression `1%1`, and get the element of the `books` array at the corresponding index
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.expr("1%1")` to specify the modulo expression, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -452,13 +452,13 @@ JSONPathQueryBuilder.from(jsonData)
     .limit(10)
     .execute();
 ```
-- 等价路径表达式:$.books[1%1]
-- **输出结果**：books数组中索引为0的书籍对象（Book 1）
+- Equivalent Path Expression: $.books[1%1]
+- **Output Result**: The book object with index 0 in the `books` array (Book 1)
 
-### 24. 大于比较表达式
-- **输入数据**：同负数表达式的输入数据
-- **路径表达式逻辑**：过滤出books数组中price大于15的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.price>15"))进行大于比较过滤，执行查询
+### 24. Greater Than Comparison Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Filter out the elements in the `books` array where the `price` is greater than 15
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.filter(JPredicate.custom("@.price>15"))` to perform greater than comparison filtering, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -466,13 +466,13 @@ JSONPathQueryBuilder.from(jsonData)
     .limit(10)
     .execute();
 ```
-- 等价路径表达式:$.books[?(@.price>15)]
-- **输出结果**：price大于15的书籍对象（Book 3）
+- Equivalent Path Expression: $.books[?(@.price>15)]
+- **Output Result**: The book object where `price` is greater than 15 (Book 3)
 
-### 25. 大于等于比较表达式
-- **输入数据**：同负数表达式的输入数据
-- **路径表达式逻辑**：过滤出books数组中price大于等于15的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.price>=15"))进行大于等于比较过滤，执行查询
+### 25. Greater Than or Equal To Comparison Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Filter out the elements in the `books` array where the `price` is greater than or equal to 15
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.filter(JPredicate.custom("@.price>=15"))` to perform greater than or equal to comparison filtering, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -480,13 +480,13 @@ JSONPathQueryBuilder.from(jsonData)
     .limit(10)
     .execute();
 ```
-- 等价路径表达式:$.books[?(@.price>=15)]
-- **输出结果**：price大于等于15的书籍对象（Book 2、Book 3）
+- Equivalent Path Expression: $.books[?(@.price>=15)]
+- **Output Result**: The book objects where `price` is greater than or equal to 15 (Book 2, Book 3)
 
-### 26. 小于比较表达式
-- **输入数据**：同负数表达式的输入数据
-- **路径表达式逻辑**：过滤出books数组中price小于15的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.price<15"))进行小于比较过滤，执行查询
+### 26. Less Than Comparison Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Filter out the elements in the `books` array where the `price` is less than 15
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.filter(JPredicate.custom("@.price<15"))` to perform less than comparison filtering, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -494,13 +494,13 @@ JSONPathQueryBuilder.from(jsonData)
     .limit(10)
     .execute();
 ```
-- 等价路径表达式:$.books[?(@.price<15)]
-- **输出结果**：price小于15的书籍对象（Book 1）
+- Equivalent Path Expression: $.books[?(@.price<15)]
+- **Output Result**: The book object where `price` is less than 15 (Book 1)
 
-### 27. 小于等于比较表达式
-- **输入数据**：同负数表达式的输入数据
-- **路径表达式逻辑**：过滤出books数组中price小于等于15的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.price<=15"))进行小于等于比较过滤，执行查询
+### 27. Less Than or Equal To Comparison Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Filter out the elements in the `books` array where the `price` is less than or equal to 15
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.filter(JPredicate.custom("@.price<=15"))` to perform less than or equal to comparison filtering, and execute the query
 ```string
 JSONPathQueryBuilder.from(jsonData)
     .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -508,13 +508,13 @@ JSONPathQueryBuilder.from(jsonData)
     .limit(10)
     .execute();
 ```
-- 等价路径表达式:$.books[?(@.price<=15)]
-- **输出结果**：price小于等于15的书籍对象（Book 1、Book 2）
+- Equivalent Path Expression: $.books[?(@.price<=15)]
+- **Output Result**: The book objects where `price` is less than or equal to 15 (Book 1, Book 2)
 
-### 28. 等于表达式
-- **输入数据**：同负数表达式的输入数据
-- **路径表达式逻辑**：过滤出books数组中price等于15的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.price==15"))进行等于比较过滤，执行查询
+### 28. Equality Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Filter out the elements in the `books` array where the `price` is equal to 15
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.filter(JPredicate.custom("@.price==15"))` to perform equality comparison filtering, and execute the query
 ```string
   JSONPathQueryBuilder.from(jsonData)
    .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -522,13 +522,13 @@ JSONPathQueryBuilder.from(jsonData)
    .limit(10)
    .execute();
 ```
-- 等价路径表达式: $.books[?(@.price==15)]
-- **输出结果**：price等于15的书籍对象（Book 2）
+- Equivalent Path Expression: $.books[?(@.price==15)]
+- **Output Result**: The book object where `price` is equal to 15 (Book 2)
 
-### 29. 不等于表达式
-- **输入数据**：同负数表达式的输入数据
-- **路径表达式逻辑**：过滤出books数组中price不等于15的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.price!=15"))进行不等于比较过滤，执行查询
+### 29. Inequality Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Filter out the elements in the `books` array where the `price` is not equal to 15
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.filter(JPredicate.custom("@.price!=15"))` to perform inequality comparison filtering, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
   .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -536,13 +536,13 @@ JSONPathQueryBuilder.from(jsonData)
   .limit(10)
   .execute();
 ```
-- 等价路径表达式: $.books[?(@.price!=15)]
-- **输出结果**：price不等于15的书籍对象（Book 1、Book 3）
+- Equivalent Path Expression: $.books[?(@.price!=15)]
+- **Output Result**: The book objects where `price` is not equal to 15 (Book 1, Book 3)
 
-### 30. in表达式
-- **输入数据**：同负数表达式的输入数据
-- **路径表达式逻辑**：过滤出books数组中title在('Book 3','Book 2')中的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2')"))进行in逻辑过滤，执行查询
+### 30. IN Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Filter out the elements in the `books` array where the `title` is in ('Book 3','Book 2')
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2')"))` to perform IN logic filtering, and execute the query
 ```string
    JSONPathQueryBuilder.from(jsonData)
   .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -550,13 +550,13 @@ JSONPathQueryBuilder.from(jsonData)
   .limit(10)
   .execute();
 ```
-- 等价路径表达式: $.books[?(@.title in ('Book 3','Book 2'))]
-- **输出结果**：title在指定范围内的书籍对象（Book 2、Book 3）
+- Equivalent Path Expression: $.books[?(@.title in ('Book 3','Book 2'))]
+- **Output Result**: The book objects where `title` is in the specified range (Book 2, Book 3)
 
-### 31. 与表达式
-- **输入数据**：同负数表达式的输入数据
-- **路径表达式逻辑**：过滤出books数组中title在('Book 3','Book 2')且isbn为true的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2') &&@.isbn"))进行与逻辑过滤，执行查询
+### 31. AND Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Filter out the elements in the `books` array where the `title` is in ('Book 3','Book 2') and `isbn` is true
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2') &&@.isbn"))` to perform AND logic filtering, and execute the query
 ```string
  JSONPathQueryBuilder.from(jsonData)
   .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -564,13 +564,13 @@ JSONPathQueryBuilder.from(jsonData)
   .limit(10)
   .execute();
 ```
-- 等价路径表达式: $.books[?(@.title in ('Book 3','Book 2') &&@.isbn)]
-- **输出结果**：符合与逻辑条件的书籍对象（Book 3）
+- Equivalent Path Expression: $.books[?(@.title in ('Book 3','Book 2') &&@.isbn)]
+- **Output Result**: The book object that meets the AND logic criteria (Book 3)
 
-### 32. 或表达式
-- **输入数据**：同负数表达式的输入数据
-- **路径表达式逻辑**：过滤出books数组中title在('Book 3','Book 2')或isbn为true的元素
-- **Java代码逻辑**：构建路径到books数组后，使用JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2') ||@.isbn"))进行或逻辑过滤，执行查询
+### 32. OR Expression
+- **Input Data**: Same as the input data of the Negative Number Expression
+- **Path Expression Logic**: Filter out the elements in the `books` array where the `title` is in ('Book 3','Book 2') or `isbn` is true
+- **Java Code Logic**: After building the path to the `books` array, use `JSubscripts.filter(JPredicate.custom("@.title in ('Book 3','Book 2') ||@.isbn"))` to perform OR logic filtering, and execute the query
 ```string
   JSONPathQueryBuilder.from(jsonData)
    .document(JPath.fromRoot(JRoot.ROOT).property("books")
@@ -578,56 +578,48 @@ JSONPathQueryBuilder.from(jsonData)
    .limit(10)
    .execute();
 ```
-- 等价路径表达式: $.books[?(@.title in ('Book 3','Book 2') ||@.isbn)]
-- **输出结果**：符合或逻辑条件的书籍对象（Book 1、Book 2、Book 3）
+- Equivalent Path Expression: $.books[?(@.title in ('Book 3','Book 2') ||@.isbn)]
+- **Output Result**: The book objects that meet the OR logic criteria (Book 1, Book 2, Book 3)
 
-### 33. 路径表达式直接使用
-- **输入数据**：包含store对象及books数组的JSON数据
-- **路径表达式逻辑**：直接使用路径表达式"$.store.books..[2]"获取对应元素
-- **Java代码逻辑**：使用JSONPathQueryBuilder的path方法直接传入路径表达式，执行查询
+### 33. Direct Use of Path Expression
+- **Input Data**: JSON data containing a `store` object and a `books` array
+- **Path Expression Logic**: Directly use the path expression `"$.store.books..[2]"` to retrieve the corresponding element
+- **Java Code Logic**: Use the `path` method of `JSONPathQueryBuilder` to directly pass in the path expression and execute the query
 ```string
 JSONPathQueryBuilder.from(jsonData).path("$.store.books..[2]").limit(10).execute();
 ```
-- **输出结果**：books数组中索引为2的书籍对象（Book 3）
+- **Output Result**: The book object with index 2 in the `books` array (Book 3)
+
 ```
+## **How to Support Us**
 
-# **捐献 ☕**
+1. **Buy Me a Coffee**  
+   If this project has saved you time or money, please consider supporting me with a small donation.
 
-感谢您使用这个开源项目！它完全免费并将持续维护，但开发者确实需要您的支持。
+2. **Where Your Donation Goes**
+- Covering server costs to keep the project running.
+- Developing new features to deliver more value.
+- Optimizing documentation to enhance user experience.
 
----
+3. **Every Penny Counts**  
+   Even a donation of just one cent can motivate me to debug code late into the night!
+## **Why Donate?**
+✔️ Keep the project forever free and ad-free.  
+✔️ Support timely responses to issues and community inquiries.  
+✔️ Realize planned future features.
 
-## **如何支持我们**
-
-1. **请我喝杯咖啡**  
-   果这个项目为您节省了时间或金钱，请考虑通过小额捐赠支持我。
-
-2. **您的捐赠用途**
-- 维持项目运行的服务器成本.
-- 开发新功能以提供更多价值.
-- 优化文档以提升用户体验.
-
-3. **每一分都很重要**  
-   即使是1分钱的捐赠也能激励我熬夜调试！
-
-
-## **为什么捐赠?**
-✔️ 保持项目永远免费且无广告.  
-✔️ 支持及时响应问题和社区咨询.  
-✔️ 实现计划中的未来功能.
-
-感谢您成为让开源世界更美好的伙伴！
+Thank you for being a partner in making the open-source world better!
 
 --- 
 
-### **补充说明**
-- 本项目和产品维护.
-- 您的支持确保其可持续性和成长 .
+### **Additional Notes**
+- Maintenance of this project and related products.
+- Your support ensures its sustainability and growth.
 ---
 
-## **🌟 立即支持**
-赞助时欢迎通过 [email](mailto:goudingcheng@gmail.com) 留言。您的名字将被列入项目README文件的 **"特别感谢"** 名单中！
-![Ali Pay](./src/main/resources/pay/alipay.jpg)
-![Wechat Pay](./src/main/resources/pay/wechat.jpg)
+## **🌟 Support Us Now**
+Feel free to leave a message via [email](mailto:goudingcheng@gmail.com) when making a donation. Your name will be listed in the **"Special Thanks"** section of the project's README file!
+![Pay Now](./src/main/resources/pay/paynow.jpg)
+![TNG go](./src/main/resources/pay/tngGo.jpg)
 
 ---
