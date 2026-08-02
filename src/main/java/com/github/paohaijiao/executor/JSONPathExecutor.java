@@ -16,6 +16,8 @@
 package com.github.paohaijiao.executor;
 
 import com.github.paohaijiao.antlr.impl.JAbstractAntlrExecutor;
+import com.github.paohaijiao.banner.JQuickBanner;
+import com.github.paohaijiao.banner.impl.JQuickBannerImpl;
 import com.github.paohaijiao.exception.JAntlrExecutionException;
 import com.github.paohaijiao.model.JSONPathResult;
 import com.github.paohaijiao.parser.JQuickJSONPathLexer;
@@ -44,6 +46,8 @@ public class JSONPathExecutor extends JAbstractAntlrExecutor<String, JSONPathRes
 
     @Override
     protected JSONPathResult parse(Parser parser) throws JAntlrExecutionException {
+        JQuickBanner banner= JQuickBannerImpl.getInstance();
+        banner.printBanner();
         JQuickJSONPathParser calcParser = (JQuickJSONPathParser) parser;
         JQuickJSONPathParser.PathContext tree = calcParser.path();
         JSONPathCommonVisitor visitor = new JSONPathCommonVisitor(json);
